@@ -813,6 +813,9 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #members-title{font-size:clamp(30px,3.8vw,56px)}
 #intel-title{font-size:clamp(28px,3vw,44px)!important}
 .xmark{color:#F3EEDF}.wear .xmark{color:#101110}.wear .eyebrow.eb-x::before{display:none}
+#about-title .ln{display:block}
+@media (min-width:1000px){#about-title{font-size:clamp(42px,4.6vw,66px)}#about-title .ln{white-space:nowrap}}
+@media (max-width:999px){#about-title .ln{display:inline}#about-title{text-wrap:balance}}
 </style>
 </head>
 <body>
@@ -886,7 +889,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="statement-grid">
       <div>
         <p class="eyebrow rv">The XDOT mindset</p>
-        <h2 class="h-xl rv d1" id="about-title">Endurance is <em>something</em> you build.</h2>
+        <h2 class="h-xl rv d1" id="about-title"><span class="ln">Endurance is</span> <span class="ln">something</span> <span class="ln">you <em>build.</em></span></h2>
       </div>
       <div class="statement-side">
         <figure class="statement-photo rv d2" style="margin:0">
