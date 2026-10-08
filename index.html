@@ -1,0 +1,1461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XDOT · Built for the long game.</title>
+<meta name="description" content="Personalized endurance training for runners and triathletes. The next chapter of RunDot and TriDot, built on the FitLogic training intelligence engine.">
+<meta name="theme-color" content="#101110">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XDOT · Built for the long game.">
+<meta property="og:description" content="Personalized endurance training for the goals that move you.">
+<meta property="og:image" content="img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -24 136 128'%3E%3Crect x='-8' y='-24' width='136' height='128' rx='22' fill='%23101110'/%3E%3Cpath d='M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z' fill='%23F3EEDF'/%3E%3Ccircle cx='104' cy='28' r='14' fill='%23C9A15C'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="img/hero.jpg?v=gh3" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#101110; --surface:#1C1E1C; --surface-2:#252825; --ivory:#F3EEDF; --ivory-2:#E8E2D1;
+  --gold:#C9A15C; --gold-hi:#D8B477; --ink:#101110;
+  --txt-mute:#A9A597; --txt-dim:#7E7B71; --line:rgba(243,238,223,.12); --line-dark:rgba(16,17,16,.14);
+  --f-word:'Archivo',system-ui,sans-serif; --f-head:'Archivo','Arial Black',sans-serif; --f-ui:'Barlow Condensed','Arial Narrow',sans-serif; --f-body:'Inter',system-ui,sans-serif;
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px; --s8:136px;
+  --max:1280px; --gut:clamp(20px,5vw,56px);
+  --radius:4px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ivory);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-60px;z-index:200;background:var(--gold);color:var(--ink);padding:10px 16px;font-weight:600;text-decoration:none;border-radius:var(--radius)}
+.skip:focus{top:16px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+section{scroll-margin-top:72px}
+
+/* Type */
+.wordmark{font-family:var(--f-word);font-weight:900;font-stretch:125%;letter-spacing:-.01em;line-height:1;text-decoration:none;color:var(--ivory)}
+.eyebrow{font-family:var(--f-body);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 var(--s3);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.h-xl,.h-lg,.h-md{font-family:var(--f-head);font-weight:800;text-transform:uppercase;letter-spacing:.005em;line-height:.92;margin:0}
+.h-xl{font-size:clamp(56px,9.2vw,138px)}
+.h-lg{font-size:clamp(42px,6vw,88px)}
+.h-md{font-size:clamp(30px,3.4vw,46px);line-height:.98}
+.gold{color:var(--gold)}
+.lede{font-size:clamp(17px,1.5vw,20px);line-height:1.6;color:var(--txt-mute);max-width:560px;margin:var(--s3) 0 0}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:0 26px;border-radius:999px;border:1px solid transparent;font-family:var(--f-body);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .25s var(--ease),color .25s,border-color .25s,transform .25s var(--ease);white-space:nowrap}
+.btn svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-hi)}
+.btn-line{border-color:rgba(243,238,223,.35);color:var(--ivory);background:transparent}
+.btn-line:hover{border-color:var(--ivory);background:rgba(243,238,223,.06)}
+.btn-dark{background:var(--ink);color:var(--ivory)}
+.btn-dark:hover{background:#2a2c2a}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:var(--s5)}
+.textlink{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px;background:none;border-top:0;border-left:0;border-right:0}
+
+/* Header */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .35s var(--ease),padding .35s var(--ease),border-color .35s;border-bottom:1px solid transparent;padding:26px 0}
+.site-header.scrolled{background:rgba(16,17,16,.94);padding:12px 0;border-bottom-color:var(--line);backdrop-filter:saturate(120%) blur(6px)}
+.nav{display:flex;align-items:center;gap:var(--s4)}
+.nav .wordmark{font-size:26px;flex:none;transition:font-size .35s var(--ease)}
+.scrolled .nav .wordmark{font-size:22px}
+.nav-links{display:flex;gap:34px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:rgba(243,238,223,.86);padding:6px 0;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a:hover{color:var(--ivory)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:26px}
+.login{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:rgba(243,238,223,.86);background:none;border:0;padding:6px 0}
+.login:hover{color:var(--gold)}
+.nav .btn{min-height:44px;padding:0 20px;font-size:12px}
+.menu-btn{display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:transparent;align-items:center;justify-content:center}
+.menu-btn span{display:block;width:18px;height:1.5px;background:var(--ivory);position:relative;transition:background .2s}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--ivory);transition:transform .3s var(--ease)}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.mobile-panel{position:fixed;inset:0;z-index:90;background:var(--bg);padding:110px var(--gut) 40px;display:flex;flex-direction:column;gap:var(--s5);transform:translateY(-100%);visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s}
+.mobile-panel.open{transform:none;visibility:visible;transition:transform .45s var(--ease)}
+.mobile-panel ul{list-style:none;margin:0;padding:0}
+.mobile-panel li{border-bottom:1px solid var(--line)}
+.mobile-panel li a{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-head);font-weight:700;font-size:40px;text-transform:uppercase;text-decoration:none;padding:12px 0}
+.mobile-panel li a::after{content:"→";font-family:var(--f-body);font-size:20px;color:var(--gold)}
+.mobile-panel .btn{width:100%}
+.mobile-cta{display:none}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 40%;transform:scale(1.04);animation:heroZoom 14s var(--ease) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(16,17,16,.82) 0%,rgba(16,17,16,.5) 42%,rgba(16,17,16,0) 72%),linear-gradient(0deg,rgba(16,17,16,.9) 0%,rgba(16,17,16,0) 40%),linear-gradient(180deg,rgba(16,17,16,.55) 0%,rgba(16,17,16,0) 22%)}
+.hero-inner{width:100%;padding-top:160px;padding-bottom:clamp(140px,17vh,180px)}
+.hero h1 span{display:block}
+.hero .lede{color:rgba(243,238,223,.86);max-width:500px}
+.scroll-cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,238,223,.6);text-decoration:none}
+.scroll-cue i{width:1px;height:44px;background:rgba(243,238,223,.25);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--gold);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{to{top:110%}}
+.hero-meta{position:absolute;right:var(--gut);bottom:34px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(243,238,223,.55);display:flex;gap:10px;align-items:center}
+.hero-meta b{color:var(--gold);font-weight:600}
+
+/* Statement (ivory) */
+.statement{background:var(--ivory);color:var(--ink);padding:var(--s8) 0}
+.statement .eyebrow{color:#8B6B33}
+.statement-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(40px,7vw,120px);align-items:end}
+.statement h2{font-size:clamp(52px,7.4vw,112px)}
+.statement h2 em{font-style:normal;color:#9C7738}
+.statement-side{display:grid;gap:var(--s4)}
+.statement-side p{font-size:clamp(18px,1.6vw,21px);line-height:1.6;margin:0;color:#3a3a35}
+.statement-photo{position:relative}
+.statement-photo img{aspect-ratio:4/5;object-fit:cover;width:72%;margin-left:auto;filter:saturate(.9)}
+.statement-photo figcaption{position:absolute;left:0;bottom:12px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6a675f;writing-mode:vertical-rl;transform:rotate(180deg)}
+.statement-rule{display:flex;gap:var(--s3);margin-top:var(--s7);padding-top:var(--s3);border-top:1px solid var(--line-dark);font-family:var(--f-head);font-weight:700;font-size:clamp(18px,2vw,24px);letter-spacing:.06em;text-transform:uppercase;color:#55534c;flex-wrap:wrap;justify-content:space-between}
+.statement-rule span:nth-child(even){color:#9C7738}
+
+/* Sections (dark) */
+.sec{padding:var(--s8) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:var(--s5);margin-bottom:var(--s6);flex-wrap:wrap}
+.sec-head .lede{margin:0;max-width:420px}
+
+/* Pathways */
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px)}
+.path{position:relative;overflow:hidden;background:var(--surface);display:flex;flex-direction:column;min-height:620px;isolation:isolate;border-radius:var(--radius)}
+.path img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.1s var(--ease),filter .6s}
+.path::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(16,17,16,.96) 8%,rgba(16,17,16,.55) 46%,rgba(16,17,16,.05) 75%)}
+.path:hover img{transform:scale(1.04)}
+.path-body{margin-top:auto;padding:var(--s4)}
+.path-num{font-size:12px;letter-spacing:.22em;color:var(--gold);font-weight:600;position:absolute;top:var(--s4);left:var(--s4)}
+.path h3{font-family:var(--f-head);font-weight:800;font-size:clamp(36px,3.4vw,52px);text-transform:uppercase;line-height:.95;margin:0 0 var(--s2)}
+.path p{margin:0 0 var(--s3);color:rgba(243,238,223,.8);font-size:16px;max-width:340px}
+.path .textlink{color:var(--ivory)}
+.path .textlink:hover{color:var(--gold)}
+.path.alt h3{color:var(--gold)}
+.paths-note{margin-top:var(--s3);font-size:14px;color:var(--txt-dim)}
+
+/* How it works */
+.how{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);counter-reset:s;list-style:none;margin:0;padding:0}
+.step{padding:var(--s5) var(--s4) var(--s4) 0;border-right:1px solid var(--line);position:relative}
+.step + .step{padding-left:var(--s4)}
+.step:last-child{border-right:0}
+.step::before{content:"";position:absolute;top:-1px;left:0;width:0;height:2px;background:var(--gold);transition:width .9s var(--ease)}
+.step + .step::before{left:var(--s4)}
+.step.in::before{width:48px}
+.step-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s5)}
+.step-num{font-family:var(--f-head);font-weight:700;font-size:56px;line-height:1;color:rgba(243,238,223,.18)}
+.step svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.step h3{font-family:var(--f-head);font-weight:700;font-size:28px;text-transform:uppercase;line-height:1.02;margin:0 0 12px;letter-spacing:.01em}
+.step p{margin:0;color:var(--txt-mute);font-size:16px}
+
+/* App showcase */
+.app{overflow:hidden}
+.app-head{text-align:center;max-width:780px;margin:0 auto var(--s6)}
+.app-head .eyebrow{justify-content:center}
+.app-head .eyebrow::after{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.app-head .lede{margin-left:auto;margin-right:auto}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,330px));justify-content:center;gap:clamp(20px,3vw,48px);align-items:start}
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:var(--s3)}
+.phone-wrap:nth-child(2){margin-top:56px}
+.phone-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--txt-mute);font-weight:600}
+.phone-label b{color:var(--gold);margin-right:8px}
+.phone{width:100%;max-width:310px;aspect-ratio:9/19;background:#0B0C0B;border:1px solid #2E312E;border-radius:44px;padding:12px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.03)}
+.screen{height:100%;border-radius:34px;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;padding:16px 18px 18px;font-size:13px;line-height:1.4;position:relative}
+.sb{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:var(--ivory);padding:2px 6px 14px}
+.sb .isl{width:84px;height:24px;border-radius:20px;background:#000;position:absolute;left:50%;top:12px;transform:translateX(-50%)}
+.app-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.app-top .wordmark{font-size:15px}
+.app-top .av{width:28px;height:28px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--txt-mute)}
+.scr-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-mute);margin:0 0 4px}
+.scr-h{font-family:var(--f-head);font-weight:700;font-size:30px;text-transform:uppercase;line-height:1;margin:0 0 14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.tag{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--gold);border:1px solid rgba(201,161,92,.4);border-radius:999px;padding:3px 8px}
+.wk-name{font-family:var(--f-head);font-size:24px;font-weight:700;text-transform:uppercase;margin:10px 0 2px;line-height:1}
+.mute{color:var(--txt-mute)}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:14px}
+.kv div{background:var(--surface-2);border-radius:9px;padding:7px 8px;min-width:0}
+.kv small{display:block;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-mute)}
+.kv b{font-size:13.5px;font-weight:600;white-space:nowrap}
+.blocks{margin-top:12px;display:grid;gap:6px}
+.blk{display:grid;grid-template-columns:64px 1fr 24px;gap:8px;align-items:center;font-size:12px}
+.blk .bar{height:6px;border-radius:3px;background:var(--surface-2);position:relative;overflow:hidden}
+.blk .bar i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:3px}
+.app-btn{margin-top:auto;background:var(--gold);color:var(--ink);text-align:center;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:13px}
+.next{display:flex;justify-content:space-between;font-size:12px;margin:12px 2px}
+.week{display:grid;gap:7px}
+.day{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:9px 11px}
+.day .d{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-mute);line-height:1.15}
+.day .d b{display:block;font-size:15px;color:var(--ivory);letter-spacing:0}
+.day .s{font-weight:600;font-size:12.5px}
+.day .s small{display:block;font-weight:400;color:var(--txt-mute);font-size:11px}
+.day .ic{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:var(--surface-2);color:var(--txt-mute)}
+.day.today{border-color:rgba(201,161,92,.55)}
+.day.today .ic{background:var(--gold);color:var(--ink);font-weight:700}
+.day.done .ic{color:var(--ivory)}
+.day.rest{opacity:.6}
+.metric{display:flex;justify-content:space-between;align-items:end}
+.metric .big{font-family:var(--f-head);font-weight:700;font-size:44px;line-height:.9}
+.metric .delta{font-size:11px;color:var(--gold);font-weight:600}
+.spark{margin-top:10px;width:100%;height:46px}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.dots{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-top:10px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--surface-2)}
+.dots i.on{background:var(--gold)}
+.illus{text-align:center;margin-top:var(--s5);font-size:13px;color:var(--txt-dim)}
+.car-ctrl{display:none}
+
+/* Intelligence */
+.intel{background:var(--bg)}
+.intel-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.intel-photo{position:relative}
+.intel-photo img{aspect-ratio:16/11;object-fit:cover;width:100%;border-radius:var(--radius)}
+.intel-list{list-style:none;margin:var(--s5) 0 0;padding:0;border-top:1px solid var(--line)}
+.intel-list li{display:grid;grid-template-columns:40px 1fr;gap:var(--s2);padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.intel-list li span{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:600}
+.intel-list li b{font-weight:600;display:block;font-size:17px}
+.intel-list li p{margin:2px 0 0;color:var(--txt-mute);font-size:15.5px}
+.powered{margin-top:var(--s4);display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--txt-dim)}
+.powered i{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.powered b{color:var(--txt-mute);font-weight:600}
+
+/* Community */
+.community{position:relative}
+.comm-hero{position:relative;height:clamp(420px,62vw,760px);overflow:hidden}
+.comm-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.comm-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,rgba(16,17,16,0) 45%)}
+.comm-body{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,96px);margin-top:calc(-1 * clamp(120px,14vw,220px));position:relative;z-index:2;align-items:end}
+.comm-copy p.lede{color:rgba(243,238,223,.8)}
+.comm-quiet{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3);align-items:center}
+.comm-quiet img{aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius)}
+.comm-quiet p{margin:0;font-size:17px;line-height:1.55;color:rgba(243,238,223,.82);border-left:1px solid var(--gold);padding-left:var(--s2)}
+
+/* Swag */
+.swag{background:var(--ivory);color:var(--ink);padding:var(--s8) 0}
+.swag .eyebrow{color:#8B6B33}
+.swag-grid{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:clamp(16px,2vw,28px);align-items:end}
+.swag-copy{align-self:center;padding-right:var(--s4)}
+.swag-copy p:not(.eyebrow){font-size:19px;color:#3a3a35;margin:var(--s3) 0 0}
+.swag figure{margin:0}
+.swag figure img{aspect-ratio:1;object-fit:cover;width:100%;border-radius:var(--radius)}
+.swag figure:nth-of-type(2){transform:translateY(48px)}
+.swag figcaption{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#6a675f;margin-top:14px;font-weight:600}
+.swag .concept{font-size:13px;color:#6a675f;margin-top:var(--s4)}
+
+/* Final CTA */
+.final{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;text-align:center}
+.final img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;z-index:-2}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--bg) 0%,rgba(16,17,16,.55) 30%,rgba(16,17,16,.55) 70%,var(--bg) 100%)}
+.final .wrap{width:100%}
+.final .eyebrow{justify-content:center}
+.final .eyebrow::after{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.final .lede{margin-left:auto;margin-right:auto;color:rgba(243,238,223,.88);max-width:620px}
+.final .btn-row{justify-content:center}
+
+/* Signup */
+.signup{padding:var(--s7) 0;border-top:1px solid var(--line)}
+.signup-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:center}
+.signup form{display:grid;gap:10px}
+.signup label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--txt-mute)}
+.field{display:flex;gap:10px;border-bottom:1px solid rgba(243,238,223,.35);padding-bottom:8px;transition:border-color .2s}
+.field:focus-within{border-color:var(--gold)}
+.field input{flex:1;min-width:0;background:transparent;border:0;color:var(--ivory);font:inherit;font-size:20px;padding:10px 0}
+.field input::placeholder{color:var(--txt-dim)}
+.field input:focus{outline:none}
+.field.err{border-color:#E07A5F}
+.form-msg{min-height:24px;font-size:14.5px;margin:4px 0 0}
+.form-msg.error{color:#F0A08A}
+.form-msg.demo{color:var(--ivory);background:var(--surface);border-left:2px solid var(--gold);padding:12px 14px}
+.hint{font-size:13px;color:var(--txt-dim);margin:0}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--line);padding:var(--s7) 0 var(--s4)}
+.foot-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:var(--s5)}
+.foot-brand .wordmark{font-size:clamp(48px,6vw,84px);display:block}
+.foot-brand p{font-family:var(--f-head);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--txt-mute);margin:14px 0 0}
+.foot-brand p span{color:var(--gold)}
+.foot-col h2{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--txt-dim);font-weight:600;margin:0 0 var(--s2)}
+.foot-col ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.foot-col a,.foot-col button{text-decoration:none;color:var(--ivory);font-size:15.5px;background:none;border:0;padding:0;text-align:left}
+.foot-col a:hover,.foot-col button:hover{color:var(--gold)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);margin-top:var(--s7);padding-top:var(--s3);border-top:1px solid var(--line);font-size:13px;color:var(--txt-dim);flex-wrap:wrap}
+.emblem{width:34px;height:auto}
+.pending{color:var(--txt-dim) !important}
+
+/* Modal */
+dialog.explore{width:min(880px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);background:var(--bg);color:var(--ivory);border-radius:6px;overflow:auto}
+dialog.explore::backdrop{background:rgba(6,7,6,.78);backdrop-filter:blur(3px)}
+dialog[open]{animation:dlg .35s var(--ease)}
+@keyframes dlg{from{opacity:0;transform:translateY(14px)}}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid var(--line)}
+.dlg-close{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:20px;line-height:1}
+.dlg-close:hover{border-color:var(--ivory)}
+.dlg-body{padding:32px 28px 30px}
+.dlg-body h2{margin-bottom:6px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:var(--s4) 0 var(--s3)}
+.choice{position:relative;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;transition:border-color .2s,background .2s;display:grid;gap:4px}
+.choice:hover{border-color:rgba(243,238,223,.35)}
+.choice[aria-checked="true"]{border-color:var(--gold);background:#22231f}
+.choice b{font-family:var(--f-head);font-size:26px;text-transform:uppercase;font-weight:700;line-height:1}
+.choice small{color:var(--txt-mute);font-size:13.5px;line-height:1.4}
+.choice::after{content:"";position:absolute;top:16px;right:16px;width:14px;height:14px;border-radius:50%;border:1px solid rgba(243,238,223,.35)}
+.choice[aria-checked="true"]::after{background:var(--gold);border-color:var(--gold);box-shadow:inset 0 0 0 3px var(--surface)}
+.reveal-panel{border-top:1px solid var(--line);padding-top:var(--s4);min-height:180px}
+.reveal-panel h3{font-family:var(--f-head);font-size:34px;text-transform:uppercase;font-weight:700;margin:0 0 10px;line-height:1}
+.reveal-panel ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.reveal-panel li{padding-left:22px;position:relative;color:var(--txt-mute)}
+.reveal-panel li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:1px;background:var(--gold)}
+.reveal-panel .btn-row{margin-top:var(--s4)}
+.q{display:grid;gap:10px;margin-top:14px}
+.q legend{font-weight:600;margin-bottom:8px;padding:0}
+.q fieldset{border:0;margin:0 0 14px;padding:0}
+.q label{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;color:var(--txt-mute);margin-bottom:8px}
+.q label:has(input:checked){border-color:var(--gold);color:var(--ivory)}
+.q input{accent-color:var(--gold)}
+.config-note{font-size:12.5px;color:var(--txt-dim);margin:var(--s2) 0 0}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,24px);opacity:0;visibility:hidden;background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--gold);padding:14px 18px;font-size:14.5px;z-index:300;max-width:calc(100vw - 32px);transition:transform .4s var(--ease),opacity .3s,visibility .3s}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+/* Reveal animation */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d1{transition-delay:.1s}.js .rv.d2{transition-delay:.2s}.js .rv.d3{transition-delay:.3s}
+
+/* Responsive */
+@media (max-width:1080px){
+  .nav-links{gap:22px}
+  .login{display:none}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
+  .step:nth-child(4){border-top:1px solid var(--line)}
+  .step:nth-child(3)::before{left:0}
+  .swag-grid{grid-template-columns:1fr 1fr}
+  .swag-copy{grid-column:1/-1;padding:0;margin-bottom:var(--s4)}
+}
+@media (max-width:920px){
+  .nav-links,.nav-actions .btn{display:none}
+  .menu-btn{display:inline-flex}
+  .nav{justify-content:space-between}
+  .nav-actions{margin-left:auto}
+  .statement-grid,.intel-grid,.comm-body,.signup-grid,.foot-top{grid-template-columns:minmax(0,1fr)}
+  .signup-grid>*,.comm-body>*,.intel-grid>*{min-width:0}
+  .statement-photo img{width:62%}
+  .paths{grid-template-columns:1fr;gap:16px}
+  .path{min-height:520px}
+  .comm-body{margin-top:-80px}
+  .foot-top{gap:var(--s5)}
+  /* Carousel */
+  .phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:20px;padding:0 calc(50vw - 150px) 10px;margin:0 calc(-1 * var(--gut));scrollbar-width:none;justify-content:flex-start}
+  .phones::-webkit-scrollbar{display:none}
+  .phone-wrap{flex:0 0 300px;scroll-snap-align:center}
+  .phone-wrap:nth-child(2){margin-top:0}
+  .car-ctrl{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:var(--s3)}
+  .car-ctrl button.arw{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:18px}
+  .car-dots{display:flex;gap:4px}
+  .car-dots button{width:28px;height:28px;border:0;background:transparent;display:grid;place-items:center;padding:0}
+  .car-dots button::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(243,238,223,.25);transition:background .2s,width .2s}
+  .car-dots button[aria-current="true"]::before{background:var(--gold);width:22px;border-radius:4px}
+}
+@media (max-width:640px){
+  :root{--s8:96px;--s7:72px}
+  body{font-size:16px}
+  .site-header{padding:16px 0}
+  .nav .wordmark{font-size:22px}
+  .hero{align-items:flex-end}
+  .hero-media img{object-position:80% 50%}
+  .hero::before{background:linear-gradient(0deg,rgba(16,17,16,.96) 0%,rgba(16,17,16,.7) 42%,rgba(16,17,16,.1) 70%),linear-gradient(180deg,rgba(16,17,16,.6) 0%,rgba(16,17,16,0) 25%)}
+  .hero-inner{padding-bottom:110px}
+  .hero .btn-row{flex-direction:column;align-items:stretch;margin-top:var(--s4)}
+  .hero-meta{display:none}
+  .choices{grid-template-columns:1fr}
+  .field{flex-direction:column;border-bottom:0;padding:0}
+  .field input{border-bottom:1px solid rgba(243,238,223,.35)}
+  .field.err input{border-color:#E07A5F}
+  .steps{grid-template-columns:1fr}
+  .step,.step + .step{padding:var(--s4) 0;border-right:0;border-top:1px solid var(--line)}
+  .step:first-child{border-top:0}
+  .step + .step::before{left:0}
+  .step-top{margin-bottom:var(--s3)}
+  .swag-grid{grid-template-columns:1fr}
+  .swag figure:nth-of-type(2){transform:none}
+  .comm-quiet{grid-template-columns:1fr 1fr}
+  .final .btn-row{flex-direction:column;align-items:stretch}
+  .dlg-body,.dlg-head{padding-left:20px;padding-right:20px}
+  .mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:80;transform:translateY(140%);transition:transform .4s var(--ease)}
+  .mobile-cta.show{transform:none}
+  .mobile-cta .btn{width:100%;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .js .rv{opacity:1;transform:none}
+  .hero-media img{transform:none}
+  .scroll-cue i::after{display:none}
+}
+
+/* Heritage */
+.heritage{background:var(--bg)}
+.lineage{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.lineage li{padding:var(--s5) var(--s4) var(--s4) 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.lineage li + li{padding-left:var(--s4)}
+.lineage li:last-child{border-right:0}
+.lin-k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.lineage h3{font-family:var(--f-head);font-weight:800;font-size:clamp(34px,3vw,46px);text-transform:uppercase;line-height:.95;margin:0}
+.lineage p{margin:0;color:var(--txt-mute);font-size:16px;max-width:360px}
+.lin-now{margin-top:auto;padding-top:var(--s3);font-size:13px;font-weight:600;color:var(--ivory);display:flex;align-items:center;gap:10px}
+.lin-now::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.heritage-line{margin-top:var(--s5);font-family:var(--f-head);font-weight:700;font-size:clamp(20px,2.2vw,28px);text-transform:uppercase;letter-spacing:.04em;color:var(--ivory)}
+.heritage-line span{color:var(--gold)}
+/* Path spec + step phase */
+.path-spec{display:block;font-size:11px!important;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)!important;font-weight:600;margin:0 0 12px!important}
+.phase{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+.step-sci{margin-top:var(--s3)!important;padding-top:12px;border-top:1px solid var(--line);font-size:13px!important;color:var(--txt-dim)!important;letter-spacing:.02em}
+.step-sci b{color:var(--ivory);font-weight:600}
+/* Intel stat + science grid */
+.intel-stat{display:flex;align-items:baseline;gap:var(--s2);margin-top:var(--s4)}
+.intel-stat b{font-family:var(--f-head);font-weight:800;font-size:clamp(54px,5vw,76px);line-height:.9;color:var(--gold)}
+.intel-stat span{font-size:15px;color:var(--txt-mute);max-width:260px;line-height:1.4}
+.science{margin-top:var(--s7);padding-top:var(--s6);border-top:1px solid var(--line)}
+.science-head{display:flex;justify-content:space-between;align-items:end;gap:var(--s4);flex-wrap:wrap;margin-bottom:var(--s5)}
+.science-head h3{font-family:var(--f-head);font-weight:800;font-size:clamp(32px,3.4vw,48px);text-transform:uppercase;line-height:.95;margin:0}
+.science-head p{margin:0;max-width:440px;color:var(--txt-mute);font-size:16px}
+.sci-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.sci-grid li{background:var(--bg);padding:var(--s4);display:flex;flex-direction:column;gap:10px;transition:background .3s var(--ease)}
+.sci-grid li:hover{background:var(--surface)}
+.sci-ph{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.sci-grid b{font-family:var(--f-head);font-weight:700;font-size:26px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.sci-grid b sup{font-size:.45em;font-weight:600;color:var(--txt-mute);vertical-align:super;margin-left:2px}
+.sci-grid p{margin:0;color:var(--txt-mute);font-size:15px;line-height:1.55}
+.sci-note{margin-top:var(--s3);font-size:13px;color:var(--txt-dim)}
+.env{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;color:var(--gold);letter-spacing:.04em}
+.env::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+@media (max-width:920px){
+  .lineage{grid-template-columns:1fr}
+  .lineage li,.lineage li + li{padding:var(--s4) 0;border-right:0;border-bottom:1px solid var(--line)}
+  .sci-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .sci-grid{grid-template-columns:1fr}
+  .sci-grid li{padding:var(--s3)}
+}
+
+/* ===== v3 additions ===== */
+.hero-what{display:flex;align-items:flex-start;gap:12px;margin:var(--s3) 0 0;max-width:560px;font-size:15.5px;font-weight:500;color:var(--ivory);line-height:1.5}
+.hero-what::before{content:"";flex:0 0 8px;height:8px;margin-top:7px;border-radius:50%;background:var(--gold)}
+/* Roots inside ivory statement */
+.roots{margin-top:var(--s7);padding-top:var(--s5);border-top:1px solid var(--line-dark)}
+.roots-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);align-items:end;margin-bottom:var(--s5)}
+.roots-title{font-family:var(--f-head);font-weight:800;font-size:clamp(34px,3.6vw,54px);text-transform:uppercase;line-height:.95;margin:0;color:var(--ink)}
+.roots-title span{color:#9C7738}
+.roots-head p:not(.eyebrow){margin:0;font-size:17px;line-height:1.6;color:#3a3a35;max-width:460px}
+.statement .lineage{border-top-color:var(--line-dark)}
+.statement .lineage li{border-right-color:var(--line-dark)}
+.statement .lineage h3{color:var(--ink)}
+.statement .lineage p{color:#4a4840}
+.statement .lin-k{color:#8B6B33}
+.statement .lin-now{color:var(--ink)}
+.statement .lin-now::before{background:#9C7738}
+.statement .heritage-line{color:var(--ink)}
+.statement .heritage-line span{color:#9C7738}
+/* Current athletes */
+.members{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.members-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,96px);align-items:start}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding:22px 0;font-weight:600;font-size:17.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-head);font-size:28px;line-height:1;color:var(--gold);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.faq .ans{padding:0 0 22px;margin:0}
+.placeholder{display:inline-flex;align-items:center;gap:10px;border:1px dashed rgba(201,161,92,.55);border-radius:var(--radius);padding:10px 14px;font-size:14px;color:var(--txt-mute)}
+.placeholder b{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+/* Proof placeholders */
+.proof{margin-top:var(--s6);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.proof-slot{border:1px dashed rgba(201,161,92,.45);border-radius:var(--radius);padding:var(--s4);display:grid;gap:8px;align-content:start}
+.proof-slot b{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.proof-slot strong{font-family:var(--f-head);font-weight:700;font-size:24px;text-transform:uppercase;line-height:1.05}
+.proof-slot span{font-size:14.5px;color:var(--txt-dim)}
+/* Slim swag strip */
+.swag.slim{padding:var(--s6) 0}
+.swag.slim .swag-grid{grid-template-columns:1fr 220px 220px;align-items:center}
+.swag.slim h2{font-size:clamp(40px,4.4vw,64px)}
+.swag.slim .swag-copy p:not(.eyebrow){margin-top:var(--s2)}
+.swag.slim .concept{margin-top:var(--s2)}
+.swag.slim figure:nth-of-type(2){transform:none}
+/* Coaches band */
+.coaches{padding:var(--s7) 0;border-top:1px solid var(--line)}
+.coaches-grid{display:grid;grid-template-columns:1fr 1.2fr auto;gap:var(--s5);align-items:center}
+.coaches h2{font-family:var(--f-head);font-weight:800;font-size:clamp(34px,3.4vw,50px);text-transform:uppercase;line-height:.95;margin:0}
+.coaches p:not(.eyebrow){margin:0;color:var(--txt-mute);font-size:16.5px;max-width:520px}
+@media (max-width:1080px){.coaches-grid{grid-template-columns:1fr 1fr}.coaches-grid .btn{justify-self:start}}
+@media (max-width:920px){
+  .roots-head,.members-grid{grid-template-columns:minmax(0,1fr)}
+  .proof{grid-template-columns:1fr}
+  .swag.slim .swag-grid{grid-template-columns:1fr 1fr}
+  .swag.slim .swag-copy{grid-column:1/-1}
+  .coaches-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .statement .lineage{grid-template-columns:1fr}
+  .statement .lineage li,.statement .lineage li + li{padding:var(--s4) 0;border-right:0;border-top:1px solid var(--line-dark)}
+  .statement .lineage li:first-child{border-top:0}
+}
+
+/* ===== Headline type matched to the XDOT wordmark (Archivo, expanded) ===== */
+.h-xl,.h-lg,.h-md,.statement h2,.path h3,.lineage h3,.roots-title,.coaches h2,.science-head h3,.intel-stat b,.step-num,.mobile-panel li a{font-stretch:115%;font-weight:800;letter-spacing:-.015em}
+.h-xl{font-size:clamp(42px,7.4vw,112px);line-height:.94}
+.h-lg{font-size:clamp(32px,4.8vw,70px);line-height:.96}
+.h-md{font-size:clamp(26px,2.8vw,38px);line-height:1}
+.statement h2{font-size:clamp(40px,6vw,92px)}
+.path h3{font-size:clamp(26px,2.4vw,36px)}
+.lineage h3{font-size:clamp(26px,2.3vw,36px)}
+.roots-title{font-size:clamp(26px,2.8vw,42px)}
+.coaches h2{font-size:clamp(26px,2.6vw,38px)}
+.science-head h3{font-size:clamp(24px,2.6vw,36px)}
+.intel-stat b{font-size:clamp(44px,4vw,60px)}
+.step-num{font-size:42px}
+.mobile-panel li a{font-size:28px}
+.step h3,.heritage-line,.sci-grid b,.proof-slot strong,.foot-brand p,.choice b,.reveal-panel h3{font-stretch:108%;font-weight:800;letter-spacing:-.005em}
+.step h3{font-size:21px;line-height:1.1}
+.heritage-line{font-size:clamp(16px,1.7vw,22px)}
+.sci-grid b{font-size:19px}
+.proof-slot strong{font-size:18px}
+.foot-brand p{font-size:16px}
+.choice b{font-size:19px}
+.reveal-panel h3{font-size:26px}
+/* App screen UI keeps the condensed face so it stays readable at phone size */
+.scr-h,.wk-name,.metric .big{font-family:var(--f-ui)}
+
+#members-title{font-size:clamp(30px,3.4vw,50px)}
+.app-head h2{max-width:900px;margin-left:auto;margin-right:auto}
+.swag.slim .swag-grid{grid-template-columns:1fr 250px 250px}
+@media (max-width:920px){.swag.slim .swag-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.swag figcaption{flex-direction:column;gap:4px}}
+.swag p.concept{font-size:13px;color:#6a675f}
+
+/* ===== v4: layout rhythm inspired by editorial endurance-event sites ===== */
+.btn,.nav .btn,.menu-btn,.dlg-close{border-radius:0}
+.eyebrow.c{justify-content:center}
+.eyebrow.c::before{display:none}
+.center-head{text-align:center;max-width:860px;margin:0 auto var(--s6)}
+.center-head .lede{margin-left:auto;margin-right:auto}
+.center-head h2{margin-left:auto;margin-right:auto}
+/* Announcement bar */
+.site-header{padding:0}
+.site-header .nav{padding-top:22px;padding-bottom:22px;transition:padding .35s var(--ease)}
+.site-header.scrolled .nav{padding-top:12px;padding-bottom:12px}
+.announce{display:block;max-height:60px;overflow:hidden;text-align:center;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:9px 16px;background:#0A0B0A;border-bottom:1px solid var(--line);color:rgba(243,238,223,.82);text-decoration:none;transition:max-height .35s var(--ease),padding .35s var(--ease)}
+.announce span{color:var(--gold);margin-left:10px;white-space:nowrap}
+.announce:hover span{color:var(--gold-hi)}
+.site-header.scrolled .announce{max-height:0;padding-top:0;padding-bottom:0;border-bottom-width:0}
+/* Full-bleed photo band */
+.band{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(520px,72vh,780px);display:flex;align-items:center;text-align:center;padding:var(--s7) 0}
+.band img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%;z-index:-2}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgba(16,17,16,.55),rgba(16,17,16,.7))}
+.band .wrap{width:100%}
+.band-kicker{font-size:16px;color:rgba(243,238,223,.82);margin:0 0 var(--s3)}
+.band-rule{display:block;width:56px;height:1px;background:var(--gold);margin:0 auto var(--s4)}
+.band h2{max-width:1040px;margin:0 auto}
+.band .lede{margin:var(--s3) auto 0;color:rgba(243,238,223,.86)}
+.band .btn-row{justify-content:center}
+/* Edge-to-edge training tiles */
+#training{padding-bottom:0}
+.paths.full{gap:0;margin-top:0}
+.paths.full .path{border-radius:0;min-height:clamp(560px,50vw,760px)}
+.paths.full .path + .path{border-left:1px solid var(--line)}
+.paths.full .path-body{padding:var(--s5) clamp(24px,3vw,48px)}
+/* How it works: alternating split rows */
+.how.v4{background:var(--bg);border:0;padding:var(--s8) 0 0}
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(420px,40vw,600px)}
+.row-media{margin:0;position:relative;overflow:hidden;background:var(--surface)}
+.row-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.row:hover .row-media img{transform:scale(1.03)}
+.row-body{display:flex;flex-direction:column;justify-content:center;padding:var(--s6) clamp(28px,6vw,104px);background:var(--surface)}
+.row:nth-child(even) .row-media{order:2}
+.row:nth-child(even) .row-body{background:var(--bg)}
+.row-num{font-family:var(--f-head);font-stretch:115%;font-weight:800;font-size:clamp(56px,6vw,96px);line-height:.9;letter-spacing:-.02em;color:var(--gold);margin-bottom:var(--s3)}
+.row h3{font-family:var(--f-head);font-stretch:110%;font-weight:800;text-transform:uppercase;font-size:clamp(26px,2.8vw,42px);line-height:.98;letter-spacing:-.01em;margin:0 0 var(--s2)}
+.row p{margin:0;color:var(--txt-mute);font-size:17px;max-width:440px}
+.row .textlink{margin-top:var(--s4);align-self:flex-start;color:var(--gold)}
+/* Stat band */
+.stats{list-style:none;margin:var(--s7) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stats li{background:var(--bg);padding:var(--s5) var(--s3);text-align:center}
+.stats b{display:block;font-family:var(--f-head);font-stretch:115%;font-weight:800;font-size:clamp(56px,6vw,88px);line-height:.9;letter-spacing:-.02em;color:var(--gold)}
+.stats span{display:block;margin-top:16px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);font-weight:600}
+.stats small{display:block;margin-top:6px;font-size:14px;color:var(--txt-dim)}
+.stats li[hidden]{display:none}
+.stats:has(> li[hidden]){grid-template-columns:repeat(3,1fr)}
+@media (max-width:1024px){.stats,.stats:has(> li[hidden]){grid-template-columns:repeat(2,1fr)}
+  .stats:has(> li[hidden]) > li:nth-child(3){grid-column:1 / -1}}
+
+/* Athlete stories (placeholder) */
+.stories{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.story{display:flex;flex-direction:column;background:var(--bg)}
+.story-media{aspect-ratio:4/3;display:grid;place-items:center;border:1px dashed rgba(201,161,92,.45);border-bottom:0;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-dim);background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(243,238,223,.03) 14px 15px)}
+.story-body{flex:1;display:grid;gap:12px;align-content:start;padding:var(--s4);border:1px dashed rgba(201,161,92,.45)}
+.story-body b{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.story-body p{margin:0;font-style:italic;font-weight:600;color:var(--txt-mute);font-size:16px;line-height:1.55}
+.story-body span{font-size:14px;color:var(--txt-dim)}
+.stories-note{text-align:center;margin:var(--s4) 0 0}
+/* Footer v4 */
+#signup{scroll-margin-top:90px}
+.foot-top.v4{grid-template-columns:1.5fr 1fr 1fr;align-items:start}
+.foot-h{font-family:var(--f-head);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.4vw,34px);line-height:1;letter-spacing:-.01em;margin:0 0 12px}
+.foot-sub{margin:0 0 var(--s3);color:var(--txt-mute);font-size:15.5px;max-width:440px}
+.foot-signup form{display:grid;gap:10px;max-width:480px}
+.foot-signup label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--txt-mute)}
+.foot-signup .field{border:1px solid rgba(243,238,223,.25);padding:0;gap:0;background:var(--surface)}
+.foot-signup .field:focus-within{border-color:var(--gold)}
+.foot-signup .field.err{border-color:#E07A5F}
+.foot-signup .field input{padding:0 16px;height:54px;font-size:16px}
+.foot-signup .field .btn{min-height:54px;padding:0 24px}
+.foot-mark{display:flex;justify-content:space-between;align-items:end;gap:var(--s4);flex-wrap:wrap;margin-top:var(--s7);padding-top:var(--s5);border-top:1px solid var(--line)}
+.foot-mark .wordmark{font-size:clamp(64px,11vw,170px);line-height:.8}
+.foot-mark p{margin:0;text-align:right;font-family:var(--f-head);font-stretch:108%;font-weight:800;text-transform:uppercase;font-size:16px;letter-spacing:.02em;color:var(--txt-mute)}
+.foot-mark p span{color:var(--gold)}
+.foot-mark p small{display:block;margin-top:8px;font-family:var(--f-body);font-weight:400;text-transform:none;letter-spacing:0;font-size:14px;color:var(--txt-dim)}
+.foot-bot{margin-top:var(--s4)}
+@media (max-width:920px){
+  .paths.full .path + .path{border-left:0;border-top:1px solid var(--line)}
+  .paths.full .path{min-height:520px}
+  .row{grid-template-columns:minmax(0,1fr);min-height:0}
+  .row-media{aspect-ratio:16/10}
+  .row:nth-child(even) .row-media{order:0}
+  .row-body{padding:var(--s5) var(--gut) var(--s6)}
+  .story-grid{grid-template-columns:minmax(0,1fr)}
+  .foot-top.v4{grid-template-columns:1fr 1fr}
+  .foot-signup{grid-column:1/-1}
+  .foot-mark p{text-align:left}
+}
+@media (max-width:640px){
+  .site-header .nav{padding-top:14px;padding-bottom:14px}
+  .announce{font-size:10px;letter-spacing:.14em;padding:8px 12px}
+  .announce span{display:inline-block;margin-left:6px}
+  .foot-signup .field{flex-direction:row;border:1px solid rgba(243,238,223,.25)}
+  .foot-signup .field input{border-bottom:0}
+  .foot-signup .field .btn{padding:0 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats li{padding:var(--s4) var(--s2)}
+  .stats b{font-size:52px}
+  .center-head{text-align:left}
+  .center-head .eyebrow.c{justify-content:flex-start}
+}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-bottom:var(--s3)}
+.legend{margin:0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);background:var(--bg);border:1px solid var(--line)}
+.legend img{width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center 25%;filter:grayscale(.25) contrast(1.05)}
+.legend figcaption{display:grid;align-content:space-between;gap:var(--s3);padding:var(--s4)}
+.legend blockquote{margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:600;color:var(--ivory)}
+.legend .who{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:16px}
+.legend .who b{font-family:var(--f-head);text-transform:uppercase;letter-spacing:.02em;color:var(--gold);font-size:17px}
+.legend .who span,.aq figcaption span{font-size:13.5px;color:var(--txt-dim)}
+.quote-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.aq{margin:0;display:grid;align-content:space-between;gap:16px;padding:var(--s4) 24px;background:var(--bg);border:1px solid var(--line)}
+.aq .stars{color:var(--gold);letter-spacing:.2em;font-size:13px}
+.aq blockquote{margin:0;font-size:16px;line-height:1.55;color:var(--ivory-2)}
+.aq figcaption{display:grid;gap:2px}.aq figcaption b{font-size:14.5px;color:var(--ivory)}
+.proof-strip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s4);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-strip p{margin:0;padding:28px 16px;text-align:center;display:grid;gap:6px}
+.proof-strip p+p{border-left:1px solid var(--line)}
+.proof-strip b{font-family:var(--f-head);font-size:clamp(28px,3.4vw,44px);color:var(--gold);text-transform:uppercase;line-height:1}
+.proof-strip span{font-size:14px;color:var(--txt-mute)}
+@media (max-width:1024px){.legend-grid{grid-template-columns:minmax(0,1fr)}.quote-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.legend{grid-template-columns:minmax(0,1fr)}.legend img{min-height:0;aspect-ratio:16/10}.quote-grid,.proof-strip{grid-template-columns:minmax(0,1fr)}.proof-strip p+p{border-left:0;border-top:1px solid var(--line)}}
+.path img[src*="running"]{object-position:50% 18%}
+.row-media img[src*="step-work"]{object-position:58% 30%}
+.path img[src*="triathlon"]{object-position:50% 12%}
+.path img[src*="direction"]{object-position:50% 30%}
+.comm-hero img{object-position:50% 30%}
+@media (max-width:900px),(max-height:760px){.scroll-cue{display:none}}
+/* Statement: stacked layout fix (tablet/phone) */
+@media (max-width:920px){
+  .statement-grid{gap:var(--s5)}
+  .statement-side{grid-template-columns:1fr 1.1fr;align-items:start;gap:clamp(24px,5vw,48px)}
+  .statement-side .statement-photo{order:2}
+  .statement-side p{order:1;padding-top:var(--s3);border-top:2px solid #9C7738;font-size:clamp(20px,2.6vw,24px);line-height:1.55}
+  .statement-photo img{width:100%;margin:0;aspect-ratio:4/3}
+  .statement-photo figcaption{left:auto;right:-22px}
+}
+@media (max-width:600px){
+  .statement-side{grid-template-columns:1fr}
+  .statement-side .statement-photo{order:1}
+  .statement-side p{order:2}
+  .statement-photo img{aspect-ratio:4/3}
+  .statement-photo figcaption{right:auto;left:8px;bottom:8px;color:#F3EEDF}
+}
+/* Heritage rows: tablet uses two-column rows to fill width */
+@media (min-width:641px) and (max-width:1000px){
+  .statement .lineage{grid-template-columns:1fr}
+  .statement .lineage li,.statement .lineage li + li{display:grid;grid-template-columns:minmax(180px,.8fr) 1.2fr;column-gap:clamp(24px,5vw,56px);row-gap:10px;align-items:start;padding:var(--s4) 0;border-right:0;border-bottom:0;border-top:1px solid var(--line-dark)}
+  .statement .lineage li:first-child{border-top:0}
+  .statement .lineage .lin-k{grid-column:1;grid-row:1}
+  .statement .lineage h3{grid-column:1;grid-row:2}
+  .statement .lineage p{grid-column:2;grid-row:1 / span 2;max-width:none;align-self:center}
+  .statement .lineage .lin-now{grid-column:2;grid-row:3;margin-top:0;padding-top:4px}
+}
+/* Heritage headline marquee */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.roots-head:has(+ .roots-marquee){margin-bottom:var(--s3)}
+.roots-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;display:flex;white-space:nowrap;padding:clamp(14px,2vw,26px) 0;border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);margin-bottom:var(--s5)}
+.mq-track{display:flex;flex-shrink:0;animation:mq 60s linear infinite}
+.roots-marquee:hover .mq-track{animation-play-state:paused}
+.mq-item{display:inline-flex;align-items:center;font-family:var(--f-head);font-weight:800;font-stretch:115%;letter-spacing:-.015em;text-transform:uppercase;line-height:1;font-size:clamp(34px,5.2vw,80px);color:var(--ink);padding-right:.55em}
+.mq-gold{color:#9C7738;margin-left:.3em}
+.mq-x{display:inline-block;height:.74em;width:auto;margin-left:.65em;margin-right:.1em;flex-shrink:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.roots-head-2{display:block;margin-bottom:var(--s5)}
+.roots-head-2 p:not(.eyebrow){max-width:640px;font-size:19px}
+@media (max-width:920px){.roots-head-2>div:empty{display:none}}
+@media (max-width:920px){
+  .comm-quiet{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:var(--s4)}
+  .comm-quiet img{aspect-ratio:4/3;width:100%;object-position:50% 30%}
+  .comm-quiet p{font-size:clamp(18px,2.4vw,22px);line-height:1.5;color:var(--ivory)}
+}
+@media (max-width:640px){
+  .comm-quiet{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  .comm-quiet img{aspect-ratio:3/2}
+  .comm-quiet p{font-size:17px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mq-track{animation:none}
+  .mq-clone,.mq-track .mq-item:not(:first-child){display:none}
+  .roots-marquee{white-space:normal;justify-content:center}
+  .mq-item{display:block;text-align:center;padding:0 24px;font-size:clamp(28px,4vw,56px)}
+  .mq-x{display:none}
+}
+
+/* ===== v16: two-line headlines + XDOT emblem system ===== */
+.line2{display:block}
+.xmark{display:block;height:auto}
+.sec-mark{display:flex;justify-content:center;margin:0 0 18px}
+.sec-mark .xmark{width:34px}
+.band-mark{display:flex;justify-content:center;margin:0 0 var(--s4)}
+.band-mark .xmark{width:44px}
+.eyebrow.eb-x::before{display:none}
+.eyebrow.eb-x .xmark{width:22px;flex:none}
+.eyebrow.eb-x{display:flex!important;align-items:center;gap:12px}
+.eyebrow.eb-x .xmark{width:22px!important;min-width:22px;height:15px}
+.final-wm{position:absolute;left:50%;top:50%;width:min(78vw,980px);height:auto;transform:translate(-50%,-50%);opacity:.07;z-index:-1;pointer-events:none}
+@media (max-width:640px){.center-head .sec-mark{justify-content:flex-start}.sec-mark .xmark{width:28px}.band-mark .xmark{width:36px}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 16 16"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="emblem" viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#F3EEDF"/><circle cx="104" cy="28" r="14" fill="#C9A15C"/></symbol>
+</svg>
+
+<header class="site-header" id="top-header">
+  <a class="announce" href="#members" data-config-show="showAnnouncement">RunDot and TriDot are becoming XDOT<span>See what’s changing →</span></a>
+  <div class="wrap nav">
+    <a class="wordmark" href="#top" aria-label="XDOT home">XDOT</a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#training">Training</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="login" href="#" data-config-link="loginUrl" data-pending-msg="Log in link is not connected yet.">Log In</a>
+      <button class="btn btn-gold" type="button" data-explore>Explore Your Training</button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobile-panel" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  <div style="display:grid;gap:12px">
+    <button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg><use href="#arrow"/></svg></button>
+    <a class="btn btn-line" href="#" data-config-link="loginUrl" data-pending-msg="Log in link is not connected yet.">Log In</a>
+  </div>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- 2. HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-media">
+    <img src="img/hero.jpg?v=gh3" srcset="img/hero-m.jpg?v=gh3 1000w, img/hero.jpg?v=gh3 2000w" sizes="100vw" width="2000" height="1333" fetchpriority="high" alt="Two runners stride along a lakeside path on a grey morning, one in black and one in bright orange.">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Running · Triathlon · Endurance</p>
+    <h1 class="h-xl rv d1" id="hero-title"><span>Built for</span><span>the <span class="gold" style="display:inline">long game.</span></span></h1>
+    <p class="lede rv d2">Personalized endurance training for the goals that move you. Build fitness, find your rhythm, and keep moving forward.</p>
+    <p class="hero-what rv d2">Personalized running and triathlon training plans, built from your goals and your data, in one app.</p>
+    <div class="btn-row rv d3">
+      <button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button>
+      <a class="btn btn-line" href="#signup">Stay in the Loop</a>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about" aria-label="Scroll to the next section"><span>Scroll</span><i></i></a>
+  <div class="hero-meta" aria-hidden="true"><b>01</b> Train with purpose</div>
+</section>
+
+<!-- 3. BRAND STATEMENT -->
+<section class="statement" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="statement-grid">
+      <div>
+        <p class="eyebrow rv">The XDOT mindset</p>
+        <h2 class="h-xl rv d1" id="about-title">Endurance is <em>something</em> you build.</h2>
+      </div>
+      <div class="statement-side">
+        <figure class="statement-photo rv d2" style="margin:0">
+          <img src="img/detail-lace-m.jpg?v=gh3" srcset="img/detail-lace-m.jpg?v=gh3 720w, img/detail-lace.jpg?v=gh3 1024w" sizes="(max-width:920px) 62vw, 24vw" width="1024" height="1280" loading="lazy" alt="Close-up of an athlete adjusting her running shoe on a red track, a sports watch on her wrist.">
+          <figcaption>5:42 AM</figcaption>
+        </figure>
+        <p class="rv d3">One session. One early morning. One decision to keep going. XDOT brings purpose to your training so you can build toward what matters to you.</p>
+      </div>
+    </div>
+    <div class="roots" id="heritage" aria-labelledby="heritage-title">
+      <div class="roots-head">
+        <div>
+          <p class="eyebrow rv">Where XDOT comes from</p>
+          <h3 class="sr-only" id="heritage-title">Nothing left behind. Everything moving forward.</h3>
+        </div>
+      </div>
+      <div class="roots-marquee rv d1" aria-hidden="true">
+        <div class="mq-track"><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span></div><div class="mq-track mq-clone"><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span><span class="mq-item">Nothing left behind. <span class="mq-gold">Everything moving forward.</span><svg class="mq-x" viewBox="0 0 120 80" aria-hidden="true"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#9C7738"/></svg></span></div>
+      </div>
+      <div class="roots-head roots-head-2">
+        <p class="rv d2">XDOT brings RunDot and TriDot together under one endurance brand. The same training science. The same personal approach. One home for runners and triathletes.</p>
+      </div>
+    <ol class="lineage">
+      <li class="rv"><span class="lin-k">Running heritage</span><h3>RunDot</h3><p>Personalized daily run training from 5K to ultra, with performance benchmarked across temperature, humidity, and elevation.</p><span class="lin-now">Becomes the XDOT running path</span></li>
+      <li class="rv d1"><span class="lin-k">Multisport heritage</span><h3>TriDot</h3><p>Swim, bike, and run planned as one system, from sprint to full distance, with RaceX race-day predictions.</p><span class="lin-now">Becomes the XDOT triathlon path</span></li>
+      <li class="rv d2" data-config-show="showPoweredBy"><span class="lin-k">The engine</span><h3>FitLogic</h3><p>The training intelligence engine behind both, built on 20+ years of real athlete training data.</p><span class="lin-now">Powers every XDOT plan</span></li>
+    </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BAND -->
+<section class="band" aria-labelledby="band-title">
+  <img class="bg" src="img/band-m.jpg?v=gh3" srcset="img/band-m.jpg?v=gh3 900w, img/band.jpg?v=gh3 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" alt="Two cyclists climb a narrow, tree-lined country lane on a bright spring day.">
+  <div class="wrap">
+    <p class="band-kicker rv">Running and triathlon. Planned as one.</p>
+    <div class="band-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
+    <h2 class="h-lg rv d1" id="band-title">Two disciplines. One engine. <span class="gold">One endurance athlete.</span></h2>
+    <p class="lede rv d2">Every plan is built on the same training science and shaped around your goals, your experience, and your week.</p>
+    <div class="btn-row rv d3"><button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
+  </div>
+</section>
+
+<!-- 4. CHOOSE YOUR TRAINING -->
+<section class="sec" id="training" aria-labelledby="training-title">
+  <div class="wrap">
+    <div class="center-head">
+      <div class="sec-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
+      <p class="eyebrow c rv">Choose your training</p>
+      <h2 class="h-lg rv d1" id="training-title">Different goals.<span class="gold line2">The same drive.</span></h2>
+      <p class="lede rv d2">Start with running or triathlon. Wherever you begin, you are part of the same endurance mindset.</p>
+    </div>
+  </div>
+    <div class="paths full">
+      <article class="path rv">
+        <img src="img/running-m.jpg?v=gh3" srcset="img/running-m.jpg?v=gh3 720w, img/running.jpg?v=gh3 1024w" sizes="(max-width:920px) 100vw, 33vw" width="1024" height="1537" loading="lazy" alt="Three runners train together on a park path, one in bright yellow shorts leading the way.">
+        <span class="path-num">01</span>
+        <div class="path-body">
+          <h3>Running</h3>
+          <p class="path-spec">5K to ultra · Built on RunDot</p>
+          <p>From your first finish line to your next personal best, make every run part of a bigger plan.</p>
+          <button class="textlink" type="button" data-explore="running">Explore running <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button>
+        </div>
+      </article>
+      <article class="path rv d1">
+        <img src="img/triathlon-m.jpg?v=gh3" srcset="img/triathlon-m.jpg?v=gh3 720w, img/triathlon.jpg?v=gh3 1024w" sizes="(max-width:920px) 100vw, 33vw" width="1024" height="1280" loading="lazy" alt="A cyclist in a white helmet rides a country road, focused on the road ahead.">
+        <span class="path-num">02</span>
+        <div class="path-body">
+          <h3>Triathlon</h3>
+          <p class="path-spec">Sprint to full distance · Built on TriDot</p>
+          <p>Bring your swim, bike, and run training together with a plan built around you.</p>
+          <button class="textlink" type="button" data-explore="triathlon">Explore triathlon <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button>
+        </div>
+      </article>
+      <article class="path alt rv d2">
+        <img src="img/direction-m.jpg?v=gh3" srcset="img/direction-m.jpg?v=gh3 720w, img/direction.jpg?v=gh3 1024w" sizes="(max-width:920px) 100vw, 33vw" width="1024" height="1280" loading="lazy" alt="A runner pauses beside a lake, hands on his head, smiling as he catches his breath.">
+        <span class="path-num">03</span>
+        <div class="path-body">
+          <h3>Find Your Direction</h3>
+          <p class="path-spec">Not sure where to start</p>
+          <p>Explore the training path that fits your goals, experience, and life.</p>
+          <button class="textlink" type="button" data-explore="help">Help me choose <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button>
+        </div>
+      </article>
+    </div>
+</section>
+
+<!-- CURRENT ATHLETES -->
+<section class="sec members" id="members" aria-labelledby="members-title">
+  <div class="wrap members-grid">
+    <div>
+      <p class="eyebrow rv">Already with us</p>
+      <h2 class="h-lg rv d1" id="members-title">Training with RunDot or TriDot? <span class="gold">You’re already home.</span></h2>
+      <p class="lede rv d2">XDOT is the next chapter of the training you already know. Here are the answers to the questions we hear most.</p>
+    </div>
+    <div class="faq rv d2">
+        <details>
+          <summary>Will my plan and training history carry over?</summary>
+          <p class="ans">Yes. Your plan, workouts and training history move with you to XDOT, so you keep building from where you are.</p>
+        </details>
+        <details>
+          <summary>Do I need a new account or login?</summary>
+          <p class="ans">No. You keep the same login you use today.</p>
+        </details>
+        <details>
+          <summary>What happens to my subscription and price?</summary>
+          <p class="ans">Nothing changes with your subscription right now. If that ever changes, you’ll hear from us first.</p>
+        </details>
+        <details>
+          <summary>Can I keep using the RunDot or TriDot app during the change?</summary>
+          <p class="ans"><span class="placeholder"><b>Placeholder</b> App transition details coming soon</span></p>
+        </details>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW IT WORKS -->
+<section class="how v4" id="how" aria-labelledby="how-title">
+  <div class="wrap center-head">
+    <div class="sec-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
+      <p class="eyebrow c rv">How it works</p>
+    <h2 class="h-lg rv d1" id="how-title">Your next step,<span class="gold line2">made clear.</span></h2>
+    <p class="lede rv d2">Four steps from your goal to your progress. You always know what comes next.</p>
+  </div>
+  <ol class="rows">
+    <li class="row">
+      <figure class="row-media"><img src="img/step-goal-m.jpg?v=gh3" srcset="img/step-goal-m.jpg?v=gh3 900w, img/step-goal.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Three runners talk over coffee at an outdoor table after a training run."></figure>
+      <div class="row-body"><span class="row-num rv" aria-hidden="true">01</span><p class="eyebrow rv">Your goal</p><h3 class="rv d1">Tell us where you want to go.</h3><p class="rv d2">Share your goals, experience, and available training time.</p></div>
+    </li>
+    <li class="row">
+      <figure class="row-media"><img src="img/step-plan-m.jpg?v=gh3" srcset="img/step-plan-m.jpg?v=gh3 900w, img/step-plan.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Two athletes look over a training plan on a phone at the edge of a running track."></figure>
+      <div class="row-body"><span class="row-num rv" aria-hidden="true">02</span><p class="eyebrow rv">Your plan</p><h3 class="rv d1">Get a plan built around you.</h3><p class="rv d2">Know what to do and where to focus.</p></div>
+    </li>
+    <li class="row">
+      <figure class="row-media"><img src="img/step-work-m.jpg?v=gh3" srcset="img/step-work-m.jpg?v=gh3 900w, img/step-work.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Runners of different ages push through a track session together in low afternoon sun."></figure>
+      <div class="row-body"><span class="row-num rv" aria-hidden="true">03</span><p class="eyebrow rv">Your work</p><h3 class="rv d1">Put in the work.</h3><p class="rv d2">Follow your sessions and connect your training data.</p></div>
+    </li>
+    <li class="row">
+      <figure class="row-media"><img src="img/step-progress-m.jpg?v=gh3" srcset="img/step-progress-m.jpg?v=gh3 900w, img/step-progress.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Close-up of an athlete checking a sports watch on her wrist."></figure>
+      <div class="row-body"><span class="row-num rv" aria-hidden="true">04</span><p class="eyebrow rv">Your progress</p><h3 class="rv d1">See your progress.</h3><p class="rv d2">Understand how your training is moving you forward.</p><button class="textlink rv d3" type="button" data-explore>Explore your training <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button></div>
+    </li>
+  </ol>
+</section>
+
+<!-- 6. APP SHOWCASE -->
+<section class="sec app" id="app" aria-labelledby="app-title">
+  <div class="wrap">
+    <div class="app-head">
+      <p class="eyebrow rv">The XDOT app</p>
+      <h2 class="h-lg rv d1" id="app-title">Less guesswork. <span class="gold">More purposeful training.</span></h2>
+      <p class="lede rv d2">Open your plan knowing what comes next. See your week clearly. Track the progress you’re working for.</p>
+    </div>
+
+    <div class="phones" id="phones" role="region" aria-roledescription="carousel" aria-label="App screens" tabindex="0">
+      <!-- TODAY -->
+      <div class="phone-wrap rv" role="group" aria-roledescription="slide" aria-label="1 of 3: Today">
+        <div class="phone"><div class="screen">
+          <div class="sb"><span>6:12</span><span class="isl"></span><span>100%</span></div>
+          <div class="app-top"><span class="wordmark" aria-hidden="true">XDOT</span><span class="av" aria-hidden="true">JR</span></div>
+          <p class="scr-title">Tuesday · Week 6</p>
+          <p class="scr-h">Today</p>
+          <div class="card">
+            <span class="tag">Run · Key session</span>
+            <p class="wk-name">Tempo Intervals</p>
+            <span class="mute">Steady pressure, controlled finish.</span>
+            <span class="env">EnviroNorm paces set for 28°C and humid</span>
+            <div class="kv"><div><small>Duration</small><b>52 min</b></div><div><small>Intensity</small><b>Zone 3</b></div><div><small>Distance</small><b>~9 km</b></div></div>
+            <div class="blocks" aria-label="Workout structure">
+              <div class="blk"><span class="mute">Warm up</span><span class="bar"><i style="width:30%"></i></span><span>12′</span></div>
+              <div class="blk"><span class="mute">3 × 8′</span><span class="bar"><i style="width:80%"></i></span><span>Z3</span></div>
+              <div class="blk"><span class="mute">Recover</span><span class="bar"><i style="width:18%"></i></span><span>2′</span></div>
+              <div class="blk"><span class="mute">Cooldown</span><span class="bar"><i style="width:28%"></i></span><span>10′</span></div>
+            </div>
+          </div>
+          <div class="next"><span class="mute">Up next</span><span>Wed · Easy Swim 40′</span></div>
+          <div class="app-btn">Start workout</div>
+        </div></div>
+        <p class="phone-label"><b>01</b>Today</p>
+      </div>
+      <!-- PLAN -->
+      <div class="phone-wrap rv d1" role="group" aria-roledescription="slide" aria-label="2 of 3: Plan">
+        <div class="phone"><div class="screen">
+          <div class="sb"><span>6:12</span><span class="isl"></span><span>100%</span></div>
+          <div class="app-top"><span class="wordmark" aria-hidden="true">XDOT</span><span class="av" aria-hidden="true">JR</span></div>
+          <p class="scr-title">Week 6 of 16 · Build</p>
+          <p class="scr-h">Plan</p>
+          <div class="week">
+            <div class="day done"><span class="d">Mon<b>12</b></span><span class="s">Recovery Ride<small>45 min · Easy</small></span><span class="ic">Done</span></div>
+            <div class="day today"><span class="d">Tue<b>13</b></span><span class="s">Tempo Intervals<small>52 min · Run</small></span><span class="ic">Today</span></div>
+            <div class="day"><span class="d">Wed<b>14</b></span><span class="s">Easy Swim<small>40 min · Technique</small></span><span class="ic">Swim</span></div>
+            <div class="day"><span class="d">Thu<b>15</b></span><span class="s">Bike Intervals<small>60 min · Run off bike</small></span><span class="ic">Bike</span></div>
+            <div class="day rest"><span class="d">Fri<b>16</b></span><span class="s">Rest Day<small>Mobility optional</small></span><span class="ic">Rest</span></div>
+            <div class="day"><span class="d">Sat<b>17</b></span><span class="s">Long Ride<small>2 h 15 min · Steady</small></span><span class="ic">Bike</span></div>
+            <div class="day"><span class="d">Sun<b>18</b></span><span class="s">Long Run<small>75 min · Easy</small></span><span class="ic">Run</span></div>
+          </div>
+        </div></div>
+        <p class="phone-label"><b>02</b>Plan</p>
+      </div>
+      <!-- PROGRESS -->
+      <div class="phone-wrap rv d2" role="group" aria-roledescription="slide" aria-label="3 of 3: Progress">
+        <div class="phone"><div class="screen">
+          <div class="sb"><span>6:12</span><span class="isl"></span><span>100%</span></div>
+          <div class="app-top"><span class="wordmark" aria-hidden="true">XDOT</span><span class="av" aria-hidden="true">JR</span></div>
+          <p class="scr-title">Last 8 weeks</p>
+          <p class="scr-h">Progress</p>
+          <div class="card">
+            <div class="metric"><div><small class="mute" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase">Dot Score</small><div class="big">74</div></div><span class="delta">+3 this month</span></div>
+            <svg class="spark" viewBox="0 0 200 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 38 L25 35 L50 36 L75 30 L100 28 L125 24 L150 22 L175 17 L200 14" fill="none" stroke="#C9A15C" stroke-width="2"/><path d="M0 38 L25 35 L50 36 L75 30 L100 28 L125 24 L150 22 L175 17 L200 14 V46 H0Z" fill="rgba(201,161,92,.12)"/></svg>
+          </div>
+          <div class="mrow">
+            <div class="card"><small class="mute" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase">TrainX</small><div class="metric"><div class="big" style="font-size:34px">112</div></div><span class="delta">+6 vs. last block</span></div>
+            <div class="card"><small class="mute" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase">Sessions</small><div class="metric"><div class="big" style="font-size:34px">5/6</div></div><span class="mute" style="font-size:11px">This week</span></div>
+          </div>
+          <div class="card" style="margin-top:8px">
+            <div style="display:flex;justify-content:space-between"><small class="mute" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase">Consistency</small><span style="font-size:12px;font-weight:600">23 of 26 sessions</span></div>
+            <div class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          </div>
+        </div></div>
+        <p class="phone-label"><b>03</b>Progress</p>
+      </div>
+    </div>
+    <div class="car-ctrl" aria-label="Carousel controls">
+      <button class="arw" type="button" data-car="-1" aria-label="Previous screen">←</button>
+      <div class="car-dots" role="group" aria-label="Choose screen">
+        <button type="button" aria-label="Show Today screen" aria-current="true"></button>
+        <button type="button" aria-label="Show Plan screen"></button>
+        <button type="button" aria-label="Show Progress screen"></button>
+      </div>
+      <button class="arw" type="button" data-car="1" aria-label="Next screen">→</button>
+    </div>
+    <p class="illus">App screens are a design concept. All names, workouts and values shown are illustrative sample data.</p>
+  </div>
+</section>
+
+<!-- 7. TRAINING INTELLIGENCE -->
+<section class="sec intel" id="intelligence" aria-labelledby="intel-title" style="padding-top:0">
+  <div class="wrap intel-grid">
+    <figure class="intel-photo rv" style="margin:0">
+      <img src="img/swim-m.jpg?v=gh3" srcset="img/swim-m.jpg?v=gh3 900w, img/swim.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Underwater view of a swimmer gliding through an indoor pool lane.">
+    </figure>
+    <div>
+      <p class="eyebrow rv">Training intelligence</p>
+      <h2 class="h-md rv d1" id="intel-title" style="font-size:clamp(30px,3.4vw,50px)">Built around you. <span class="gold">Backed by training intelligence.</span></h2>
+      <p class="lede rv d2">Your goals, training history, and performance help shape a more personal training experience. XDOT brings that intelligence into a plan you can follow with confidence.</p>
+      <p class="powered rv" data-config-show="showPoweredBy" hidden><i></i>Powered by <b>FitLogic</b></p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="stats" aria-label="XDOT at a glance">
+      <li class="rv"><b>2</b><span>Disciplines</span><small>Running and triathlon</small></li>
+      <li class="rv d1"><b>3</b><span>Sports, one plan</span><small>Swim, bike, run</small></li>
+      <li class="rv d2"><b>4</b><span>Training phases</span><small>Assess, prescribe, evaluate, predict</small></li>
+      <li class="rv d3" data-config-show="showPoweredBy"><b>20+</b><span>Years of data</span><small>Real athlete training behind every plan</small></li>
+    </ul>
+  </div>
+  <div class="wrap science">
+    <div class="science-head">
+      <h3 class="rv">The science <span class="gold">you already trust.</span></h3>
+      <p class="rv d1">The tools RunDot and TriDot athletes know by name, explained in plain language and now in one endurance platform.</p>
+    </div>
+    <ul class="sci-grid">
+      <li class="rv"><span class="sci-ph">Assess</span><b>Dot Score<sup>™</sup></b><p>A benchmark of your true performance ability, normalized for age, gender, and conditions.</p></li>
+      <li class="rv d1"><span class="sci-ph">Prescribe</span><b>Normalized Training Stress<sup>®</sup></b><p>Quantifies the physiological stress of every session, so training load is measured, not guessed.</p></li>
+      <li class="rv d2"><span class="sci-ph">Prescribe</span><b>EnviroNorm<sup>®</sup></b><p>Sets intensities for temperature, humidity, and elevation, so progress shows up in real conditions, not just good-weather days.</p></li>
+      <li class="rv"><span class="sci-ph">Evaluate</span><b>TrainX<sup>®</sup></b><p>Scores how well you executed what was prescribed and tracks your consistency over time.</p></li>
+      <li class="rv d1"><span class="sci-ph">Predict</span><b>RaceX<sup>®</sup></b><p>Forecasts race-day paces and splits using course terrain, temperature, humidity, and elevation.</p></li>
+      <li class="rv d2"><span class="sci-ph">Connect</span><b>Your devices</b><p>Works with the watches you already train with, including Garmin, COROS, and Apple Watch.</p></li>
+    </ul>
+    <p class="sci-note">Feature names carried over from RunDot and TriDot. Availability may vary by training path and plan.</p>
+  </div>
+</section>
+
+<!-- ATHLETE STORIES -->
+<section class="sec stories" id="stories" data-config-show="showStories" aria-labelledby="stories-title">
+  <div class="wrap">
+    <div class="center-head">
+      <div class="sec-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
+      <p class="eyebrow c rv">Athlete stories</p>
+      <h2 class="h-lg rv d1" id="stories-title">In their <span class="gold">own words.</span></h2>
+    </div>
+    <div class="legend-grid">
+      <figure class="legend rv">
+        <img src="img/meb.jpg?v=gh3" width="1200" height="660" loading="lazy" alt="Portrait of Meb Keflezighi.">
+        <figcaption>
+          <blockquote>“RunDot’s technology is so far ahead of anything else I’ve seen, and I want the absolute best for my athletes.”</blockquote>
+          <p class="who"><b>Meb Keflezighi</b><span>Olympic Marathon Silver Medalist · Boston and NYC Marathon Champion</span></p>
+        </figcaption>
+      </figure>
+      <figure class="legend rv d1">
+        <img src="img/mark-allen.jpg?v=gh3" width="400" height="400" loading="lazy" alt="Portrait of Mark Allen.">
+        <figcaption>
+          <blockquote>“TriDot’s technology is so far ahead of anything I’ve seen in this sport, and I want the absolute best for the athletes I coach.”</blockquote>
+          <p class="who"><b>Mark Allen</b><span>6x IRONMAN World Champion</span></p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="quote-grid">
+      <figure class="aq rv"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“I love that I can trust that the workouts are exactly what I need, not too much or too little!”</blockquote><figcaption><b>RunDot athlete</b><span>App Store review</span></figcaption></figure>
+      <figure class="aq rv d1"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“TriDot maximizes efficiency while preserving the athlete. I don’t feel destroyed after my workouts, and I can complete each day.”</blockquote><figcaption><b>Seth W.</b><span>TriDot athlete</span></figcaption></figure>
+      <figure class="aq rv d2"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“Within minutes I had my first run loaded and I hit the road.”</blockquote><figcaption><b>RunDot athlete</b><span>App Store review</span></figcaption></figure>
+      <figure class="aq rv d3"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“From my first full-distance IRONMAN to solo mountain bike races and Xterra, TriDot has been my companion for every multisport adventure.”</blockquote><figcaption><b>April S.</b><span>TriDot athlete</span></figcaption></figure>
+    </div>
+    <div class="proof-strip rv">
+      <p><b>50,000+</b><span>athletes have trained with RunDot and TriDot</span></p>
+      <p><b>20+ years</b><span>of real athlete training data</span></p>
+      <p><b>2 legends</b><span>Meb Keflezighi and Mark Allen</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. COMMUNITY -->
+<section class="community" id="community" aria-labelledby="comm-title">
+  <div class="comm-hero">
+    <img src="img/community-m.jpg?v=gh3" srcset="img/community-m.jpg?v=gh3 900w, img/community.jpg?v=gh3 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" alt="A group of runners, women and men, run together along a wooded path.">
+  </div>
+  <div class="wrap comm-body">
+    <div class="comm-copy">
+      <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Community</p>
+      <h2 class="h-lg rv d1" id="comm-title">The work is personal.<br><span class="gold">The journey is shared.</span></h2>
+      <p class="lede rv d2">There’s something powerful about being around people who understand why you keep showing up. Make room for shared miles, new goals, and the encouragement to keep going.</p>
+      <div class="btn-row rv d3"><a class="btn btn-gold" href="#signup">Stay in the Loop <svg aria-hidden="true"><use href="#arrow"/></svg></a></div>
+    </div>
+    <div class="comm-quiet rv d2">
+      <img src="img/recovery-m.jpg?v=gh3" srcset="img/recovery-m.jpg?v=gh3 720w, img/recovery.jpg?v=gh3 1024w" sizes="(max-width:920px) 50vw, 20vw" width="1024" height="1280" loading="lazy" alt="A runner laughs with a training partner during a warm-up on a track.">
+      <p>The quiet moments count too. The swim before sunrise. The cool down after. The reasons only you know.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. SWAG -->
+<section class="swag slim" id="wear" aria-labelledby="wear-title" style="margin-top:var(--s7)">
+  <div class="wrap swag-grid">
+    <div class="swag-copy">
+      <p class="eyebrow rv">The XDOT line</p>
+      <h2 class="h-lg rv d1" id="wear-title">Wear the mindset.</h2>
+      <p class="rv d2">Built for the long game. On and off the course.</p>
+      <p class="concept rv d3">Brand concept visuals. Not currently available for purchase.</p>
+    </div>
+    <figure class="rv">
+      <img src="img/cap-m.jpg" srcset="img/cap-m.jpg 900w, img/cap.jpg 1024w" sizes="(max-width:640px) 100vw, 33vw" width="900" height="900" loading="lazy" alt="Concept black performance cap with an XDOT wordmark, resting on rocky ground at a mountain overlook.">
+      <figcaption><span>Performance Cap</span><span>Concept</span></figcaption>
+    </figure>
+    <figure class="rv d1">
+      <img src="img/shirt-m.jpg" srcset="img/shirt-m.jpg 900w, img/shirt.jpg 1024w" sizes="(max-width:640px) 100vw, 33vw" width="900" height="900" loading="lazy" alt="Concept black technical shirt with a small XDOT wordmark on the chest, laid on dark rocks.">
+      <figcaption><span>Technical Tee</span><span>Concept</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- FOR COACHES -->
+<section class="coaches" id="coaches" aria-labelledby="coaches-title">
+  <div class="wrap coaches-grid">
+    <div>
+      <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>For coaches</p>
+      <h2 class="rv d1" id="coaches-title">Coaching endurance athletes?</h2>
+    </div>
+    <p class="rv d2">Coaches have built their practices on RunDot and TriDot for years. XDOT is built to carry that forward, with coach education through ESCI.</p>
+    <a class="btn btn-line rv d3" href="#" data-config-link="coachesUrl" data-pending-msg="Coach information link is not connected yet.">Coaching with XDOT <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- 10. FINAL CTA -->
+<section class="final" aria-labelledby="final-title">
+  <svg class="final-wm" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>
+  <img class="bg" src="img/final-m.jpg?v=gh3" srcset="img/final-m.jpg?v=gh3 900w, img/final.jpg?v=gh3 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" alt="">
+  <div class="wrap">
+    <p class="eyebrow rv">Train with purpose. Build your endurance. Go further.</p>
+    <h2 class="h-xl rv d1" id="final-title">What are you <span class="gold">building toward?</span></h2>
+    <p class="lede rv d2">Your next finish line. A stronger foundation. A version of yourself you haven’t met yet. Start with your next step.</p>
+    <div class="btn-row rv d3">
+      <button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button>
+      <a class="btn btn-line" href="#signup">Stay in the Loop</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 11. FOOTER -->
+<footer class="site-footer" id="signup">
+  <div class="wrap">
+    <div class="foot-top v4">
+      <div class="foot-signup">
+        <p class="eyebrow">Stay in the loop</p>
+        <h2 class="foot-h" id="signup-title">Training ideas and XDOT news, <span class="gold">when it matters.</span></h2>
+        <form id="signup-form" novalidate aria-labelledby="signup-title">
+          <label for="email">Email address</label>
+          <div class="field" id="email-field">
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-msg email-hint" required>
+            <button class="btn btn-gold" type="submit">Join</button>
+          </div>
+          <p class="form-msg" id="email-msg" role="status" aria-live="polite"></p>
+          <p class="hint" id="email-hint">We’ll only use your email for XDOT updates. You can unsubscribe at any time.</p>
+        </form>
+      </div>
+      <div class="foot-col">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="#training">Training</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#members">RunDot and TriDot Athletes</a></li>
+          <li><a href="#coaches">For Coaches</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="#" data-config-link="contactUrl" data-pending-msg="Contact details are not connected yet.">Contact</a></li>
+          <li><a href="#" data-config-link="privacyUrl" data-pending-msg="Privacy policy link is not connected yet.">Privacy</a></li>
+          <li><a href="#" data-config-link="termsUrl" data-pending-msg="Terms link is not connected yet.">Terms</a></li>
+          <li><a href="#" data-config-link="loginUrl" data-pending-msg="Log in link is not connected yet.">Log In</a></li>
+        </ul>
+        <ul id="socials" style="display:flex;gap:16px;margin-top:20px" aria-label="Social media"></ul>
+      </div>
+    </div>
+    <div class="foot-mark">
+      <a class="wordmark" href="#top" aria-label="XDOT, back to top">XDOT</a>
+      <p>Built for the <span>long game.</span><small>The next chapter of RunDot and TriDot.</small></p>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr"></span> XDOT. All rights reserved.</span>
+      <svg class="emblem" viewBox="0 0 120 80" role="img" aria-label="XDOT emblem"><use href="#emblem"/></svg>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta" id="mobile-cta"><button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
+
+<!-- EXPLORE MODAL -->
+<dialog class="explore" id="explore" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <span class="wordmark" style="font-size:20px" aria-hidden="true">XDOT</span>
+    <button class="dlg-close" type="button" aria-label="Close" data-close>×</button>
+  </div>
+  <div class="dlg-body">
+    <p class="eyebrow">Explore your training</p>
+    <h2 class="h-md" id="dlg-title">Where do you want to start?</h2>
+    <div class="choices" role="radiogroup" aria-label="Training path">
+      <button class="choice" type="button" role="radio" aria-checked="false" data-choice="running"><b>Running</b><small>5K to marathon and beyond.</small></button>
+      <button class="choice" type="button" role="radio" aria-checked="false" data-choice="triathlon"><b>Triathlon</b><small>Swim, bike, and run together.</small></button>
+      <button class="choice" type="button" role="radio" aria-checked="false" data-choice="help"><b>Help me choose</b><small>Not sure yet? Start here.</small></button>
+    </div>
+    <div class="reveal-panel" id="reveal" aria-live="polite">
+      <p class="mute" style="margin:0">Choose a path above to see what training looks like.</p>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   XDOT CONFIG: replace these when destinations are approved.
+   Leave a value empty ('') to keep it in "pending" mode.
+   ============================================================ */
+const XDOT_CONFIG = {
+  loginUrl: '',
+  contactUrl: '',
+  privacyUrl: '',
+  termsUrl: '',
+  coachesUrl: '',               // Coach info / ESCI destination
+  nextStep: {
+    running:   { label: 'Start with running',   url: '' },
+    triathlon: { label: 'Start with triathlon', url: '' }
+  },
+  showAnnouncement: false,       // Top bar: "RunDot and TriDot are becoming XDOT". Pending approval.
+  showStories: true,            // Athlete stories, legend quotes and proof strip
+  showPoweredBy: true,          // "Powered by FitLogic" line, pending approval
+  emailEndpoint: '',            // POST endpoint for signups. Empty = demo mode.
+  socials: []                   // e.g. [{label:'Instagram', url:'https://...', icon:'<svg>...</svg>'}]
+};
+
+(() => {
+  const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $('#yr').textContent = new Date().getFullYear();
+
+  // Toast
+  const toast = $('#toast'); let tt;
+  const say = m => { toast.textContent = m; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 3600); };
+
+  // Configurable links
+  $$('[data-config-link]').forEach(a => {
+    const url = XDOT_CONFIG[a.dataset.configLink];
+    if (url) { a.href = url; }
+    else { a.classList.add('pending'); a.setAttribute('aria-disabled','true'); a.addEventListener('click', e => { e.preventDefault(); say(a.dataset.pendingMsg); }); }
+  });
+  $$('[data-config-show]').forEach(el => { el.hidden = !XDOT_CONFIG[el.dataset.configShow]; });
+  const soc = $('#socials');
+  XDOT_CONFIG.socials.forEach(s => { const li = document.createElement('li'); li.innerHTML = `<a href="${s.url}" aria-label="${s.label}" rel="noopener" target="_blank">${s.icon||s.label}</a>`; soc.appendChild(li); });
+  if (!XDOT_CONFIG.socials.length) soc.remove();
+
+  // Sticky header + mobile CTA
+  const header = $('#top-header'), mcta = $('#mobile-cta'), hero = $('.hero');
+  const onScroll = () => {
+    header.classList.toggle('scrolled', scrollY > 40);
+    const past = scrollY > hero.offsetHeight * .8;
+    const nearEnd = innerHeight + scrollY > document.body.scrollHeight - 700;
+    mcta.classList.toggle('show', past && !nearEnd);
+  };
+  addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+  // Mobile menu
+  const mb = $('.menu-btn'), panel = $('#mobile-panel');
+  const setMenu = open => {
+    mb.setAttribute('aria-expanded', open); mb.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    panel.classList.toggle('open', open); panel.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) header.classList.add('scrolled'); else onScroll();
+    if (open) setTimeout(() => $('a', panel).focus(), 50);
+  };
+  mb.addEventListener('click', () => setMenu(mb.getAttribute('aria-expanded') !== 'true'));
+  $$('a', panel).forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('open')) { setMenu(false); mb.focus(); } });
+  addEventListener('resize', () => { if (innerWidth > 920 && panel.classList.contains('open')) setMenu(false); });
+
+  // Reveal on scroll
+  const rv = $$('.rv, .step');
+  if (reduce || !('IntersectionObserver' in window)) rv.forEach(el => el.classList.add('in'));
+  else {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    rv.forEach(el => io.observe(el));
+  }
+
+  // Explore modal
+  const dlg = $('#explore'), reveal = $('#reveal');
+  const content = {
+    running: {
+      h: 'Running', p: 'From your first finish line to your next personal best, make every run part of a bigger plan.',
+      li: ['Personalized daily runs for any goal, from 5K to ultra', 'Paces set for real conditions like heat, humidity, and elevation', 'A benchmark score and session ratings that show real progress', 'Built on the RunDot training system']
+    },
+    triathlon: {
+      h: 'Triathlon', p: 'Bring your swim, bike, and run training together with a plan built around you.',
+      li: ['Swim, bike, and run planned as one week, not three', 'Training load measured across all three disciplines', 'Race-day pacing and predictions for your course', 'Built on the TriDot training system']
+    }
+  };
+  const ctaHTML = key => {
+    const n = XDOT_CONFIG.nextStep[key];
+    return n.url
+      ? `<a class="btn btn-gold" href="${n.url}">${n.label} <svg aria-hidden="true"><use href="#arrow"/></svg></a>`
+      : `<a class="btn btn-gold" href="#signup" data-close-nav>Get XDOT updates <svg aria-hidden="true"><use href="#arrow"/></svg></a>`;
+  };
+  const render = key => {
+    $$('.choice', dlg).forEach(c => c.setAttribute('aria-checked', c.dataset.choice === key));
+    if (key === 'help') {
+      reveal.innerHTML = `<h3>Let’s find your direction</h3>
+        <p class="mute" style="margin:0">Two quick questions. There are no wrong answers.</p>
+        <form class="q" id="helper">
+          <fieldset><legend>Which sounds more like you right now?</legend>
+            <label><input type="radio" name="a" value="running"> I love to run and want to go further or faster.</label>
+            <label><input type="radio" name="a" value="triathlon"> I swim, ride, or want to try all three.</label>
+          </fieldset>
+          <fieldset><legend>What are you working toward?</legend>
+            <label><input type="radio" name="b" value="running"> A road or trail race, or simply running more.</label>
+            <label><input type="radio" name="b" value="triathlon"> A triathlon, from sprint to full distance.</label>
+          </fieldset>
+          <p class="form-msg" id="helper-msg" role="status" aria-live="polite"></p>
+          <div class="btn-row" style="margin-top:6px"><button class="btn btn-line" type="submit">Show my path</button></div>
+        </form>`;
+      $('#helper').addEventListener('submit', e => {
+        e.preventDefault();
+        const f = new FormData(e.target), a = f.get('a'), b = f.get('b');
+        if (!a || !b) { $('#helper-msg').className = 'form-msg error'; $('#helper-msg').textContent = 'Please answer both questions.'; return; }
+        const pick = (a === 'triathlon' || b === 'triathlon') ? 'triathlon' : 'running';
+        render(pick);
+        reveal.insertAdjacentHTML('afterbegin', `<p class="eyebrow" style="margin-bottom:10px">Suggested for you</p>`);
+        $('h3', reveal).setAttribute('tabindex','-1'); $('h3', reveal).focus();
+      });
+      return;
+    }
+    const c = content[key];
+    reveal.innerHTML = `<h3>${c.h}</h3><p style="margin:0;color:var(--ivory)">${c.p}</p><ul>${c.li.map(x => `<li>${x}</li>`).join('')}</ul>
+      <div class="btn-row">${ctaHTML(key)}<button class="btn btn-line" type="button" data-close>Keep exploring</button></div>
+      ${XDOT_CONFIG.nextStep[key].url ? '' : '<p class="config-note">Sign up links are on the way. For now, join the list and we’ll let you know.</p>'}`;
+  };
+  const open = key => { dlg.showModal(); if (key) render(key); else { $$('.choice', dlg).forEach(c => c.setAttribute('aria-checked','false')); reveal.innerHTML = '<p class="mute" style="margin:0">Choose a path above to see what training looks like.</p>'; } setTimeout(() => (key ? $(`.choice[data-choice="${key}"]`, dlg) : $('.choice', dlg)).focus(), 30); };
+  $$('[data-explore]').forEach(b => b.addEventListener('click', () => { if (panel.classList.contains('open')) setMenu(false); open(b.dataset.explore || ''); }));
+  dlg.addEventListener('click', e => {
+    const ch = e.target.closest('.choice'); if (ch) render(ch.dataset.choice);
+    if (e.target.closest('[data-close]') || e.target === dlg) dlg.close();
+    if (e.target.closest('[data-close-nav]')) { dlg.close(); setTimeout(() => $('#email').focus({preventScroll:true}), 400); }
+  });
+  // Arrow-key support for radiogroup
+  $('.choices', dlg).addEventListener('keydown', e => {
+    if (!['ArrowRight','ArrowDown','ArrowLeft','ArrowUp'].includes(e.key)) return;
+    e.preventDefault(); const cs = $$('.choice', dlg), i = cs.indexOf(document.activeElement);
+    const n = cs[(i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1) + cs.length) % cs.length]; n.focus(); render(n.dataset.choice);
+  });
+
+  // App carousel (mobile)
+  const phones = $('#phones'), slides = $$('.phone-wrap', phones), dots = $$('.car-dots button');
+  const go = i => { i = Math.max(0, Math.min(slides.length - 1, i)); slides[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'center' }); };
+  const cur = () => { const mid = phones.scrollLeft + phones.clientWidth / 2; let best = 0, d = 1e9; slides.forEach((s, i) => { const c = s.offsetLeft + s.offsetWidth / 2, dd = Math.abs(c - mid); if (dd < d) { d = dd; best = i; } }); return best; };
+  phones.addEventListener('scroll', () => { const i = cur(); dots.forEach((d, j) => d.setAttribute('aria-current', i === j)); }, { passive:true });
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  $$('[data-car]').forEach(b => b.addEventListener('click', () => go(cur() + +b.dataset.car)));
+  phones.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur() - 1); } });
+
+  // Email signup
+  const form = $('#signup-form'), email = $('#email'), msg = $('#email-msg'), field = $('#email-field');
+  const valid = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const v = email.value.trim();
+    if (!valid(v)) {
+      field.classList.add('err'); email.setAttribute('aria-invalid','true');
+      msg.className = 'form-msg error'; msg.setAttribute('role','alert');
+      msg.textContent = v ? 'That email doesn’t look quite right. Please check it and try again.' : 'Please enter your email address.';
+      email.focus(); return;
+    }
+    field.classList.remove('err'); email.removeAttribute('aria-invalid'); msg.setAttribute('role','status');
+    if (!XDOT_CONFIG.emailEndpoint) {
+      msg.className = 'form-msg demo';
+      msg.textContent = 'Demo only: this form isn’t connected to an email service yet, so your address was not saved or subscribed.';
+      return;
+    }
+    try {
+      msg.className = 'form-msg'; msg.textContent = 'Sending…';
+      const r = await fetch(XDOT_CONFIG.emailEndpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email: v }) });
+      if (!r.ok) throw 0;
+      msg.className = 'form-msg demo'; msg.textContent = 'You’re in. Watch your inbox for a confirmation.'; form.reset();
+    } catch { msg.className = 'form-msg error'; msg.setAttribute('role','alert'); msg.textContent = 'Something went wrong and you weren’t signed up. Please try again.'; }
+  });
+  email.addEventListener('input', () => { if (field.classList.contains('err') && valid(email.value.trim())) { field.classList.remove('err'); email.removeAttribute('aria-invalid'); msg.textContent=''; msg.className='form-msg'; } });
+})();
+</script>
+</body>
+</html>
