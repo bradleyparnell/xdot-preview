@@ -828,6 +828,11 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #about-title .ln{display:block}
 @media (min-width:1000px){#about-title{font-size:clamp(42px,4.6vw,66px)}#about-title .ln{white-space:nowrap}}
 @media (max-width:999px){#about-title .ln{display:inline}#about-title{text-wrap:balance}}
+
+/* Community: give the section breathing room so the photo is not clipped */
+.community{padding-bottom:clamp(72px,8vw,120px);background:var(--bg)}
+.comm-quiet{align-items:center}
+.comm-quiet img{display:block;width:100%;height:auto}
 </style>
 </head>
 <body>
