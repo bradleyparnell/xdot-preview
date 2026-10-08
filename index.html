@@ -757,6 +757,62 @@ dialog[open]{animation:dlg .35s var(--ease)}
 .final-wm{position:absolute;left:50%;top:50%;width:min(78vw,980px);height:auto;transform:translate(-50%,-50%);opacity:.07;z-index:-1;pointer-events:none}
 @media (max-width:640px){.center-head .sec-mark{justify-content:flex-start}.sec-mark .xmark{width:28px}.band-mark .xmark{width:36px}}
 .more-sports{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px var(--gutter,24px);border-bottom:1px solid rgba(243,238,223,.12);text-align:left}.more-sports .xmark{flex:0 0 auto;width:30px;height:20px}.more-sports p{margin:0;font-size:16px;line-height:1.5;color:rgba(243,238,223,.78)}.more-sports b{color:var(--ivory);font-weight:600}
+/* ===== Creative director pass (v19) ===== */
+:root{--txt-mute:#BEBAAC;--txt-dim:#9A968B}
+.eyebrow{font-size:13px}
+.lede{font-size:clamp(18px,1.55vw,21px)}
+.aq figcaption span{font-size:14px}
+.sci-grid p{font-size:16px}.sci-note,.illus{font-size:14px}
+.hero .eyebrow,.hero .lede{text-shadow:0 1px 14px rgba(0,0,0,.55)}
+@media (max-width:760px){.hero::before{background:linear-gradient(0deg,rgba(16,17,16,.97) 0%,rgba(16,17,16,.82) 48%,rgba(16,17,16,.25) 76%),linear-gradient(180deg,rgba(16,17,16,.6) 0%,rgba(16,17,16,0) 25%)}}
+.split-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,96px);align-items:end;margin-bottom:var(--s6)}
+.split-head .lede{margin:0;max-width:460px}
+@media (max-width:920px){.split-head{grid-template-columns:minmax(0,1fr);gap:var(--s3)}}
+.legends{padding:var(--s8) 0 var(--s7);background:var(--bg)}
+.legends-head{margin-bottom:var(--s6)}
+.lg{margin:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-height:clamp(420px,42vw,620px);border-top:1px solid var(--line)}
+.lg.flip{border-bottom:1px solid var(--line);grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.lg-img{position:relative;overflow:hidden;background:var(--surface)}
+.lg-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:grayscale(.2) contrast(1.05)}
+.lg.flip .lg-img{order:2}
+.lg.flip .lg-img img{object-position:center 30%}
+.lg figcaption{display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding:var(--s6) clamp(28px,6vw,104px);background:var(--surface)}
+.lg.flip figcaption{background:var(--bg)}
+.lg blockquote{margin:0;font-family:var(--f-head);font-stretch:105%;font-weight:700;font-size:clamp(24px,2.4vw,38px);line-height:1.18;letter-spacing:-.01em;color:var(--ivory)}
+.lg blockquote::before{content:"\201C";display:block;font-size:2.6em;line-height:.6;color:var(--gold);margin-bottom:10px}
+.lg .who{margin:0;display:grid;gap:6px;border-top:1px solid var(--line);padding-top:18px;max-width:460px}
+.lg .who b{font-family:var(--f-head);font-stretch:112%;text-transform:uppercase;letter-spacing:.02em;color:var(--gold);font-size:19px}
+.lg .who span{font-size:14.5px;color:var(--txt-mute)}
+.legends .proof-strip{margin-top:var(--s6)}
+@media (max-width:920px){.lg,.lg.flip{grid-template-columns:minmax(0,1fr);min-height:0}.lg-img,.lg.flip .lg-img{order:0;aspect-ratio:16/10}.lg.flip .lg-img{aspect-ratio:4/3}.lg figcaption{padding:var(--s5) var(--gut)}}
+.how.v4{padding:var(--s8) 0}
+.how-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:stretch}
+.how-photo{margin:0;position:relative;overflow:hidden;min-height:480px;background:var(--surface)}
+.how-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.how-steps{list-style:none;margin:0;padding:0}
+.how-steps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s4);padding:var(--s4) 0;border-top:1px solid var(--line)}
+.how-steps li:last-child{border-bottom:1px solid var(--line)}
+.hs-num{font-family:var(--f-head);font-stretch:115%;font-weight:800;font-size:clamp(40px,3.6vw,56px);line-height:.9;color:var(--gold);min-width:1.6em}
+.hs-k{margin:0 0 6px;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--txt-dim)}
+.how-steps h3{margin:0 0 6px;font-family:var(--f-head);font-stretch:110%;font-weight:800;text-transform:uppercase;font-size:clamp(22px,2vw,30px);line-height:1;letter-spacing:-.01em}
+.how-steps p:not(.hs-k){margin:0;color:var(--txt-mute);font-size:17px}
+.how-grid .textlink{margin-top:var(--s4);color:var(--gold)}
+@media (max-width:920px){.how-grid{grid-template-columns:minmax(0,1fr)}.how-photo{min-height:0;aspect-ratio:16/10}}
+@media (max-width:520px){.how-steps li{gap:var(--s2)}}
+.wear{background:var(--ivory);color:var(--ink);padding:var(--s7) 0 0}
+.wear .eyebrow{color:#8B6B33}
+.wear .lede{color:#3a3a35}
+.wear .concept{display:block;margin-top:10px;font-size:14px;color:#6a675f}
+.wear-imgs{display:grid;grid-template-columns:1fr 1fr}
+.wear-imgs figure{margin:0;position:relative}
+.wear-imgs img{display:block;width:100%;aspect-ratio:5/4;object-fit:cover}
+.wear-imgs figcaption{position:absolute;left:var(--gut);right:var(--gut);bottom:20px;display:flex;justify-content:space-between;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--ivory);text-shadow:0 1px 10px rgba(0,0,0,.6)}
+@media (max-width:640px){.wear-imgs{grid-template-columns:1fr}}
+body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+@media print{body::after{display:none}}
+#members-title{font-size:clamp(30px,3.8vw,56px)}
+#intel-title{font-size:clamp(28px,3vw,44px)!important}
+.xmark{color:#F3EEDF}.wear .xmark{color:#101110}.wear .eyebrow.eb-x::before{display:none}
 </style>
 </head>
 <body>
@@ -766,7 +822,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
 <!-- SVG sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="arrow" viewBox="0 0 16 16"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
-  <symbol id="emblem" viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#F3EEDF"/><circle cx="104" cy="28" r="14" fill="#C9A15C"/></symbol>
+  <symbol id="emblem" viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="currentColor"/><circle cx="104" cy="28" r="14" fill="#C9A15C"/></symbol>
 </svg>
 
 <header class="site-header" id="top-header">
@@ -815,14 +871,13 @@ dialog[open]{animation:dlg .35s var(--ease)}
   <div class="wrap hero-inner">
     <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Endurance · Running · Triathlon · More to come</p>
     <h1 class="h-xl rv d1" id="hero-title"><span>Built for</span><span>the <span class="gold" style="display:inline">long game.</span></span></h1>
-    <p class="lede rv d2">Personalized endurance training, built from your goals and your data, in one app. Starting with running and triathlon, with more endurance sports on the way.</p>
+    <p class="lede rv d2">Personalized endurance training built from your goals and your data, starting with running and triathlon.</p>
     <div class="btn-row rv d3">
       <button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button>
       <a class="btn btn-line" href="#signup">Stay in the Loop</a>
     </div>
   </div>
   <a class="scroll-cue" href="#about" aria-label="Scroll to the next section"><span>Scroll</span><i></i></a>
-  <div class="hero-meta" aria-hidden="true"><b>01</b> Train with purpose</div>
 </section>
 
 <!-- 3. BRAND STATEMENT -->
@@ -863,13 +918,43 @@ dialog[open]{animation:dlg .35s var(--ease)}
   </div>
 </section>
 
+
+<!-- LEGENDS -->
+<section class="legends" id="legends" data-config-show="showStories" aria-labelledby="legends-title">
+  <div class="wrap legends-head">
+    <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Trusted by legends</p>
+    <h2 class="h-lg rv d1" id="legends-title">Trusted by<span class="line2">champions.</span></h2>
+  </div>
+  <figure class="lg rv">
+    <div class="lg-img"><img src="img/meb.jpg?v=gh3" width="1200" height="660" loading="lazy" alt="Portrait of Meb Keflezighi."></div>
+    <figcaption>
+      <blockquote>“RunDot’s technology is so far ahead of anything else I’ve seen, and I want the absolute best for my athletes.”</blockquote>
+      <p class="who"><b>Meb Keflezighi</b><span>Olympic Marathon Silver Medalist · Boston and NYC Marathon Champion</span></p>
+    </figcaption>
+  </figure>
+  <figure class="lg flip rv">
+    <div class="lg-img"><img src="img/mark-allen.jpg?v=gh3" width="400" height="400" loading="lazy" alt="Portrait of Mark Allen."></div>
+    <figcaption>
+      <blockquote>“TriDot’s technology is so far ahead of anything I’ve seen in this sport, and I want the absolute best for the athletes I coach.”</blockquote>
+      <p class="who"><b>Mark Allen</b><span>6x IRONMAN World Champion</span></p>
+    </figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="proof-strip rv">
+      <p><b>50,000+</b><span>athletes have trained with RunDot and TriDot</span></p>
+      <p><b>20+ years</b><span>of real athlete training data</span></p>
+      <p><b>2 to start</b><span>Running and triathlon today. More endurance sports coming.</span></p>
+    </div>
+  </div>
+</section>
+
 <!-- PHOTO BAND -->
 <section class="band" aria-labelledby="band-title">
   <img class="bg" src="img/band-m.jpg?v=gh3" srcset="img/band-m.jpg?v=gh3 900w, img/band.jpg?v=gh3 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" alt="Two cyclists climb a narrow, tree-lined country lane on a bright spring day.">
   <div class="wrap">
     <p class="band-kicker rv">Running and triathlon today. More endurance sports ahead.</p>
     <div class="band-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
-    <h2 class="h-lg rv d1" id="band-title">Every discipline. One engine. <span class="gold">One endurance athlete.</span></h2>
+    <h2 class="h-lg rv d1" id="band-title">Every discipline. One engine.<span class="line2">One endurance athlete.</span></h2>
     <p class="lede rv d2">Every plan is built on the same training science and shaped around your goals, your experience, and your week.</p>
     <div class="btn-row rv d3"><button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
   </div>
@@ -878,10 +963,9 @@ dialog[open]{animation:dlg .35s var(--ease)}
 <!-- 4. CHOOSE YOUR TRAINING -->
 <section class="sec" id="training" aria-labelledby="training-title">
   <div class="wrap">
-    <div class="center-head">
-      <div class="sec-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
-      <p class="eyebrow c rv">Choose your training</p>
-      <h2 class="h-lg rv d1" id="training-title">Different goals.<span class="gold line2">The same drive.</span></h2>
+    <div class="split-head">
+      <div><p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Choose your training</p>
+      <h2 class="h-lg rv d1" id="training-title">Different goals.<span class="line2">The same drive.</span></h2></div>
       <p class="lede rv d2">Start with running or triathlon today. Wherever you begin, you are part of the same endurance mindset.</p>
     </div>
   </div>
@@ -925,7 +1009,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
   <div class="wrap members-grid">
     <div>
       <p class="eyebrow rv">Already with us</p>
-      <h2 class="h-lg rv d1" id="members-title">Training with RunDot or TriDot? <span class="gold">You’re already home.</span></h2>
+      <h2 class="h-lg rv d1" id="members-title">Training with RunDot or TriDot?<span class="line2">You’re already home.</span></h2>
       <p class="lede rv d2">XDOT is the next chapter of the training you already know. Here are the answers to the questions we hear most.</p>
     </div>
     <div class="faq rv d2">
@@ -957,24 +1041,18 @@ dialog[open]{animation:dlg .35s var(--ease)}
     <h2 class="h-lg rv d1" id="how-title">Your next step,<span class="gold line2">made clear.</span></h2>
     <p class="lede rv d2">Four steps from your goal to your progress. You always know what comes next.</p>
   </div>
-  <ol class="rows">
-    <li class="row">
-      <figure class="row-media"><img src="img/step-goal-m.jpg?v=gh3" srcset="img/step-goal-m.jpg?v=gh3 900w, img/step-goal.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Three runners talk over coffee at an outdoor table after a training run."></figure>
-      <div class="row-body"><span class="row-num rv" aria-hidden="true">01</span><p class="eyebrow rv">Your goal</p><h3 class="rv d1">Tell us where you want to go.</h3><p class="rv d2">Share your goals, experience, and available training time.</p></div>
-    </li>
-    <li class="row">
-      <figure class="row-media"><img src="img/step-plan-m.jpg?v=gh3" srcset="img/step-plan-m.jpg?v=gh3 900w, img/step-plan.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Two athletes look over a training plan on a phone at the edge of a running track."></figure>
-      <div class="row-body"><span class="row-num rv" aria-hidden="true">02</span><p class="eyebrow rv">Your plan</p><h3 class="rv d1">Get a plan built around you.</h3><p class="rv d2">Know what to do and where to focus.</p></div>
-    </li>
-    <li class="row">
-      <figure class="row-media"><img src="img/step-work-m.jpg?v=gh3" srcset="img/step-work-m.jpg?v=gh3 900w, img/step-work.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Runners of different ages push through a track session together in low afternoon sun."></figure>
-      <div class="row-body"><span class="row-num rv" aria-hidden="true">03</span><p class="eyebrow rv">Your work</p><h3 class="rv d1">Put in the work.</h3><p class="rv d2">Follow your sessions and connect your training data.</p></div>
-    </li>
-    <li class="row">
-      <figure class="row-media"><img src="img/step-progress-m.jpg?v=gh3" srcset="img/step-progress-m.jpg?v=gh3 900w, img/step-progress.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Close-up of an athlete checking a sports watch on her wrist."></figure>
-      <div class="row-body"><span class="row-num rv" aria-hidden="true">04</span><p class="eyebrow rv">Your progress</p><h3 class="rv d1">See your progress.</h3><p class="rv d2">Understand how your training is moving you forward.</p><button class="textlink rv d3" type="button" data-explore>Explore your training <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button></div>
-    </li>
-  </ol>
+  <div class="wrap how-grid">
+    <figure class="how-photo rv"><img src="img/step-plan-m.jpg?v=gh3" srcset="img/step-plan-m.jpg?v=gh3 900w, img/step-plan.jpg?v=gh3 1800w" sizes="(max-width:920px) 100vw, 50vw" width="1800" height="1200" loading="lazy" alt="Two athletes look over a training plan on a phone at the edge of a running track."></figure>
+    <div>
+      <ol class="how-steps">
+      <li class="rv"><span class="hs-num" aria-hidden="true">01</span><div><p class="hs-k">Your goal</p><h3>Tell us where you want to go.</h3><p>Share your goals, experience, and available training time.</p></div></li>
+      <li class="rv"><span class="hs-num" aria-hidden="true">02</span><div><p class="hs-k">Your plan</p><h3>Get a plan built around you.</h3><p>Know what to do and where to focus.</p></div></li>
+      <li class="rv"><span class="hs-num" aria-hidden="true">03</span><div><p class="hs-k">Your work</p><h3>Put in the work.</h3><p>Follow your sessions and connect your training data.</p></div></li>
+      <li class="rv"><span class="hs-num" aria-hidden="true">04</span><div><p class="hs-k">Your progress</p><h3>See your progress.</h3><p>Understand how your training is moving you forward.</p></div></li>
+      </ol>
+      <button class="textlink rv" type="button" data-explore>Explore your training <svg width="16" height="16" aria-hidden="true"><use href="#arrow"/></svg></button>
+    </div>
+  </div>
 </section>
 
 <!-- 6. APP SHOWCASE -->
@@ -982,7 +1060,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
   <div class="wrap">
     <div class="app-head">
       <p class="eyebrow rv">The XDOT app</p>
-      <h2 class="h-lg rv d1" id="app-title">Less guesswork. <span class="gold">More purposeful training.</span></h2>
+      <h2 class="h-lg rv d1" id="app-title">Less guesswork.<span class="line2">More purposeful training.</span></h2>
       <p class="lede rv d2">Open your plan knowing what comes next. See your week clearly. Track the progress you’re working for.</p>
     </div>
 
@@ -1075,22 +1153,14 @@ dialog[open]{animation:dlg .35s var(--ease)}
     </figure>
     <div>
       <p class="eyebrow rv">Training intelligence</p>
-      <h2 class="h-md rv d1" id="intel-title" style="font-size:clamp(30px,3.4vw,50px)">Built around you. <span class="gold">Backed by training intelligence.</span></h2>
+      <h2 class="h-md rv d1" id="intel-title" style="font-size:clamp(30px,3.4vw,50px)">Built around you.<span class="line2">Backed by training intelligence.</span></h2>
       <p class="lede rv d2">Your goals, training history, and performance help shape a more personal training experience. XDOT brings that intelligence into a plan you can follow with confidence.</p>
       <p class="powered rv" data-config-show="showPoweredBy" hidden><i></i>Powered by <b>FitLogic</b></p>
     </div>
   </div>
-  <div class="wrap">
-    <ul class="stats" aria-label="XDOT at a glance">
-      <li class="rv"><b>2</b><span>Disciplines to start</span><small>More endurance sports coming</small></li>
-      <li class="rv d1"><b>3</b><span>Sports, one plan</span><small>Swim, bike, run</small></li>
-      <li class="rv d2"><b>4</b><span>Training phases</span><small>Assess, prescribe, evaluate, predict</small></li>
-      <li class="rv d3" data-config-show="showPoweredBy"><b>20+</b><span>Years of data</span><small>Real athlete training behind every plan</small></li>
-    </ul>
-  </div>
   <div class="wrap science">
     <div class="science-head">
-      <h3 class="rv">The science <span class="gold">you already trust.</span></h3>
+      <h3 class="rv">The science<span class="line2">you already trust.</span></h3>
       <p class="rv d1">The tools RunDot and TriDot athletes know by name, explained in plain language and now in one endurance platform.</p>
     </div>
     <ul class="sci-grid">
@@ -1108,37 +1178,16 @@ dialog[open]{animation:dlg .35s var(--ease)}
 <!-- ATHLETE STORIES -->
 <section class="sec stories" id="stories" data-config-show="showStories" aria-labelledby="stories-title">
   <div class="wrap">
-    <div class="center-head">
-      <div class="sec-mark rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg></div>
-      <p class="eyebrow c rv">Athlete stories</p>
-      <h2 class="h-lg rv d1" id="stories-title">In their <span class="gold">own words.</span></h2>
-    </div>
-    <div class="legend-grid">
-      <figure class="legend rv">
-        <img src="img/meb.jpg?v=gh3" width="1200" height="660" loading="lazy" alt="Portrait of Meb Keflezighi.">
-        <figcaption>
-          <blockquote>“RunDot’s technology is so far ahead of anything else I’ve seen, and I want the absolute best for my athletes.”</blockquote>
-          <p class="who"><b>Meb Keflezighi</b><span>Olympic Marathon Silver Medalist · Boston and NYC Marathon Champion</span></p>
-        </figcaption>
-      </figure>
-      <figure class="legend rv d1">
-        <img src="img/mark-allen.jpg?v=gh3" width="400" height="400" loading="lazy" alt="Portrait of Mark Allen.">
-        <figcaption>
-          <blockquote>“TriDot’s technology is so far ahead of anything I’ve seen in this sport, and I want the absolute best for the athletes I coach.”</blockquote>
-          <p class="who"><b>Mark Allen</b><span>6x IRONMAN World Champion</span></p>
-        </figcaption>
-      </figure>
+    <div class="split-head">
+      <div><p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Athlete stories</p>
+      <h2 class="h-lg rv d1" id="stories-title">In their<span class="line2">own words.</span></h2></div>
+      <p class="lede rv d2">Real words from RunDot and TriDot athletes about the training XDOT carries forward.</p>
     </div>
     <div class="quote-grid">
       <figure class="aq rv"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“I love that I can trust that the workouts are exactly what I need, not too much or too little!”</blockquote><figcaption><b>RunDot athlete</b><span>App Store review</span></figcaption></figure>
       <figure class="aq rv d1"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“TriDot maximizes efficiency while preserving the athlete. I don’t feel destroyed after my workouts, and I can complete each day.”</blockquote><figcaption><b>Seth W.</b><span>TriDot athlete</span></figcaption></figure>
       <figure class="aq rv d2"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“Within minutes I had my first run loaded and I hit the road.”</blockquote><figcaption><b>RunDot athlete</b><span>App Store review</span></figcaption></figure>
       <figure class="aq rv d3"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“From my first full-distance IRONMAN to solo mountain bike races and Xterra, TriDot has been my companion for every multisport adventure.”</blockquote><figcaption><b>April S.</b><span>TriDot athlete</span></figcaption></figure>
-    </div>
-    <div class="proof-strip rv">
-      <p><b>50,000+</b><span>athletes have trained with RunDot and TriDot</span></p>
-      <p><b>20+ years</b><span>of real athlete training data</span></p>
-      <p><b>2 legends</b><span>Meb Keflezighi and Mark Allen</span></p>
     </div>
   </div>
 </section>
@@ -1151,7 +1200,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
   <div class="wrap comm-body">
     <div class="comm-copy">
       <p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Community</p>
-      <h2 class="h-lg rv d1" id="comm-title">The work is personal.<br><span class="gold">The journey is shared.</span></h2>
+      <h2 class="h-lg rv d1" id="comm-title">The work is personal.<span class="line2">The journey is shared.</span></h2>
       <p class="lede rv d2">There’s something powerful about being around people who understand why you keep showing up. Make room for shared miles, new goals, and the encouragement to keep going.</p>
       <div class="btn-row rv d3"><a class="btn btn-gold" href="#signup">Stay in the Loop <svg aria-hidden="true"><use href="#arrow"/></svg></a></div>
     </div>
@@ -1163,22 +1212,15 @@ dialog[open]{animation:dlg .35s var(--ease)}
 </section>
 
 <!-- 9. SWAG -->
-<section class="swag slim" id="wear" aria-labelledby="wear-title" style="margin-top:var(--s7)">
-  <div class="wrap swag-grid">
-    <div class="swag-copy">
-      <p class="eyebrow rv">The XDOT line</p>
-      <h2 class="h-lg rv d1" id="wear-title">Wear the mindset.</h2>
-      <p class="rv d2">Built for the long game. On and off the course.</p>
-      <p class="concept rv d3">Brand concept visuals. Not currently available for purchase.</p>
-    </div>
-    <figure class="rv">
-      <img src="img/cap-m.jpg" srcset="img/cap-m.jpg 900w, img/cap.jpg 1024w" sizes="(max-width:640px) 100vw, 33vw" width="900" height="900" loading="lazy" alt="Concept black performance cap with an XDOT wordmark, resting on rocky ground at a mountain overlook.">
-      <figcaption><span>Performance Cap</span><span>Concept</span></figcaption>
-    </figure>
-    <figure class="rv d1">
-      <img src="img/shirt-m.jpg" srcset="img/shirt-m.jpg 900w, img/shirt.jpg 1024w" sizes="(max-width:640px) 100vw, 33vw" width="900" height="900" loading="lazy" alt="Concept black technical shirt with a small XDOT wordmark on the chest, laid on dark rocks.">
-      <figcaption><span>Technical Tee</span><span>Concept</span></figcaption>
-    </figure>
+<section class="wear" id="wear" aria-labelledby="wear-title">
+  <div class="wrap split-head">
+    <div><p class="eyebrow eb-x rv"><svg class="xmark" viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>The XDOT line</p>
+    <h2 class="h-lg rv d1" id="wear-title">Wear the mindset.</h2></div>
+    <p class="lede rv d2">Built for the long game. On and off the course.<span class="concept">Brand concept visuals. Not currently available for purchase.</span></p>
+  </div>
+  <div class="wear-imgs">
+    <figure class="rv"><img src="img/cap.jpg" srcset="img/cap-m.jpg 900w, img/cap.jpg 1024w" sizes="(max-width:640px) 100vw, 50vw" width="1024" height="1024" loading="lazy" alt="Concept black performance cap with an XDOT wordmark, resting on rocky ground at a mountain overlook."><figcaption><span>Performance Cap</span><span>Concept</span></figcaption></figure>
+    <figure class="rv d1"><img src="img/shirt.jpg" srcset="img/shirt-m.jpg 900w, img/shirt.jpg 1024w" sizes="(max-width:640px) 100vw, 50vw" width="1024" height="1024" loading="lazy" alt="Concept black technical shirt with a small XDOT wordmark on the chest, laid on dark rocks."><figcaption><span>Technical Tee</span><span>Concept</span></figcaption></figure>
   </div>
 </section>
 
@@ -1200,7 +1242,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
   <img class="bg" src="img/final-m.jpg?v=gh3" srcset="img/final-m.jpg?v=gh3 900w, img/final.jpg?v=gh3 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" alt="">
   <div class="wrap">
     <p class="eyebrow rv">Train with purpose. Build your endurance. Go further.</p>
-    <h2 class="h-xl rv d1" id="final-title">What are you <span class="gold">building toward?</span></h2>
+    <h2 class="h-xl rv d1" id="final-title">What are you<span class="line2 gold">building toward?</span></h2>
     <p class="lede rv d2">Your next finish line. A stronger foundation. A version of yourself you haven’t met yet. Start with your next step.</p>
     <div class="btn-row rv d3">
       <button class="btn btn-gold" type="button" data-explore>Explore Your Training <svg aria-hidden="true"><use href="#arrow"/></svg></button>
@@ -1217,7 +1259,7 @@ dialog[open]{animation:dlg .35s var(--ease)}
     <div class="foot-top v4">
       <div class="foot-signup">
         <p class="eyebrow">Stay in the loop</p>
-        <h2 class="foot-h" id="signup-title">Training ideas and XDOT news, <span class="gold">when it matters.</span></h2>
+        <h2 class="foot-h" id="signup-title">Training ideas and XDOT news, when it matters.</h2>
         <form id="signup-form" novalidate aria-labelledby="signup-title">
           <label for="email">Email address</label>
           <div class="field" id="email-field">
@@ -1300,7 +1342,7 @@ const XDOT_CONFIG = {
     running:   { label: 'Start with running',   url: '' },
     triathlon: { label: 'Start with triathlon', url: '' }
   },
-  showAnnouncement: false,       // Top bar: "RunDot and TriDot are becoming XDOT". Pending approval.
+  showAnnouncement: false,      // Top bar: "RunDot and TriDot are becoming XDOT". Pending approval.
   showStories: true,            // Athlete stories, legend quotes and proof strip
   showPoweredBy: true,          // "Powered by FitLogic" line, pending approval
   emailEndpoint: '',            // POST endpoint for signups. Empty = demo mode.
