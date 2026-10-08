@@ -685,6 +685,18 @@ dialog[open]{animation:dlg .35s var(--ease)}
 .path img[src*="direction"]{object-position:50% 30%}
 .comm-hero img{object-position:50% 30%}
 @media (max-width:900px),(max-height:760px){.scroll-cue{display:none}}
+
+/* Statement: desktop layout, headline top-left, paragraph bottom-left, large photo right */
+@media (min-width:921px){
+  .statement{padding:clamp(72px,8vw,120px) 0}
+  .statement-grid{grid-template-columns:1.2fr .8fr;grid-template-rows:auto 1fr;align-items:start;column-gap:clamp(48px,6vw,96px);row-gap:var(--s5)}
+  .statement-grid>div:first-child{grid-column:1;grid-row:1}
+  .statement-side{display:contents}
+  .statement-side .statement-photo{grid-column:2;grid-row:1 / span 2;align-self:stretch}
+  .statement-photo img{width:100%;height:100%;min-height:440px;max-height:620px;margin:0;aspect-ratio:auto;object-position:50% 60%}
+  .statement-photo figcaption{left:-26px;bottom:12px}
+  .statement-side p{grid-column:1;grid-row:2;align-self:end;max-width:560px;padding-top:var(--s3);border-top:2px solid #9C7738}
+}
 /* Statement: stacked layout fix (tablet/phone) */
 @media (max-width:920px){
   .statement-grid{gap:var(--s5)}
