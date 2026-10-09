@@ -44,7 +44,7 @@ p{margin:0 0 14px}
 .cover::before{content:"";position:absolute;inset:0;background:url(../img/hero.jpg) center 30%/cover;opacity:.55}
 .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,17,16,.25),rgba(16,17,16,.6) 55%,#101110)}
 .cover .wrap{position:relative;z-index:1;width:100%}
-.cover-mark{display:flex;align-items:center;gap:28px;margin-bottom:34px}
+.cover-mark{display:flex;flex-direction:column;align-items:flex-start;gap:22px;margin-bottom:34px}
 .cover-mark svg{width:120px;color:var(--ivory)}
 .cover-mark .wm{font-size:clamp(64px,10vw,140px);line-height:.85}
 .cover h1{font-size:clamp(34px,4.4vw,60px);max-width:900px}
@@ -73,17 +73,16 @@ section{padding:110px 0;border-bottom:1px solid var(--line)}
 .panel.gold{background:var(--gold);color:var(--bg)}.panel.gold .cap{color:rgba(16,17,16,.6)}
 .panel.photo{background:url(../img/band.jpg) center/cover}
 .panel.photo::before{content:"";position:absolute;inset:0;background:rgba(16,17,16,.35)}
-.panel.photo > *{position:relative}
+.panel.photo > *:not(.cap){position:relative}
+.panel.photo .cap{z-index:1}
 .lock{display:flex;align-items:center;gap:22px}
 .lock svg{width:86px}
 .lock .wm{font-size:64px;color:inherit}
 .stack{display:flex;flex-direction:column;align-items:center;gap:18px}
 .stack svg{width:96px}.stack .wm{font-size:48px;color:inherit}
 .panel .solo{width:150px}
-.ring{width:170px}
+.marks .panel{min-height:300px}
 .panel.ivory .x-ink{color:var(--bg)}
-.appicon{width:150px;height:150px;border-radius:34px;background:#101110;display:grid;place-items:center;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.appicon svg{width:118px}
 .space-demo{position:relative;padding:42px;outline:1px dashed rgba(201,161,92,.7);outline-offset:0}
 .space-demo::before,.space-demo::after{content:"X";position:absolute;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:.1em}
 .space-demo::before{left:6px;top:4px}.space-demo::after{right:8px;bottom:4px}
@@ -233,39 +232,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <!-- 02 LOGO -->
 <section id="logo">
   <div class="wrap">
-    <div class="sec-head"><div class="num">02</div><div><p class="eyebrow"><svg viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Logo</p><h2>The marks</h2><p class="lead">Three pieces: the XDOT wordmark, the X-and-dot emblem and the Ring icon. The emblem always sits beside the wordmark, never inside it.</p></div></div>
+    <div class="sec-head"><div class="num">02</div><div><p class="eyebrow"><svg viewBox="0 0 120 80" aria-hidden="true"><use href="#emblem"/></svg>Logo</p><h2>The marks</h2><p class="lead">Three pieces: the XDOT wordmark, the X-and-dot emblem and the stacked logo. When they appear together, the emblem sits above the wordmark, never beside or inside it.</p></div></div>
 
-    <div class="grid2">
-      <div class="panel dark"><span class="cap">Primary lockup</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory)"><use href="#emblem"/></svg><span class="wm">XDOT</span></div></div>
-      <div class="panel char"><span class="cap">Stacked lockup</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory)"><use href="#emblem"/></svg><span class="wm">XDOT</span></div></div>
+    <div class="grid3 marks">
+      <div class="panel char"><span class="cap">Stacked logo</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory)"><use href="#emblem"/></svg><span class="wm">XDOT</span></div></div>
       <div class="panel dark"><span class="cap">Wordmark</span><span class="wm" style="font-size:88px">XDOT</span></div>
       <div class="panel char"><span class="cap">Emblem</span><svg class="solo" viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory)"><use href="#emblem"/></svg></div>
-      <div class="panel dark"><span class="cap">Ring icon · Bronze</span>
-        <svg class="ring" viewBox="0 0 200 200" fill="none" aria-hidden="true"><circle cx="100" cy="100" r="90" stroke="#B08D57" stroke-width="5"/><circle cx="100" cy="100" r="81" stroke="#B08D57" stroke-opacity=".35" stroke-width="1.5"/><g stroke="#F3EEDF" stroke-width="15"><line x1="136.1" y1="60.1" x2="63.9" y2="139.9"/><line x1="63.9" y1="60.1" x2="89.55" y2="89.55"/><line x1="110.45" y1="110.45" x2="136.1" y2="139.9"/></g></svg>
-      </div>
-      <div class="panel char"><span class="cap">App icon</span><div class="appicon"><svg viewBox="0 0 200 200" fill="none" aria-hidden="true"><circle cx="100" cy="100" r="88" stroke="#C9A15C" stroke-width="12"/><g stroke="#F3EEDF" stroke-width="26"><line x1="136.1" y1="60.1" x2="63.9" y2="139.9"/><line x1="63.9" y1="60.1" x2="89.55" y2="89.55"/><line x1="110.45" y1="110.45" x2="136.1" y2="139.9"/></g></svg></div></div>
     </div>
 
     <div class="grid3" style="margin-top:40px">
       <div class="rule"><h3>Wordmark</h3><p class="muted">Reads exactly "XDOT." Archivo Black at its widest setting. Nothing follows the T: no extra X, dot or symbol.</p></div>
-      <div class="rule"><h3>Emblem</h3><p class="muted">The X with a gold dot. Our signature: section dividers, the scrolling line, social avatars and small brand moments.</p></div>
-      <div class="rule"><h3>Ring icon</h3><p class="muted">The broken X inside a bronze ring. For the app icon, favicon, badges and anywhere a round mark fits. Both X arms stay equal weight.</p></div>
+      <div class="rule"><h3>Emblem</h3><p class="muted">The X with a gold dot. Our signature: section dividers, the scrolling line, social avatars, the favicon and small brand moments.</p></div>
+      <div class="rule"><h3>Stacked logo</h3><p class="muted">The emblem centered above the wordmark. Use it when the brand needs both pieces together, like cover pages, presentations and merchandise concepts.</p></div>
     </div>
 
     <h3 style="margin-top:80px">Color versions</h3>
     <div class="grid4 cv" style="margin-top:20px">
-      <div class="panel dark" style="min-height:180px;padding:30px"><span class="cap">On near-black</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:48px"><use href="#emblem"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
-      <div class="panel ivory" style="min-height:180px;padding:30px"><span class="cap">On ivory</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--bg);width:48px"><use href="#emblem"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
-      <div class="panel gold" style="min-height:180px;padding:30px"><span class="cap">On gold · one color</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="width:48px"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#101110"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
-      <div class="panel photo" style="min-height:180px;padding:30px"><span class="cap" style="color:var(--ivory)">On photography</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:48px"><use href="#emblem"/></svg><span class="wm" style="font-size:34px;color:var(--ivory)">XDOT</span></div></div>
+      <div class="panel dark" style="min-height:250px;padding:56px 30px 30px"><span class="cap">On near-black</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:56px"><use href="#emblem"/></svg><span class="wm" style="font-size:30px">XDOT</span></div></div>
+      <div class="panel ivory" style="min-height:250px;padding:56px 30px 30px"><span class="cap">On ivory</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--bg);width:56px"><use href="#emblem"/></svg><span class="wm" style="font-size:30px">XDOT</span></div></div>
+      <div class="panel gold" style="min-height:250px;padding:56px 30px 30px"><span class="cap">On gold · one color</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="width:56px"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#101110"/></svg><span class="wm" style="font-size:30px">XDOT</span></div></div>
+      <div class="panel photo" style="min-height:250px;padding:56px 30px 30px"><span class="cap" style="color:var(--ivory)">On photography</span><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:56px"><use href="#emblem"/></svg><span class="wm" style="font-size:30px;color:var(--ivory)">XDOT</span></div></div>
     </div>
 
     <div class="grid2" style="margin-top:80px;align-items:center">
-      <div class="panel dark" style="min-height:260px"><span class="cap">Clear space</span><div class="space-demo"><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:60px"><use href="#emblem"/></svg><span class="wm" style="font-size:44px">XDOT</span></div></div></div>
+      <div class="panel dark" style="min-height:260px"><span class="cap">Clear space</span><div class="space-demo"><div class="stack"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:72px"><use href="#emblem"/></svg><span class="wm" style="font-size:44px">XDOT</span></div></div></div>
       <div>
         <h3>Clear space and size</h3>
-        <p class="muted">Keep space around the logo equal to the height of the X in the wordmark. Nothing else enters that space.</p>
-        <p class="muted">Smallest sizes: the lockup at 96 px wide on screen (25 mm in print), the emblem at 20 px, the Ring icon at 16 px for favicons.</p>
+        <p class="muted">Keep space around the stacked logo equal to the height of the X in the wordmark. Nothing else enters that space.</p>
+        <p class="muted">Smallest sizes: the stacked logo at 72 px wide on screen (20 mm in print), the wordmark at 64 px wide, and the emblem at 16 px for favicons.</p>
       </div>
     </div>
 
@@ -298,7 +292,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
     <div class="grid3" style="margin-top:50px">
       <div class="rule"><h3>Gold is earned</h3><p class="muted">One gold moment per view: a button, a highlighted word or the dot. Gold headline words appear only in the hero and the closing call to action.</p></div>
-      <div class="rule"><h3>Supporting tones</h3><p class="muted">Bronze <span class="mono">#B08D57</span> for the Ring icon. Lighter gold <span class="mono">#D8B477</span> for button hover. Ivory at 68% for secondary text.</p></div>
+      <div class="rule"><h3>Supporting tones</h3><p class="muted">Lighter gold <span class="mono">#D8B477</span> for button hover. Ivory at 68% for secondary text.</p></div>
       <div class="rule"><h3>Keep it flat</h3><p class="muted">No heavy gradients, glow or glassmorphism. Dark fades are allowed only to keep text readable over photos.</p></div>
     </div>
   </div>
@@ -416,7 +410,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="grid2">
       <ul class="checks muted open">
         <li><b style="color:var(--ivory)">Trademark and domain checks</b> for XDOT have not been done.</li>
-        <li><b style="color:var(--ivory)">Official logo files.</b> The emblem and Ring icon here are redraws. Final vector files are needed.</li>
+        <li><b style="color:var(--ivory)">Official logo files.</b> The emblem here is a redraw. Final vector files are needed.</li>
         <li><b style="color:var(--ivory)">Colors</b> to confirm against the official RunDot and TriDot brand guides.</li>
       </ul>
       <ul class="checks muted open">
