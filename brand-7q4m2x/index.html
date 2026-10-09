@@ -56,6 +56,7 @@ section{padding:110px 0;border-bottom:1px solid var(--line)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.grid2>*,.grid3>*,.grid4>*{min-width:0}
 .card{background:var(--surface);padding:30px;border:1px solid var(--line)}
 .rule{border-top:1px solid var(--line);padding-top:20px}
 
@@ -158,6 +159,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 @media (max-width:1000px){
   .toc{display:none}
+  .grid4.cv{grid-template-columns:1fr 1fr}
   .grid4{grid-template-columns:1fr 1fr}
   .grid3,.apps{grid-template-columns:1fr 1fr}
   .spec{grid-template-columns:1fr;gap:16px}
@@ -170,6 +172,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .sec-head{grid-template-columns:1fr;gap:8px;margin-bottom:36px}
   .grid2,.grid3,.apps,.compare{grid-template-columns:1fr}
   .grid4{grid-template-columns:1fr 1fr;gap:12px}
+  .grid4.cv{grid-template-columns:1fr}
+  .donts .dont{padding:20px 10px;min-height:130px}.donts .dont .wm{font-size:24px}.donts .dont svg{width:60px!important}.dont-cap{font-size:13px}
   .sw .chip{height:130px;font-size:16px}
   .cover-mark svg{width:72px}
   .lock{gap:14px}.lock svg{width:54px}.lock .wm{font-size:40px}
@@ -249,7 +253,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
 
     <h3 style="margin-top:80px">Color versions</h3>
-    <div class="grid4" style="margin-top:20px">
+    <div class="grid4 cv" style="margin-top:20px">
       <div class="panel dark" style="min-height:180px;padding:30px"><span class="cap">On near-black</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--ivory);width:48px"><use href="#emblem"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
       <div class="panel ivory" style="min-height:180px;padding:30px"><span class="cap">On ivory</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="color:var(--bg);width:48px"><use href="#emblem"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
       <div class="panel gold" style="min-height:180px;padding:30px"><span class="cap">On gold · one color</span><div class="lock"><svg viewBox="0 0 120 80" aria-hidden="true" style="width:48px"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="#101110"/><circle cx="104" cy="28" r="14" fill="#101110"/></svg><span class="wm" style="font-size:34px">XDOT</span></div></div>
@@ -266,7 +270,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
 
     <h3 style="margin-top:80px">Please don't</h3>
-    <div class="grid4" style="margin-top:20px">
+    <div class="grid4 donts" style="margin-top:20px">
       <div><div class="dont"><span class="wm">XDOTX</span></div><p class="dont-cap"><b>✕</b>Add an X, dot or symbol after the wordmark.</p></div>
       <div><div class="dont"><span class="wm" style="display:inline-block;transform:scaleX(.6)">XDOT</span></div><p class="dont-cap"><b>✕</b>Stretch, squash or retype the wordmark.</p></div>
       <div><div class="dont"><span class="wm" style="background:linear-gradient(90deg,#C9A15C,#ff7a3d);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,160,60,.8))">XDOT</span></div><p class="dont-cap"><b>✕</b>Add gradients, glow or effects.</p></div>
