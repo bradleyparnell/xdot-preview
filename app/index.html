@@ -38,6 +38,7 @@ body{background:#0B0C0B;color:var(--iv);font-family:Inter,system-ui,sans-serif;-
 .cap{margin-top:20px}
 .cap .chip{display:inline-block;font-family:'Barlow Condensed';font-weight:700;letter-spacing:.12em;font-size:11.5px;text-transform:uppercase;padding:4px 9px;border:1px solid var(--ln);color:var(--mute)}
 .cap .chip.new{border-color:var(--gd);color:var(--gd)}
+.cap .chip.sd{border-style:dashed;color:var(--dim);margin-left:6px}
 .cap .chip.ref{border-color:#6f6650;color:var(--gd2)}
 .cap h3{font-family:Archivo;font-stretch:115%;font-weight:800;text-transform:uppercase;font-size:17px;margin:12px 0 8px}
 .cap p{font-size:14px;line-height:1.55;color:var(--mute);margin-bottom:6px}
@@ -114,9 +115,9 @@ body{background:#0B0C0B;color:var(--iv);font-family:Inter,system-ui,sans-serif;-
 .live-big{font-family:Archivo;font-stretch:125%;font-weight:900;font-size:64px;line-height:.95;letter-spacing:-.02em}
 .feed{display:grid;grid-template-columns:32px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--ln);font-size:12.5px;line-height:1.4;color:var(--mute)}
 .feed b{color:var(--iv);font-weight:600}
-.ill{position:absolute;top:50px;right:16px;font-size:9px;letter-spacing:.12em;font-family:'Barlow Condensed';font-weight:700;color:var(--dim);text-transform:uppercase;border:1px solid var(--ln);padding:2px 6px;background:var(--bk);z-index:3}
-.fab{position:absolute;right:16px;bottom:92px;width:48px;height:48px;border-radius:50%;background:var(--ch2);border:1px solid rgba(201,161,92,.6);display:grid;place-items:center;z-index:4}
-.fab svg{width:24px;height:16px;color:var(--iv)}
+.ill{display:none;position:absolute;top:50px;right:16px;font-size:9px;letter-spacing:.12em;font-family:'Barlow Condensed';font-weight:700;color:var(--dim);text-transform:uppercase;border:1px solid var(--ln);padding:2px 6px;background:var(--bk);z-index:3}
+.fab{position:absolute;right:60px;top:56px;width:34px;height:34px;border-radius:50%;background:var(--ch2);border:1px solid rgba(201,161,92,.6);display:grid;place-items:center;z-index:4}
+.fab svg{width:18px;height:12px;color:var(--iv)}
 /* tables at bottom */
 .matrix{max-width:1280px;margin:0 auto;padding:16px 5vw 40px}
 .matrix table{width:100%;border-collapse:collapse;font-size:14.5px}
@@ -197,6 +198,7 @@ body{background:#0B0C0B;color:var(--iv);font-family:Inter,system-ui,sans-serif;-
  <div class="item">
   <div class="ph">
    <div class="sb"><span>9:41</span><span class="isl"></span><span class="ic">●●● ▮</span></div>
+   <div class="ill">Illustrative</div>
    <div class="scr" style="padding-top:0">
     <div style="margin:0 -18px;height:200px;background:linear-gradient(180deg,rgba(16,17,16,0) 40%,#101110),url(../img/running-m.jpg) center 30%/cover;position:relative">
      <div style="position:absolute;left:18px;bottom:6px"><div class="lbl gold" style="color:var(--gd)">Your plan is ready</div><div class="h1" style="margin-top:6px">Half marathon<br>in 14 weeks</div></div>
@@ -374,7 +376,7 @@ body{background:#0B0C0B;color:var(--iv);font-family:Inter,system-ui,sans-serif;-
    <div class="sb"><span>7:45</span><span class="isl"></span><span class="ic">●●● ▮</span></div>
    <div class="ill">Illustrative</div>
    <div class="scr">
-    <div class="hd"><div class="h2">Progress</div><span class="xs">Last 12 weeks</span></div>
+    <div class="hd"><div><div class="h2">Progress</div><div class="xs" style="margin-top:4px">Last 12 weeks</div></div><div class="av">AK</div></div>
     <div class="g3">
      <div class="card" style="padding:12px 10px"><span class="disc" style="font-size:11px"><svg><use href="#swim"/></svg>Swim</span><div class="num" style="margin:8px 0 4px">68</div><div class="xs">1:49 /100y</div></div>
      <div class="card" style="padding:12px 10px"><span class="disc" style="font-size:11px"><svg><use href="#bike"/></svg>Bike</span><div class="num" style="margin:8px 0 4px">51</div><div class="xs">181 W</div></div>
@@ -458,5 +460,6 @@ body{background:#0B0C0B;color:var(--iv);font-family:Inter,system-ui,sans-serif;-
 </table></div>
 
 <div class="foot">Sources studied: current App Store listings and screenshots for TriDot: Triathlon Training (v1.4.0), RunDot: Adaptive Run Training (v1.14.0) and Runna, plus recent App Store reviews and rundot.com. Sample names, clubs, scores, paces and times are illustrative and are not real athlete data. Photos are from the XDOT concept site. Concept only, not a product commitment.</div>
+<script>document.querySelectorAll(".item").forEach(i=>{if(i.querySelector(".ill")){const c=i.querySelector(".cap .chip");const t=document.createElement("span");t.className="chip sd";t.textContent="Sample data";c.after(t)}})</script>
 </body>
 </html>
