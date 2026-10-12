@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noai, noimageai">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<title>Something big is coming</title>
+<meta name="description" content="Something big is coming for endurance athletes. Be the first to know.">
+<meta property="og:title" content="Something big is coming.">
+<meta property="og:description" content="For the athletes who got us here. Be the first to know.">
+<meta property="og:image" content="https://bradleyparnell.github.io/xdot-preview/img/hero.jpg">
+<meta name="theme-color" content="#101110">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 80'%3E%3Cpath d='M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z' fill='%23F3EEDF'/%3E%3Ccircle cx='104' cy='28' r='14' fill='%23C9A15C'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Archivo';font-weight:600 900;font-stretch:100% 125%;font-display:block;src:url(../fonts/archivo.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-weight:300 800;font-display:swap;src:url(../fonts/inter.woff2) format('woff2')}
+:root{
+  --bg:#101110;--surface:#1C1E1C;--ivory:#F3EEDF;--gold:#C9A15C;--gold-hi:#D8B477;
+  --mute:#BEBAAC;--dim:#8F8B80;--line:rgba(243,238,223,.16);
+  --head:'Archivo','Arial Black',Arial,sans-serif;--body:'Inter',system-ui,-apple-system,Arial,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ivory);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ---------- Stage ---------- */
+.stage{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;isolation:isolate;overflow:hidden}
+
+/* photo montage */
+.slides{position:absolute;inset:0;z-index:-3}
+.slides div{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.12);
+  animation:slide 24s infinite;filter:saturate(.7) contrast(1.05)}
+.slides div:nth-child(1){background-image:url(../img/hero.jpg);background-position:40% 40%;animation-delay:0s}
+.slides div:nth-child(2){background-image:url(../img/band.jpg);background-position:60% 50%;animation-delay:8s}
+.slides div:nth-child(3){background-image:url(../img/swim.jpg);background-position:55% 60%;animation-delay:16s}
+@keyframes slide{
+  0%{opacity:0;transform:scale(1.12)}
+  6%{opacity:1}
+  33%{opacity:1}
+  42%{opacity:0;transform:scale(1)}
+  100%{opacity:0;transform:scale(1)}
+}
+/* darkening + vignette */
+.shade{position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 46%,rgba(16,17,16,.45) 0%,rgba(16,17,16,.82) 62%,rgba(16,17,16,.97) 100%),
+    linear-gradient(180deg,rgba(16,17,16,.6) 0%,rgba(16,17,16,.2) 30%,rgba(16,17,16,.55) 70%,#101110 100%)}
+/* film grain */
+.grain{position:absolute;inset:-50%;z-index:-1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .9s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* giant watermark X */
+.ghost{position:absolute;z-index:-1;left:50%;top:46%;width:min(120vw,1500px);transform:translate(-50%,-50%);color:rgba(243,238,223,.035);pointer-events:none}
+.ghost svg{width:100%;height:auto;display:block}
+
+/* ---------- Top bar ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;padding:clamp(20px,3vw,32px) clamp(20px,5vw,56px);
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--mute)}
+.top .mark{width:44px;color:var(--ivory)}
+.top .mark svg{display:block;width:100%;height:auto}
+.live{display:flex;align-items:center;gap:10px}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(201,161,92,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(201,161,92,.55)}70%{box-shadow:0 0 0 10px rgba(201,161,92,0)}100%{box-shadow:0 0 0 0 rgba(201,161,92,0)}}
+
+/* ---------- Hero ---------- */
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:clamp(24px,4vh,48px) clamp(20px,5vw,56px) clamp(40px,6vh,72px)}
+.emblem{width:clamp(84px,9vw,128px);color:var(--ivory);margin-bottom:clamp(18px,3vh,30px);opacity:0;animation:rise 1.2s var(--ease) .2s forwards}
+.emblem svg{display:block;width:100%;height:auto;overflow:visible}
+.emblem .dot{transform-origin:104px 28px;animation:beat 2.6s ease-in-out 1.6s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.22)}24%{transform:scale(1)}36%{transform:scale(1.12)}48%{transform:scale(1)}}
+.kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 22px;
+  opacity:0;animation:rise 1s var(--ease) .5s forwards}
+h1{font-family:var(--head);font-weight:900;font-stretch:125%;text-transform:uppercase;line-height:.88;letter-spacing:-.01em;margin:0;
+  font-size:clamp(40px,7.4vw,124px)}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.04em}
+h1 .ln span{display:inline-block;transform:translateY(105%);animation:up 1.1s var(--ease) forwards}
+h1 .ln:nth-child(1) span{animation-delay:.7s}
+h1 .ln:nth-child(2) span{animation-delay:.85s;color:var(--gold)}
+@keyframes up{to{transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.sub{max-width:560px;margin:clamp(18px,3vh,28px) auto 0;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:var(--mute);
+  opacity:0;animation:rise 1s var(--ease) 1.2s forwards}
+.sub b{color:var(--ivory);font-weight:600}
+
+/* rotating line */
+.rotor{margin-top:22px;height:22px;overflow:hidden;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--ivory);
+  opacity:0;animation:rise 1s var(--ease) 1.4s forwards}
+.rotor ul{list-style:none;margin:0;padding:0;animation:rot 12s var(--ease) infinite}
+.rotor li{height:22px;line-height:22px}
+.rotor li::before{content:"";display:inline-block;width:18px;height:1px;background:var(--gold);vertical-align:middle;margin-right:12px}
+@keyframes rot{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-22px)}50%,70%{transform:translateY(-44px)}75%,95%{transform:translateY(-66px)}100%{transform:translateY(-88px)}}
+
+/* ---------- Form ---------- */
+.signup{width:100%;max-width:640px;margin:clamp(24px,4vh,36px) auto 0;opacity:0;animation:rise 1s var(--ease) 1.6s forwards}
+.fields{display:grid;grid-template-columns:1.25fr 1fr auto;border:1px solid var(--line);background:rgba(16,17,16,.55);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .3s}
+.fields:focus-within{border-color:rgba(201,161,92,.7)}
+.field{position:relative;border-right:1px solid var(--line)}
+.field label{position:absolute;left:18px;top:11px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:600;pointer-events:none}
+.field input{width:100%;height:64px;padding:24px 18px 8px;background:transparent;border:0;outline:0;color:var(--ivory);font:500 16px var(--body)}
+.field input::placeholder{color:rgba(243,238,223,.35)}
+.field .opt{color:rgba(243,238,223,.3);letter-spacing:.12em}
+.btn{height:64px;padding:0 26px;border:0;background:var(--gold);color:#101110;font:700 12px var(--body);letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;display:flex;align-items:center;gap:10px;white-space:nowrap;transition:background .25s}
+.btn:hover{background:var(--gold-hi)}
+.btn svg{width:15px;transition:transform .25s}
+.btn:hover svg{transform:translateX(4px)}
+.consent{display:flex;gap:10px;align-items:flex-start;text-align:left;margin:16px 2px 0;font-size:12px;line-height:1.55;color:var(--dim)}
+.consent input{appearance:none;-webkit-appearance:none;flex:none;width:16px;height:16px;margin:1px 0 0;border:1px solid rgba(243,238,223,.35);background:transparent;cursor:pointer;position:relative}
+.consent input:checked{background:var(--gold);border-color:var(--gold)}
+.consent input:checked::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;border:solid #101110;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.consent a{color:var(--mute)}
+.msg{min-height:20px;margin-top:12px;font-size:13px;color:var(--gold);text-align:left}
+.msg.err{color:#E39A7B}
+
+/* success */
+.done{display:none;border:1px solid rgba(201,161,92,.5);padding:26px 24px;background:rgba(16,17,16,.6);text-align:center}
+.done h3{font-family:var(--head);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:24px;margin:0 0 6px}
+.done p{margin:0;color:var(--mute);font-size:14px}
+.done .demo{margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#E39A7B}
+.signup.sent form{display:none}.signup.sent .done{display:block;animation:rise .7s var(--ease) forwards}
+
+/* ---------- Footer strip ---------- */
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px clamp(20px,5vw,56px);border-top:1px solid var(--line);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.foot .heritage b{color:var(--ivory);font-weight:600}
+.foot nav{display:flex;gap:22px}
+.foot a{color:var(--dim);text-decoration:none}.foot a:hover{color:var(--ivory)}
+
+/* ---------- Marquee ---------- */
+.marq{border-top:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:14px 0;background:#0C0D0C}
+.marq .track{display:inline-flex;animation:marq 40s linear infinite}
+.marq span{font-family:var(--head);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:.06em;color:rgba(243,238,223,.5);
+  display:inline-flex;align-items:center;gap:26px;padding-right:26px}
+.marq svg{width:22px;color:rgba(243,238,223,.5)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+@media (max-width:760px){
+  .fields{grid-template-columns:1fr}
+  .field{border-right:0;border-bottom:1px solid var(--line)}
+  .btn{justify-content:center;width:100%}
+  .foot{flex-direction:column;text-align:center;gap:12px}
+  .kicker{font-size:11px;letter-spacing:.2em}
+  .ghost{top:40%;width:180vw}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important}
+  .slides div:nth-child(1){opacity:1;transform:none}
+  h1 .ln span{transform:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="x" viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="currentColor"/><circle cx="104" cy="28" r="14" fill="#C9A15C"/></symbol>
+  <symbol id="arrow" viewBox="0 0 16 16"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+
+<main class="stage">
+  <div class="slides" aria-hidden="true"><div></div><div></div><div></div></div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="ghost" aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="currentColor"/></svg></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="mark" aria-label="Emblem"><svg viewBox="0 0 120 80"><use href="#x"/></svg></div>
+    <div class="live"><i></i><span>Coming soon</span></div>
+  </header>
+
+  <section class="hero">
+    <div class="emblem" aria-hidden="true">
+      <svg viewBox="0 0 120 80"><path d="M0 4h26l18 24L62 4h26L57 40l31 36H62L44 52 26 76H0l31-36z" fill="currentColor"/><circle class="dot" cx="104" cy="28" r="14" fill="#C9A15C"/></svg>
+    </div>
+    <p class="kicker">For the athletes who got us here</p>
+    <h1><span class="ln"><span>Something big</span></span><span class="ln"><span>is coming.</span></span></h1>
+    <p class="sub">You've trained with us through every season. Now we're building what's next, and <b>you'll see it first.</b></p>
+    <div class="rotor" aria-hidden="true"><ul><li>Running</li><li>Triathlon</li><li>Endurance</li><li>And what's next</li><li>Running</li></ul></div>
+
+    <div class="signup" id="signup">
+      <form id="f" novalidate>
+        <div class="fields">
+          <div class="field"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+          <div class="field"><label for="ph">Mobile <span class="opt">· optional</span></label><input id="ph" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555"></div>
+          <button class="btn" type="submit">Notify me <svg viewBox="0 0 16 16"><use href="#arrow"/></svg></button>
+        </div>
+        <label class="consent"><input type="checkbox" id="sms" name="sms_consent"><span>Text me when it launches. Msg &amp; data rates may apply. Reply STOP to opt out. Consent isn't required to sign up. See our <a href="#" data-link="privacy">Privacy Policy</a>.</span></label>
+        <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      </form>
+      <div class="done" role="status">
+        <h3>You're on the list.</h3>
+        <p>We'll reach out the moment it's ready.</p>
+        <div class="demo">Preview only · Not connected yet · Nothing was saved</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="heritage">From the team behind <b>RunDot</b> and <b>TriDot</b></div>
+    <nav><a href="#" data-link="privacy">Privacy</a><a href="#" data-link="terms">Terms</a></nav>
+  </footer>
+</main>
+
+<div class="marq" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<script>
+/* ===== Config ===== */
+const CONFIG = {
+  // Leave false until a form service (e.g. HubSpot) is connected. The form then shows a clearly labeled preview state.
+  formConnected: false,
+  links: { privacy: "#", terms: "#" }   // set real URLs before sending
+};
+document.querySelectorAll('[data-link]').forEach(a=>{a.href=CONFIG.links[a.dataset.link]||'#'});
+
+// marquee
+const phrase='<span>Nothing left behind<svg viewBox="0 0 120 80"><use href="#x"/></svg></span><span>Everything moving forward<svg viewBox="0 0 120 80"><use href="#x"/></svg></span>';
+document.getElementById('track').innerHTML=phrase.repeat(8);
+
+// form
+const f=document.getElementById('f'),msg=document.getElementById('msg'),em=document.getElementById('em'),ph=document.getElementById('ph'),sms=document.getElementById('sms');
+f.addEventListener('submit',e=>{
+  e.preventDefault();msg.className='msg';msg.textContent='';
+  const email=em.value.trim(),phone=ph.value.trim(),digits=phone.replace(/\D/g,'');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){msg.className='msg err';msg.textContent='Enter a valid email address.';em.focus();return}
+  if(phone && (digits.length<10||digits.length>15)){msg.className='msg err';msg.textContent='Check your mobile number, or leave it blank.';ph.focus();return}
+  if(sms.checked && !phone){msg.className='msg err';msg.textContent='Add a mobile number to get a text.';ph.focus();return}
+  if(!CONFIG.formConnected){document.getElementById('signup').classList.add('sent');return}
+  // TODO: submit {email, phone, sms_consent} to the connected form service, then show success.
+});
+</script>
+</body>
+</html>
