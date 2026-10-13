@@ -320,7 +320,7 @@ input{font:inherit;color:inherit}
  <symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4h10l-1 3h5v8h-9l1-3H5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
  <symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
  <symbol id="search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></g></symbol>
- <symbol id="drag" viewBox="0 0 16 16"><g fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></g></symbol><symbol id="spark" viewBox="0 0 24 24"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z" fill="currentColor"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" fill="currentColor"/></symbol>
+ <symbol id="drag" viewBox="0 0 16 16"><g fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></g></symbol><symbol id="spark" viewBox="0 0 24 24"><path d="M11 2.5C11.7 8.3 13.7 10.3 19.5 11 13.7 11.7 11.7 13.7 11 19.5 10.3 13.7 8.3 11.7 2.5 11 8.3 10.3 10.3 8.3 11 2.5Z" fill="currentColor"/><path d="M19 14.5C19.3 16.9 19.9 17.5 22.3 17.8 19.9 18.1 19.3 18.7 19 21.1 18.7 18.7 18.1 18.1 15.7 17.8 18.1 17.5 18.7 16.9 19 14.5Z" fill="currentColor"/><path d="M19.2 1.8C19.4 3.3 19.8 3.7 21.3 3.9 19.8 4.1 19.4 4.5 19.2 6 19 4.5 18.6 4.1 17.1 3.9 18.6 3.7 19 3.3 19.2 1.8Z" fill="currentColor"/></symbol>
 <symbol id="dumbbell" viewBox="0 0 24 24"><path d="M3 9v6M6 6.5v11M18 6.5v11M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
 <symbol id="sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-14.3 4.9M4 12A8 8 0 0118.3 7.1M18.5 3v4.3h-4.3M5.5 21v-4.3h4.3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
 
@@ -727,7 +727,7 @@ SCREENS.analysis=i=>{const s=S.week[i];const thr=s.id==='thr';
  <table class="tbl"><tr><th>Rep</th><th>Pace</th><th>Target</th><th>HR</th></tr>${reps.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td style="color:var(--gd)">✓ In range</td><td>${r[2]}</td></tr>`).join('')}</table>
  <div class="why"><div class="lbl">EnviroNorm®</div><div class="sm" style="color:var(--iv)">88°F and humid. Normalized for the heat, these reps were worth about 7:44/mi on a cool day.</div></div>`
  :`<div class="why" style="margin-top:20px"><div class="lbl">Execution</div><div class="sm" style="color:var(--iv)">Every step within target. TrainX scores how well you did the right workout, the right way.</div></div>`}
- <button class="btn s" style="margin-top:12px" onclick="go('assistant')">${ic('emblem','width:20px;height:14px')}Ask the Assistant about this</button></div>`};
+ <button class="btn s" style="margin-top:12px" onclick="go('assistant')">${ic('spark','width:16px;height:16px;color:var(--gd)')}Ask AI about this</button></div>`};
 
 /* Share */
 function storyHTML(s,style){const pace=S.showPace;const bg={photo:AIMG+'share-trail.jpg',stats:AIMG+'share-track.jpg',plan:AIMG+'share-road.jpg'}[style];const thr=s.id==='thr';
