@@ -560,7 +560,7 @@ AFTER.building=()=>{const li=[...document.querySelectorAll('#bl li')];li.forEach
 
 SCREENS.ready=()=>{const o=S.ob,t=o.sport==='tri';let g=sp().goal,w='in 18 weeks';
  if(o.goal&&!o.goal.startsWith('r')){g=(t?o.goal+' triathlon':o.goal==='Half'?'Half marathon':o.goal==='Marathon'?'Marathon':o.goal);w='in 16 weeks'}
- if(o.noRace&&o.goal){g=o.goal==='Base'?(t?'Year-round triathlon fitness':'Year-round running fitness'):o.goal+(t?' triathlon':'')+' fitness';w='week by week'}
+ if(o.noRace&&o.goal){g=o.goal==='Base'?(t?'Year-round triathlon fitness':'Year-round running fitness'):o.goal+(t?' triathlon':'')+' fitness';w='on your schedule'}
  if(o.firstTri&&o.goal==='Sprint')g='Your first sprint triathlon';
  if(o.goal==='r1'){g=t?'Coastal Sprint Triathlon':'Riverfront 10K';w='in 3 weeks'}
  const KS=['mon','tue','wed','thu','fri','sat','sun'];const dn=[...o.days].sort((x,y)=>KS.indexOf(x)-KS.indexOf(y)).map(k=>DAYN[['mon','tue','wed','thu','fri','sat','sun'].indexOf(k)]).join(', ');
