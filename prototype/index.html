@@ -68,7 +68,7 @@ input{font:inherit;color:inherit}
 .tabs button.on{color:var(--iv)}.tabs button.on svg{color:var(--gd)}
 .tabs svg{width:23px;height:23px}
 .home-ind{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(243,238,223,.55);z-index:40;pointer-events:none}
-.ill{position:absolute;top:56px;right:18px;font-size:9px;letter-spacing:.12em;font-weight:600;color:var(--dim);text-transform:uppercase;border:1px solid var(--ln);padding:2px 6px;background:rgba(16,17,16,.75);z-index:15;pointer-events:none}
+.ill{display:none;position:absolute;top:56px;right:18px;font-size:9px;letter-spacing:.12em;font-weight:600;color:var(--dim);text-transform:uppercase;border:1px solid var(--ln);padding:2px 6px;background:rgba(16,17,16,.75);z-index:15;pointer-events:none}
 /* parts */
 .card{background:var(--ch);border:1px solid var(--ln);padding:14px}
 .hd{display:flex;justify-content:space-between;align-items:center;margin:4px 0 16px;min-height:34px}
@@ -258,7 +258,7 @@ input{font:inherit;color:inherit}
  .sb{visibility:hidden;height:calc(env(safe-area-inset-top) + 28px);padding:0}
  .home-ind{display:none}
  .guide-btn{display:block;position:fixed;top:calc(env(safe-area-inset-top) + 6px);left:50%;transform:translateX(-50%);z-index:60;font-size:9px;letter-spacing:.14em;font-weight:600;text-transform:uppercase;color:var(--dim);border:1px solid var(--ln);background:rgba(16,17,16,.85);padding:3px 8px}
- .ill{top:calc(env(safe-area-inset-top) + 6px);right:12px}
+ .ill{display:block;top:calc(env(safe-area-inset-top) + 6px);right:12px}
  .toast{top:max(env(safe-area-inset-top),14px)}
  .tabs{height:calc(64px + env(safe-area-inset-bottom))}
  .guide .close{display:block!important}
