@@ -479,7 +479,7 @@ const NOTES={
  share:['new','Share','<b>Today:</b> confirm what sharing exists today.','<b>Change:</b> a ready-made graphic in two taps, with proof of quality: TrainX, EnviroNorm, race build.'],
  plan:['ref','Plan','<b>Today:</b> week list with stress labels; sessions can be moved; FitLogic rebalances.','<b>Change:</b> race phase bar, and moving a session explains the knock-on effect first. Try moving the long session.'],
  progress:['ref','Progress','<b>Today:</b> Dot Scores, levels, TrainX and normalized benchmarking all exist.','<b>Change:</b> one screen, trend lines, level ladder, next assessment flagged.'],
- assistant:['exist','Assistant','<b>Today:</b> reviews workouts, compares intervals, finds best efforts.','<b>Change:</b> reachable from every screen with suggested questions. Letting it move sessions is new.'],
+ assistant:['exist','Assistant','<b>Today:</b> reviews workouts, compares intervals, finds best efforts.','<b>Change:</b> reachable from every screen with suggested questions. It suggests changes, and you make them in Plan. It cannot change plans yet.'],
  club:['exist','Club','<b>Today:</b> followers, feeds, groups, badges and milestones.','<b>Change:</b> one community for runners and triathletes. Cheer a post. Shared finishes show up here.'],
  you:['ref','You','<b>Today:</b> profile, devices and settings exist.','<b>Change:</b> races and badges get a clear home. Where coaches fit is an open question.'],
  races:['ref','Your races','<b>Today:</b> Add a Race, race details and RaceX exist.','<b>Change:</b> one race calendar with A, B and C priorities. Search and B/C handling need product review.'],
@@ -563,7 +563,7 @@ SCREENS.goal=()=>{const t=S.ob.sport==='tri';const o=S.ob;
  ${fs.map(f=>`<button class="opt ${o.goal===f[0]?'sel':''}" style="grid-template-columns:1fr 18px;padding:14px" onclick="S.ob.goal='${f[0]}';render('fade')"><div><div style="font-size:14px;font-weight:600">${f[0]==='Base'?'General fitness':f[0]+' fitness'}</div><div class="xs" style="margin-top:3px">${f[1]}</div></div><svg class="ck"><use href="#check"/></svg></button>`).join('')}
  <div class="foot"><button class="btn p ${o.goal?'':'dis'}" onclick="go('days')">Continue</button></div></div>`}
  const races=t?[['Lakeside Half Triathlon','Sun, Dec 20 · 70.3',AIMG+'race-tri.jpg'],['Coastal Sprint Triathlon','Sun, Nov 1 · Sprint',AIMG+'race-tri.jpg']]:[['City Half Marathon','Sun, Dec 20 · 13.1 mi',AIMG+'race-city.jpg'],['Riverfront 10K','Sat, Nov 14 · 10K',AIMG+'share-road.jpg']];
- const dists=t?['Sprint','Olympic','70.3','Full']:['5K','10K','Half','Marathon'];
+ const dists=t?['Sprint','Olympic','70.3','Full']:['5K','10K','Half','Marathon','Ultra'];
  return `<div class="scr">${hdr('Step 2 of 4')}<div class="stepdots"><i class="d"></i><i class="d"></i><i></i><i></i></div>
  <div class="h1" style="margin-bottom:8px">${o.firstTri?'Your first<br>triathlon':'Got a race<br>in mind?'}</div><p class="sm" style="margin-bottom:16px">${o.firstTri?'Most first-timers start with a sprint. Pick a race or keep the distance.':'Your plan builds to race day. No race yet? Pick a distance.'}</p>
  <div class="inbar" style="margin-bottom:12px">${ic('search','width:16px;height:16px;color:var(--dim)')}<input placeholder="Find a race or event…" onfocus="toast('Race search is a concept. Pick a sample race below.')"></div>
@@ -591,7 +591,7 @@ SCREENS.building=()=>`<div class="scr" style="display:flex;flex-direction:column
 AFTER.building=()=>{const li=[...document.querySelectorAll('#bl li')];li.forEach((l,i)=>setTimeout(()=>l.classList.add('d'),450*(i+1)));setTimeout(()=>{if(cur.id==='building'){S=Object.assign(fresh(S.ob.sport||'tri'),{ob:S.ob});go('ready','fade')}},450*li.length+700)};
 
 SCREENS.ready=()=>{const o=S.ob,t=o.sport==='tri';let g=sp().goal,w='in 18 weeks';
- if(o.goal&&!o.goal.startsWith('r')){g=(t?o.goal+' triathlon':o.goal==='Half'?'Half marathon':o.goal==='Marathon'?'Marathon':o.goal);w='in 16 weeks'}
+ if(o.goal&&!o.goal.startsWith('r')){g=(t?o.goal+' triathlon':o.goal==='Half'?'Half marathon':o.goal==='Marathon'?'Marathon':o.goal==='Ultra'?'Ultramarathon':o.goal);w=o.goal==='Ultra'?'in 24 weeks':'in 16 weeks'}
  if(o.noRace&&o.goal){g=o.goal==='Base'?(t?'Year-round triathlon fitness':'Year-round running fitness'):o.goal+(t?' triathlon':'')+' fitness';w='on your schedule'}
  if(o.firstTri&&o.goal==='Sprint')g='Your first sprint triathlon';
  if(o.goal==='r1'){g=t?'Coastal Sprint Triathlon':'Riverfront 10K';w='in 3 weeks'}
@@ -799,7 +799,7 @@ SCREENS.assistant=()=>{const used=S.chat.map(c=>c.k);
  <div class="inbar"><input id="q" placeholder="Ask about your training…" onkeydown="if(event.key==='Enter')askFree()"><button onclick="askFree()">${ic('send')}</button></div></div></div>`};
 AFTER.assistant=()=>{const c=$('#chat');if(c)c.scrollTop=c.scrollHeight};
 function ask(k){const v=QA[k];let a=v.a;const t=S.sport==='tri';
- if(k==='move')a=S.moved?`Already done. Your long ${t?'ride':'run'} is on Sunday and your week's stress is unchanged.`:`Yes. Sunday is the best fit${t?", and Sunday's easy run moves to Monday":''}. Your week's training stress stays the same.<div style="display:flex;gap:8px;margin-top:10px"><button class="btn p" style="height:38px" onclick="doMove();this.parentNode.outerHTML='<div class=&quot;xs gold&quot; style=&quot;margin-top:8px&quot;>✓ Moved to Sunday</div>'">Move it</button><button class="btn s" style="height:38px" onclick="this.parentNode.remove()">Not now</button></div>`;
+ if(k==='move')a=S.moved?`Your long ${t?'ride':'run'} is already on Sunday, and your week's training stress is unchanged.`:`Sunday is the best fit${t?", with Sunday's easy run moving to Monday":''}. Your week's training stress stays the same.<br><br>I can't change your plan for you yet. Open your plan and tap <b>Move a session</b>, and it will show the knock-on effects before you confirm.<div style="display:flex;gap:8px;margin-top:10px"><button class="btn p" style="height:38px" onclick="go('plan','tab');setTimeout(moveSheet,450)">Open my plan</button></div>`;
  pushChat(k,v.q,a)}
 function askFree(){const q=$('#q');if(!q||!q.value.trim())return;pushChat('free'+Date.now(),q.value.trim(),'In the full app, I answer from your training data. In this prototype, try one of the suggested questions.')}
 function pushChat(k,q,a){const m=$('#msgs');m.insertAdjacentHTML('beforeend',`<div class="bub me">${q}</div><div class="bub ai typing" id="ty"><i></i><i></i><i></i></div>`);const c=$('#chat');c.scrollTop=c.scrollHeight;
@@ -1168,13 +1168,13 @@ const insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if
 const askBar=(ph)=>`<button class="askbar" onclick="go('assistant')"><span class="aio">${ic('spark')}</span><span class="aph">${ph||'Ask anything: plan, recovery, fueling, sleep…'}</span><span class="aitag">AI</span></button>`;
 
 const QA_EXTRA={
- tired:{q:'My legs feel heavy. Should I still train today?',a:"Your last two sessions were on target and this week's training stress is normal, so it's most likely everyday fatigue. Do the warm-up, then decide. If the first rep feels much harder than usual, swap today for 30 easy minutes and I'll rebalance the week.<div class=\"xs\" style=\"margin-top:8px\">If you have pain or feel unwell, rest and check with a doctor.</div>"},
- sleep:{q:'I only slept 5 hours. Should I change today?',a:"One short night won't undo your fitness. Keep today's session, but stop at 3 reps if your heart rate runs high early. If it's two or more short nights in a row, tell me and I'll ease the week."},
+ tired:{q:'My legs feel heavy. Should I still train today?',a:"Your last two sessions were on target and this week's training stress is normal, so it's most likely everyday fatigue. Do the warm-up, then decide. If the first rep feels much harder than usual, swap today for 30 easy minutes. Your plan rebalances the week when you change it.<div class=\"xs\" style=\"margin-top:8px\">If you have pain or feel unwell, rest and check with a doctor.</div>"},
+ sleep:{q:'I only slept 5 hours. Should I change today?',a:"One short night won't undo your fitness. Keep today's session, but stop at 3 reps if your heart rate runs high early. If it's two or more short nights in a row, consider swapping in an easy day from your plan."},
  race:{q:'How should I pace race day?',a:null},
  swimq:{q:'How do I do catch-up drill?',a:"Swim freestyle, but leave one hand out front until the other hand arrives to \"catch up\" with it. It slows your stroke down so you can feel a long reach and a full pull. Keep it easy, and focus on reaching forward rather than going fast.<div class=\"xs\" style=\"margin-top:8px\">The full app would link the drill video here.</div>"},
  bikeq:{q:'What should I eat on this ride?',a:null},
  bpace:{q:'How slow is easy pace?',a:"Slow enough to talk in full sentences. If you can't, walk until you can. Slow is the point right now. It's how you build up without getting hurt."},
- bsore:{q:'My shins are sore. What should I do?',a:"Mild soreness is common in the first few weeks. Keep the walk breaks, stay at easy pace, and tap <b>Too hard</b> after a run so I can ease the plan.<div class=\"xs\" style=\"margin-top:8px\">Sharp pain, or pain that gets worse while running, is a reason to stop and see a doctor.</div>"},
+ bsore:{q:'My shins are sore. What should I do?',a:"Mild soreness is common in the first few weeks. Keep the walk breaks, stay at easy pace, and tap <b>Too hard</b> after a run so your plan eases off.<div class=\"xs\" style=\"margin-top:8px\">Sharp pain, or pain that gets worse while running, is a reason to stop and see a doctor.</div>"},
  bmiss:{q:'I missed my run yesterday. Now what?',a:"No problem. Just do today's run. Your plan slides back instead of stacking runs up, so you're still on track."}};
 QA.fuel={q:"What should I eat for Saturday's long session?",a:null};
 Object.assign(QA,QA_EXTRA);
@@ -1182,7 +1182,7 @@ const FUEL=()=>{const t=S.sport==='tri';return `For your ${t?'2.5-hour ride':'95
 const RACEA=()=>S.sport==='tri'?`Your RaceX plan predicts <b>5:41:20</b>.<br><br><b>Swim:</b> steady, not hard. Settle in by the first buoy.<br><b>Bike:</b> 139 to 148 W, about 77 to 82% of threshold, so you can still run.<br><b>Run:</b> the first 2 miles a little slower than goal pace, then settle in.<br><br>Want me to open the full race plan?<div style="margin-top:10px"><button class="btn s" style="height:36px;font-size:12px" onclick="go('racex')">Open race plan</button></div>`
  :`Your prediction is <b>1:44:30</b>, about 7:58 per mile.<br><br>Run the first 2 miles 5 to 10 seconds slower than that, settle in through the middle, and save anything extra for the last 5K.`;
 const _ask5=ask;ask=function(k){if(k==='fuel'||k==='bikeq'){pushChat(k,QA[k].q,FUEL());return}if(k==='race'){pushChat(k,QA.race.q,RACEA());return}_ask5(k)};
-askFree=function(){const q=$('#q');if(!q||!q.value.trim())return;pushChat('free'+Date.now(),q.value.trim(),"In the full app I can answer anything about your training, recovery, fueling and health, using your plan, workouts and Dot Scores. In this prototype, try one of the suggested questions.")};
+askFree=function(){const q=$('#q');if(!q||!q.value.trim())return;pushChat('free'+Date.now(),q.value.trim(),"In the full app I can answer questions about your training, fitness, recovery, fueling and basic health, using your plan, workouts and Dot Scores. In this prototype, try one of the suggested questions.")};
 
 const CATS=()=>S.mode==='b5k'?[['run','Easy pace','bpace'],['flame','Soreness','bsore'],['cal','Missed a run','bmiss']]
  :[['cal','My plan','move'],['run','Workouts','why'],['flame','Recovery','tired'],['sun','Fueling','fuel'],['rest','Sleep','sleep'],['flag','Race day','race']];
@@ -1190,12 +1190,12 @@ const CHIPKEYS=()=>S.mode==='b5k'?['bpace','bsore','bmiss']:['move','why','cmp',
 SCREENS.assistant=()=>{const used=S.chat.map(c=>c.k);const tabbed=!stack.length;
  return `<div class="scr" id="chat" style="display:flex;flex-direction:column;padding-bottom:0">
  <div class="hd">${tabbed?'<span style="width:34px"></span>':'<button class="back" onclick="back()">‹</button>'}<span class="t" style="display:flex;gap:8px;align-items:center">Assistant <span class="aitag">AI</span></span>${AVB()}</div>
- <div style="flex:1">${S.chat.length?'':`<div style="text-align:center;padding:14px 6px 16px"><div class="aiorb">${ic('spark')}</div><div class="h2" style="margin:14px 0 6px">Ask me anything</div><p class="xs" style="max-width:270px;margin:0 auto">Your plan, workouts, recovery, fueling, sleep and race day. I answer from your plan, your sessions and your Dot Scores.</p></div>
+ <div style="flex:1">${S.chat.length?'':`<div style="text-align:center;padding:14px 6px 16px"><div class="aiorb">${ic('spark')}</div><div class="h2" style="margin:14px 0 6px">Ask me anything</div><p class="xs" style="max-width:270px;margin:0 auto">Your plan, workouts, recovery, fueling, sleep and race day. I answer from your plan, your sessions and your Dot Scores.</p><p class="xs" style="max-width:270px;margin:8px auto 0;color:var(--gd)">Powered by our own private AI model</p></div>
  <div class="g3 aicats">${CATS().map(c=>`<button onclick="ask('${c[2]}')">${ic(c[0])}<span>${c[1]}</span></button>`).join('')}</div>`}
  <div id="msgs">${S.chat.map(c=>`<div class="bub me">${c.q}</div><div class="bub ai">${c.a}</div>`).join('')}</div></div>
  <div style="position:sticky;bottom:0;background:var(--bk);padding:10px 0 12px"><div class="chips" style="margin-bottom:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none">${CHIPKEYS().filter(k=>!used.includes(k)).map(k=>`<button style="white-space:nowrap" onclick="ask('${k}')">${QA[k].q}</button>`).join('')}</div>
  <div class="inbar"><button onclick="toast('Voice questions work in the full app')" aria-label="Speak" style="color:var(--mute);background:none">${ic('mic')}</button><input id="q" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')askFree()"><button onclick="askFree()">${ic('send')}</button></div>
- <p class="xs" style="text-align:center;margin-top:8px;font-size:10px">AI answers can be wrong. Not medical advice.</p></div></div>`};
+ <p class="xs" style="text-align:center;margin-top:8px;font-size:10px">Our private AI model. Answers can be wrong. Not medical advice.</p></div></div>`};
 const _push5=pushChat;pushChat=function(k,q,a){const c=document.querySelector('.aicats');if(c){c.remove();const h=document.querySelector('#chat .aiorb');if(h)h.parentNode.remove()}_push5(k,q,a)};
 
 /* ---------- Today, Plan and others: inject new pieces ---------- */
@@ -1254,9 +1254,9 @@ SCREENS.switch=()=>{const L=[['cal','Your plan','Lakeside Half Triathlon · Week
 /* ---------- guide notes and flows ---------- */
 Object.assign(NOTES,{
  switch:['new','Welcome to XDOT','<b>Today:</b> existing athletes would open a new app with no explanation.','<b>Change:</b> one screen that shows everything came across: plan, history, Dot Scores, races, XP, watch and login. Plus a founder badge. This is the moment most likely to lose loyal users.'],
- assistant:['ref','AI Assistant','<b>Today:</b> the Assistant reviews workouts, compares intervals and finds best efforts.','<b>Change:</b> its own tab in the center of the bar, an ask bar on Today, a suggestion card, and "Ask" links on workouts. Topics widen to recovery, fueling, sleep and race day. Whether it can change plans, and how health questions are handled safely, need product and legal review.'],
+ assistant:['ref','AI Assistant','<b>Today:</b> the Assistant reviews workouts, compares intervals and finds best efforts.','<b>Change:</b> its own tab in the center of the bar, an ask bar on Today, a suggestion card, and "Ask" links on workouts. Topics widen to recovery, fueling, sleep and race day. <b>Confirmed:</b> it runs on our own private AI model and handles basic health and fitness questions. It can\'t change plans yet, so it points athletes to Plan to make changes. Health answer wording still needs a legal check.'],
  devices:['ref','Watch and apps','<b>Today:</b> Garmin, Apple Watch, COROS, Fitbit and Strava are listed in the App Store.','<b>Change:</b> clear sync status, Sync now, and help when a workout is missing. Sync problems are a common complaint in reviews.'],
- strength:['ref','Strength','<b>Today:</b> reviews mention strength sessions in plans.','<b>Change:</b> a clear add-on card with exercise videos. Product to confirm what strength content exists and how it is scheduled.']});
+ strength:['ref','Strength','<b>Today:</b> basic strength exercises are built into the apps.','<b>Change:</b> a clear add-on card on easy days, counted toward the streak. Product to confirm which exercises have videos and how strength is scheduled.']});
 NOTES.workout[3]+=' Swim sessions show sets, yards and pace per 100. Bike sessions show watts with an Indoor/Outdoor switch.';
 NOTES.races[3]+=' Tap <b>predicted</b> for the race prediction breakdown.';
 NOTES.today[3]+=' Also new: an <b>Ask AI</b> bar, a suggestion card from the Assistant, a sync status by the date, a strength add-on on Friday, and race prediction on the race row. <b>You</b> is now the avatar top right.';
