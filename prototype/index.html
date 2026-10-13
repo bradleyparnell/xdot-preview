@@ -293,6 +293,7 @@ input{font:inherit;color:inherit}
 .devic{width:36px;height:36px;border:1px solid var(--ln);display:grid;place-items:center;color:var(--gd)}
 .devic svg{width:18px;height:18px}
 .btn svg{flex:none}
+#ph{overflow:clip!important}
 </style>
 </head>
 <body>
@@ -1163,7 +1164,7 @@ function askFrom(k){go('assistant','push');setTimeout(()=>ask(k),350)}
 const insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if(!lr||lr.done)return '';
  return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
  <div class="sm" style="color:var(--iv)">${t?"Saturday's long ride is 2.5 hours in the heat. Want a fueling plan for it?":"Saturday's long run is 95 minutes. Want a fueling plan for it?"}</div>
- <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('fuel')">Yes, plan it</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Ask something else</button></div></div>`};
+ <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('fuel')">Yes, plan it</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Something else</button></div></div>`};
 const askBar=(ph)=>`<button class="askbar" onclick="go('assistant')"><span class="aio">${ic('spark')}</span><span class="aph">${ph||'Ask anything: plan, recovery, fueling, sleep…'}</span><span class="aitag">AI</span></button>`;
 
 const QA_EXTRA={
