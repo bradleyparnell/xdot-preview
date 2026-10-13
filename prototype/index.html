@@ -1107,7 +1107,7 @@ function bikeW(id,name,type,min,stress,rows,why,extra={}){
  const steps=rows.map(r=>({n:r[0],s:r[1],d:r[4]*60,z:r[3],t:r[2]}));
  return Object.assign({id,d:'bike',name,type,min,stress,nts:stress==='Low'?30:stress==='Moderate'?58:72,why,steps,
   display:rows.map(r=>({n:r[0],s:r[1],t:r[2],u:'W',z:r[3]})),unit:'W',trainx:88,xp:Math.round(min*0.6)},extra)}
-const STRENGTH={name:"Runner's Strength A",min:20,
+const STRENGTH={name:"Endurance Strength A",min:20,
  why:'Short, bodyweight strength that supports your hips, calves and core. It sits on an easy day so it never steals from key sessions.',
  ex:[['Glute bridge','2 × 12','step-work-m'],['Split squat','2 × 10 each leg','running-m'],['Single-leg calf raise','2 × 12 each leg','detail-lace-m'],['Side plank','2 × 30 sec each side','recovery-m'],['Dead bug','2 × 10 each side','step-goal-m']]};
 const _triWeek=SPORT.tri.week;
@@ -1215,7 +1215,6 @@ const _plan5=SCREENS.plan;
 SCREENS.plan=a=>{let h=_plan5(a);if(S.mode==='b5k')return h;
  h=h.replace(/(<button class="sess [^"]*" onclick="[^"]*"><div class="ico">.*?<span class="xs">Fri · .*?<\/button>)/,`$1<button class="sess" onclick="go('strength')"><div class="ico">${ic('dumbbell')}</div><div style="text-align:left"><span class="xs">Fri · Strength · add-on</span><b>${STRENGTH.name} · ${STRENGTH.min}m</b></div><span class="str ${S.strDone?'done':''}">${S.strDone?'✓ Done':'Low'}</span></button>`);
  return h};
-const _club5=SCREENS.club;SCREENS.club=a=>{const h=_club5(a);return h.includes('youbtn')?h:h.replace(/(<div class="hd">[\s\S]*?)(<\/div>)/,`$1${AVB()}$2`)};
 
 /* race prediction */
 function predSheet(){const t=S.sport==='tri';openSheet(`<div class="lbl gold" style="margin-bottom:6px">Race prediction</div><div class="h2" style="margin-bottom:10px">${sp().pred}</div><p class="sm" style="margin-bottom:12px">Built from your current Dot Scores, your recent training and the race course. It updates after each assessment, so you can watch it move as you get fitter.</p>${t?`<div class="tbl" style="display:grid;grid-template-columns:1fr auto;gap:8px;font-size:13px"><span>Swim</span><b>0:38:50</b><span>Bike</span><b>2:58:30</b><span>Run</span><b>1:56:40</b><span class="xs">Transitions</span><b class="xs">0:07:20</b></div>`:''}<p class="xs" style="margin-top:12px">Sample numbers. In the apps today: race prediction and RaceX® pacing.</p><button class="btn s" style="margin-top:14px" onclick="closeSheet();go('racex')">Open race plan</button>`)}
