@@ -275,7 +275,7 @@ input{font:inherit;color:inherit}
 .aio{width:28px;height:28px;background:var(--gd);color:#101110;display:grid;place-items:center;flex:none}
 .aio svg{width:15px;height:15px}
 .askbar{display:flex;gap:10px;align-items:center;width:100%;margin-top:10px;padding:8px 12px 8px 8px;border:1px solid rgba(201,161,92,.45);background:linear-gradient(90deg,rgba(201,161,92,.10),rgba(201,161,92,0) 70%),var(--ch);text-align:left}
-.askbar .ph{flex:1;font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.askbar .aph{flex:1;font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .aicard{margin-top:16px;padding:14px;border:1px solid rgba(201,161,92,.35);background:var(--ch)}
 .aichip{display:flex;gap:10px;align-items:center;width:100%;margin-top:12px;padding:8px 12px 8px 8px;border:1px solid var(--ln);background:var(--ch);font-size:13px;color:var(--iv);text-align:left}
 .aiorb{width:64px;height:64px;margin:0 auto;background:var(--gd);color:#101110;display:grid;place-items:center;box-shadow:0 0 0 8px rgba(201,161,92,.12)}
@@ -490,7 +490,7 @@ const NOTES={
 const CHIP={ref:['ref','Refined'],new:['new','New concept'],exist:['','In the apps today']};
 function renderNotes(id){const n=NOTES[id];if(!n){$('#notes').innerHTML='';return}
  const c=CHIP[n[0]];$('#notes').innerHTML=`<div class="lbl" style="margin-bottom:10px">On screen now</div><span class="chip ${c[0]}">${c[1]}</span><h3>${n[1]}</h3><p>${n[2]}</p><p>${n[3]}</p>`}
-const FLOWS=[['01','New athlete sign-up','welcome'],['02','Today → run → finish → share','today'],['03','Move a session','plan'],['04','Add a race','races'],['05','Ask the Assistant','assistant'],['06','Dot Scores and progress','progress'],['07','Badges and Club','badges']];
+const FLOWS=[['01','New athlete sign-up','welcome'],['02','Today → run → finish → share','today'],['03','Move a session','plan'],['04','Add a race','races'],['05','Ask AI anything','assistant'],['06','Dot Scores and progress','progress'],['07','Badges and Club','badges']];
 $('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
 
 /* ---------- nav ---------- */
@@ -1164,7 +1164,7 @@ const insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if
  return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
  <div class="sm" style="color:var(--iv)">${t?"Saturday's long ride is 2.5 hours in the heat. Want a fueling plan for it?":"Saturday's long run is 95 minutes. Want a fueling plan for it?"}</div>
  <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('fuel')">Yes, plan it</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Ask something else</button></div></div>`};
-const askBar=(ph)=>`<button class="askbar" onclick="go('assistant')"><span class="aio">${ic('spark')}</span><span class="ph">${ph||'Ask anything: plan, recovery, fueling, sleep…'}</span><span class="aitag">AI</span></button>`;
+const askBar=(ph)=>`<button class="askbar" onclick="go('assistant')"><span class="aio">${ic('spark')}</span><span class="aph">${ph||'Ask anything: plan, recovery, fueling, sleep…'}</span><span class="aitag">AI</span></button>`;
 
 const QA_EXTRA={
  tired:{q:'My legs feel heavy. Should I still train today?',a:"Your last two sessions were on target and this week's training stress is normal, so it's most likely everyday fatigue. Do the warm-up, then decide. If the first rep feels much harder than usual, swap today for 30 easy minutes and I'll rebalance the week.<div class=\"xs\" style=\"margin-top:8px\">If you have pain or feel unwell, rest and check with a doctor.</div>"},
@@ -1259,7 +1259,7 @@ Object.assign(NOTES,{
 NOTES.workout[3]+=' Swim sessions show sets, yards and pace per 100. Bike sessions show watts with an Indoor/Outdoor switch.';
 NOTES.races[3]+=' Tap <b>predicted</b> for the race prediction breakdown.';
 NOTES.today[3]+=' Also new: an <b>Ask AI</b> bar, a suggestion card from the Assistant, a sync status by the date, a strength add-on on Friday, and race prediction on the race row. <b>You</b> is now the avatar top right.';
-FLOWS.splice(1,0,['','Current athlete: welcome to XDOT','switch']);FLOWS.push(['','Ask AI anything','assistant'],['','Swim and bike workouts','swimday'],['','Watch and sync','devices']);
+FLOWS.splice(1,0,['','Current athlete: welcome to XDOT','switch']);FLOWS.push(['','Swim and bike workouts','swimday'],['','Watch and sync','devices']);
 FLOWS.forEach((f,k)=>f[0]=String(k+1).padStart(2,'0'));
 $('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
 const _jump5=jump;jump=function(id){
