@@ -1189,7 +1189,7 @@ const CATS=()=>S.mode==='b5k'?[['run','Easy pace','bpace'],['flame','Soreness','
 const CHIPKEYS=()=>S.mode==='b5k'?['bpace','bsore','bmiss']:['move','why','cmp','best','tired','fuel','sleep','race'];
 SCREENS.assistant=()=>{const used=S.chat.map(c=>c.k);const tabbed=!stack.length;
  return `<div class="scr" id="chat" style="display:flex;flex-direction:column;padding-bottom:0">
- <div class="hd">${tabbed?'<span style="width:34px"></span>':'<button class="back" onclick="back()">‹</button>'}<span class="t" style="display:flex;gap:8px;align-items:center">Assistant <span class="aitag">AI</span></span>${AVB()}</div>
+ <div class="hd">${tabbed?'<span style="width:34px"></span>':'<button class="back" onclick="back()">‹</button>'}<span class="t" style="display:flex;gap:8px;align-items:center"><span class="aio" style="width:24px;height:24px">${ic('spark')}</span>Ask AI <span class="aitag">AI</span></span>${AVB()}</div>
  <div style="flex:1">${S.chat.length?'':`<div style="text-align:center;padding:14px 6px 16px"><div class="aiorb">${ic('spark')}</div><div class="h2" style="margin:14px 0 6px">Ask me anything</div><p class="xs" style="max-width:270px;margin:0 auto">Your plan, workouts, recovery, fueling, sleep and race day. I answer from your plan, your sessions and your Dot Scores.</p><p class="xs" style="max-width:270px;margin:8px auto 0;color:var(--gd)">Powered by our own private AI model</p></div>
  <div class="g3 aicats">${CATS().map(c=>`<button onclick="ask('${c[2]}')">${ic(c[0])}<span>${c[1]}</span></button>`).join('')}</div>`}
  <div id="msgs">${S.chat.map(c=>`<div class="bub me">${c.q}</div><div class="bub ai">${c.a}</div>`).join('')}</div></div>
