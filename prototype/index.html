@@ -516,18 +516,24 @@ function loginSheet(){openSheet(`<div class="h2" style="margin-bottom:8px">Welco
  <button class="btn p" onclick="closeSheet();S=fresh('tri');go('today','tab');setTimeout(()=>toast('Welcome back, Alex. Your TriDot plan is here.'),350)">Log in</button>
  <p class="xs" style="margin-top:12px;text-align:center">Prototype · any details work</p>`)}
 
+function moreSheet(){openSheet(`<div style="text-align:center"><svg style="width:44px;height:30px;color:var(--gd);margin:4px 0 12px"><use href="#emblem"/></svg><div class="h2" style="margin-bottom:8px">More endurance sports are coming</div><p class="sm" style="margin-bottom:18px">Running and triathlon are first. We'll tell you the moment the next sport is ready.</p><button class="btn p" onclick="closeSheet();toast('You\\'re on the list. Prototype · nothing saved.')">Notify me</button><p class="xs" style="margin-top:12px">Meanwhile, pick Running or Triathlon to start training.</p></div>`)}
 SCREENS.sport=()=>{const o=S.ob;return `<div class="scr">${hdr('Step 1 of 4')}<div class="stepdots"><i class="d"></i><i></i><i></i><i></i></div>
  <div class="h1" style="margin-bottom:8px">What are you<br>training for?</div><p class="sm" style="margin-bottom:20px">Pick your sport. You can add another goal any time.</p>
  <button class="opt ${o.sport==='run'?'sel':''}" onclick="S.ob.sport='run';render('fade')"><div class="ico">${ic('run')}</div><div><div class="h2" style="font-size:15px">Running</div><div class="xs" style="margin-top:4px">First 5K to ultra</div></div><svg class="ck"><use href="#check"/></svg></button>
  <button class="opt ${o.sport==='tri'?'sel':''}" onclick="S.ob.sport='tri';render('fade')"><div class="ico">${ic('swim')}</div><div><div class="h2" style="font-size:15px">Triathlon</div><div class="xs" style="margin-top:4px">Sprint to full distance · swim, bike, run</div></div><svg class="ck"><use href="#check"/></svg></button>
- <button class="opt off" onclick="toast('More endurance sports are on the way.')"><div class="ico" style="color:var(--dim)"><svg style="width:22px;height:15px"><use href="#emblem"/></svg></div><div><div class="h2" style="font-size:15px;color:var(--mute)">More endurance sports</div><div class="xs" style="margin-top:4px">Coming soon</div></div><span></span></button>
+ <button class="opt off" onclick="moreSheet()"><div class="ico" style="color:var(--dim)"><svg style="width:22px;height:15px"><use href="#emblem"/></svg></div><div><div class="h2" style="font-size:15px;color:var(--mute)">More endurance sports</div><div class="xs" style="margin-top:4px">Coming soon · Get notified</div></div><span></span></button>
  <div class="foot"><button class="btn p ${o.sport?'':'dis'}" onclick="go('goal')">Continue</button></div></div>`};
 
 SCREENS.goal=()=>{const t=S.ob.sport==='tri';const o=S.ob;
+ if(o.noRace){const fs=t?[['Sprint','Sharpen speed in all three'],['Olympic','Build all-round endurance'],['Base','Stay fit between seasons']]:[['5K','Get faster over short races'],['10K','Build speed and endurance'],['Base','Stay fit and consistent']];
+  return `<div class="scr">${hdr('Step 2 of 4')}<div class="stepdots"><i class="d"></i><i class="d"></i><i></i><i></i></div>
+ <div class="h1" style="margin-bottom:8px">What do you<br>want to build?</div><p class="sm" style="margin-bottom:18px">No race date needed. Your plan keeps moving week to week, and you can add a race any time.</p>
+ ${fs.map(f=>`<button class="opt ${o.goal===f[0]?'sel':''}" style="grid-template-columns:1fr 18px;padding:14px" onclick="S.ob.goal='${f[0]}';render('fade')"><div><div style="font-size:14px;font-weight:600">${f[0]==='Base'?'General fitness':f[0]+' fitness'}</div><div class="xs" style="margin-top:3px">${f[1]}</div></div><svg class="ck"><use href="#check"/></svg></button>`).join('')}
+ <div class="foot"><button class="btn p ${o.goal?'':'dis'}" onclick="go('days')">Continue</button></div></div>`}
  const races=t?[['Lakeside Half Triathlon','Sun, Dec 20 · 70.3',AIMG+'race-tri.jpg'],['Coastal Sprint Triathlon','Sun, Nov 1 · Sprint',AIMG+'race-tri.jpg']]:[['City Half Marathon','Sun, Dec 20 · 13.1 mi',AIMG+'race-city.jpg'],['Riverfront 10K','Sat, Nov 14 · 10K',AIMG+'share-road.jpg']];
  const dists=t?['Sprint','Olympic','70.3','Full']:['5K','10K','Half','Marathon'];
  return `<div class="scr">${hdr('Step 2 of 4')}<div class="stepdots"><i class="d"></i><i class="d"></i><i></i><i></i></div>
- <div class="h1" style="margin-bottom:8px">Got a race<br>in mind?</div><p class="sm" style="margin-bottom:16px">Your plan builds to race day. No race yet? Pick a distance.</p>
+ <div class="h1" style="margin-bottom:8px">${o.firstTri?'Your first<br>triathlon':'Got a race<br>in mind?'}</div><p class="sm" style="margin-bottom:16px">${o.firstTri?'Most first-timers start with a sprint. Pick a race or keep the distance.':'Your plan builds to race day. No race yet? Pick a distance.'}</p>
  <div class="inbar" style="margin-bottom:12px">${ic('search','width:16px;height:16px;color:var(--dim)')}<input placeholder="Find a race or event…" onfocus="toast('Race search is a concept. Pick a sample race below.')"></div>
  ${races.map((r,i)=>`<button class="rrow" onclick="S.ob.goal='r${i}';render('fade')" style="${o.goal==='r'+i?'background:rgba(201,161,92,.08)':''}"><div class="tile gh" style="background-image:url(${r[2]})"></div><div><b style="font-size:13.5px">${r[0]}</b><div class="xs">${r[1]}</div></div>${o.goal==='r'+i?ic('check','width:18px;height:18px;color:var(--gd)'):'<span></span>'}</button>`).join('')}
  <div class="lbl" style="margin:20px 0 10px">Or train for a distance</div>
@@ -554,13 +560,15 @@ AFTER.building=()=>{const li=[...document.querySelectorAll('#bl li')];li.forEach
 
 SCREENS.ready=()=>{const o=S.ob,t=o.sport==='tri';let g=sp().goal,w='in 18 weeks';
  if(o.goal&&!o.goal.startsWith('r')){g=(t?o.goal+' triathlon':o.goal==='Half'?'Half marathon':o.goal==='Marathon'?'Marathon':o.goal);w='in 16 weeks'}
+ if(o.noRace&&o.goal){g=o.goal==='Base'?(t?'Year-round triathlon fitness':'Year-round running fitness'):o.goal+(t?' triathlon':'')+' fitness';w='week by week'}
+ if(o.firstTri&&o.goal==='Sprint')g='Your first sprint triathlon';
  if(o.goal==='r1'){g=t?'Coastal Sprint Triathlon':'Riverfront 10K';w='in 3 weeks'}
  const KS=['mon','tue','wed','thu','fri','sat','sun'];const dn=[...o.days].sort((x,y)=>KS.indexOf(x)-KS.indexOf(y)).map(k=>DAYN[['mon','tue','wed','thu','fri','sat','sun'].indexOf(k)]).join(', ');
  return `<div class="scr np"><div class="photo gh grain" style="height:300px;background-image:linear-gradient(180deg,rgba(16,17,16,0) 40%,#101110),url(${IMG}${t?'triathlon-m':'running-m'}.jpg);background-position:center 30%"><div style="position:absolute;left:20px;right:20px;bottom:10px"><div class="lbl gold">Your plan is ready</div><div class="h1" style="margin-top:8px;font-size:30px">${g}<br>${w}</div></div></div>
  <div style="padding:6px 20px 24px"><div class="lbl" style="margin:12px 0 4px">Built from</div>
  <div class="chk">${ic('check')}<div><b>Your goal:</b> ${g}</div></div>
  <div class="chk">${ic('check')}<div><b>Your week:</b> ${dn}, long ${t?'ride':'run'} on ${o.long==='sat'?'Saturday':'Sunday'}</div></div>
- <div class="chk">${ic('check')}<div><b>Your fitness:</b> ${o.watch?'recent workouts from your watch':'a quick run test in week 1'}</div></div>
+ <div class="chk">${ic('check')}<div><b>Your fitness:</b> ${o.firstTri?'an easy first week, including a first swim you can finish':o.watch?'recent workouts from your watch':'a quick run test in week 1'}</div></div>
  <div class="chk">${ic('check')}<div><b>Where you train:</b> local heat, humidity and elevation</div></div>
  <div class="chk">${ic('check')}<div><b>FitLogic:</b> 20+ years of real athlete data</div></div>
  <div style="margin-top:20px;display:grid;gap:10px"><button class="btn p" onclick="go('today','tab');setTimeout(()=>toast('Showing a sample athlete in week 9 of the plan'),400)">See today's workout</button><button class="btn s" onclick="back()">Adjust my plan</button></div>
@@ -867,14 +875,16 @@ const bGoal=()=>S.b&&S.b.intent==='move'?'Run 30 minutes':'Your first 5K';
 const bWeeks=()=>bPath().length;
 
 /* goal-first start */
+function goalNext(){const o=S.ob;o.beg=o.intent==='5k';o.noRace=o.intent==='norace';o.firstTri=o.intent==='firsttri';
+ if(o.beg)return go('bstart');if(o.firstTri){o.sport='tri';o.goal='Sprint';return go('goal')}o.sport=null;o.goal=null;go('sport')}
 SCREENS.bgoal=()=>{const o=S.ob,opt=(k,i,t,s)=>`<button class="opt ${o.intent===k?'sel':''}" onclick="S.ob.intent='${k}';render('fade')"><div class="ico">${ic(i)}</div><div><div class="h2" style="font-size:15px">${t}</div><div class="xs" style="margin-top:4px">${s}</div></div><svg class="ck"><use href="#check"/></svg></button>`;
  return `<div class="scr">${hdr('Let\'s start')}
  <div class="h1" style="margin-bottom:8px">What do you<br>want to do?</div><p class="sm" style="margin-bottom:20px">Start with your goal. We'll build everything around it.</p>
  ${opt('5k','flag','Run my first 5K','From zero. Walk breaks welcome.')}
- ${opt('move','flame','Just get moving','Build a running habit, no race needed')}
- ${opt('race','trophy','Train for a race','Running or triathlon, any distance')}
- ${opt('faster','star','Get faster','Sharpen up with smart targets')}
- <div class="foot"><button class="btn p ${o.intent?'':'dis'}" onclick="S.ob.beg=['5k','move'].includes(S.ob.intent);go(S.ob.beg?'bstart':'sport')">Continue</button></div></div>`};
+ ${opt('firsttri','swim','Do my first triathlon','Swim, bike and run, starting with a sprint')}
+ ${opt('race','trophy','Train for a race','Any race, any distance')}
+ ${opt('norace','flame','Train without a race','Get fitter and faster, no date needed')}
+ <div class="foot"><button class="btn p ${o.intent?'':'dis'}" onclick="goalNext()">Continue</button></div></div>`};
 
 SCREENS.bstart=()=>{const o=S.ob;
  return `<div class="scr">${hdr('Step 2 of 3')}<div class="stepdots"><i class="d"></i><i class="d"></i><i></i></div>
@@ -1034,7 +1044,7 @@ const _rn=renderNotes;renderNotes=function(id){if(S.mode==='b5k'&&NOTES['b_'+id]
 const _jump=jump;jump=function(id){if(id==='bgoal'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh();stack=[{id:'welcome'}];cur={id:'bgoal'};render('push');return}
  if(S.mode==='b5k')S=fresh();_jump(id)};
 Object.assign(NOTES,{
- bgoal:['new','Start with the goal','<b>Today:</b> setup starts with sport and settings. A beginner asked, "Where do I put in that I want to do a 5K?"','<b>Change:</b> the first question is what you want to do. First 5K and Just get moving lead to the beginner path. Train for a race and Get faster lead to the full setup.'],
+ bgoal:['new','Start with the goal','<b>Today:</b> setup starts with sport and settings. A beginner asked, "Where do I put in that I want to do a 5K?"','<b>Change:</b> four goals. First 5K leads to the beginner path. First triathlon goes straight to a sprint. Train for a race and Train without a race ask for the sport next. <b>Product question:</b> a first-triathlon path needs the same beginner rule, including a first swim the athlete can finish.'],
  bstart:['new','Honest starting point','<b>Today:</b> a beginner described her fitness honestly and still got a 50-minute run she couldn\'t finish.','<b>Change:</b> plain questions set week 1. If you can\'t run 10 minutes yet, you start with run-walk. <b>Requirement:</b> the first workout must be one the athlete can finish.'],
  bready:['new','Beginner plan recap','<b>Change:</b> the recap promises a doable start and says the plan eases off if a run feels too hard.','<b>Engineering question:</b> can FitLogic produce run-walk sessions and a beginner ramp today? Plan lengths here are sample.'],
  b_today:['new','Today · beginner mode','<b>Change:</b> one doable session in plain language ("easy pace: you can talk in full sentences"), a coach note and simple wins.','<b>Dot Score is locked</b> until the week 3 check-in, and Data mode stays off, so a new runner isn\'t handed numbers that don\'t mean anything yet.'],
