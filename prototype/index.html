@@ -839,6 +839,214 @@ SCREENS.badges=()=>`<div class="scr">${hdr('Badges')}
  <div class="g3" style="row-gap:18px">${BADGES.map((b,k)=>`<button class="bdg ${b.e?'':'lock'}" onclick="badgeSheet(${k})"><div class="rg">${b.i==='emblem'?`<svg style="width:28px;height:19px"><use href="#emblem"/></svg>`:ic(b.i)}</div><b>${b.n}</b><span>${b.s}</span></button>`).join('')}</div></div>`;
 function badgeSheet(k){const b=BADGES[k];openSheet(`<div style="text-align:center"><div class="bdg ${b.e?'':'lock'}" style="margin-bottom:10px"><div class="rg badge-pop" style="width:90px;height:90px">${b.i==='emblem'?`<svg style="width:40px;height:27px"><use href="#emblem"/></svg>`:ic(b.i,'width:34px;height:34px')}</div></div><div class="lbl ${b.e?'gold':''}">${b.e?'Earned':'Locked'}</div><div class="h2" style="margin:6px 0 8px">${b.n}</div><p class="sm">${b.d}</p></div>`)}
 
+/* ---------- First 5K beginner path (sample data) ---------- */
+const BLV={
+ none:{wk:9,run:60,er:45,walk:90,reps:6,opt:'Not yet, or under a minute',txt:"you can't run a minute yet",start:0},
+ short:{wk:8,run:120,er:90,walk:120,reps:5,opt:'1 to 5 minutes',txt:'you can run 1 to 5 minutes',start:1},
+ ten:{wk:6,run:300,er:240,walk:60,reps:3,opt:'About 10 minutes',txt:'you can run about 10 minutes',start:3},
+ twenty:{wk:4,cont:true,opt:'20 minutes or more',txt:'you can run 20 minutes or more'}};
+const P9=['Run 1 min, walk 90 sec · 6 times','Run 90 sec, walk 2 min · 6 times','Run 2 min, walk 2 min · 6 times','Run 3 min, walk 2 min · 5 times','Run 5 min, walk 2 min · 4 times','Run 8 min, walk 2 min · 3 times','Run 10 min, walk 1 min · 2 times','Run 20 min without stopping','Run 25 to 30 min · 5K week'];
+const P4=['Easy 20 min run','Easy 22 min run','Easy 25 min run','Run 25 to 30 min · 5K week'];
+const BDAYS={2:[1,5],3:[1,3,5],4:[1,3,5,6]};
+const dur=s=>s%60===0?(s/60)+' min':s<120?s+' sec':(s/60)+' min';
+function bPath(){const lv=S.b.lv;return lv==='twenty'?P4:P9.slice(BLV[lv].start)}
+function bSess(n,lv,eased){const L=BLV[lv];let steps,desc,runSec;
+ const W=(nm,d)=>({n:nm,kind:'walk',d,z:1,lo:1000,hi:1080});
+ if(L.cont){const m=eased?15:20;runSec=m*60;steps=[W('Warm-up walk',300),{n:'Easy run',kind:'run',d:runSec,z:2,rep:1,of:1,lo:760,hi:800},W('Cool-down walk',300)];desc=`Easy ${m} min run, 5 min walk before and after`}
+ else{const run=eased?L.er:L.run;runSec=run*L.reps;steps=[W('Warm-up walk',300)];
+  for(let k=1;k<=L.reps;k++){steps.push({n:'Run',kind:'run',d:run,z:2,rep:k,of:L.reps,lo:760,hi:800});if(k<L.reps)steps.push(W('Walk',L.walk))}
+  steps.push(W('Cool-down walk',300));desc=`Run ${dur(run)}, walk ${dur(L.walk)} · ${L.reps} times`}
+ const tot=steps.reduce((a,b)=>a+b.d,0);
+ return {beg:true,d:'run',n,name:(L.cont?'Easy Run ':'Run-Walk ')+n,steps,desc,min:Math.round(tot/60),runMin:Math.round(runSec/6)/10,done:false,eased:!!eased,
+  why:L.cont?'An easy, steady run builds the base for your 5K. Slow is the right speed today.':'Short runs with walk breaks build your legs and lungs without wearing you out. The walks are part of the plan, not a step back.'}}
+function setupBeg(){const ob=S.ob;S=fresh('run');S.ob=ob;S.mode='b5k';S.dataMode=false;
+ const lv=ob.lv||'none',days=BDAYS[ob.bdays||3];let n=1;
+ S.b={lv,intent:ob.intent,days:ob.bdays||3,dayIdx:1,done:0,mins:0,eased:false,feel:null,badge:false,last:null,
+  week:DAYN.map((_,j)=>days.includes(j)?bSess(n++,lv,false):null)};S.xp=0;S.streak=0;S.level=1}
+const bGoal=()=>S.b&&S.b.intent==='move'?'Run 30 minutes':'Your first 5K';
+const bWeeks=()=>bPath().length;
+
+/* goal-first start */
+SCREENS.bgoal=()=>{const o=S.ob,opt=(k,i,t,s)=>`<button class="opt ${o.intent===k?'sel':''}" onclick="S.ob.intent='${k}';render('fade')"><div class="ico">${ic(i)}</div><div><div class="h2" style="font-size:15px">${t}</div><div class="xs" style="margin-top:4px">${s}</div></div><svg class="ck"><use href="#check"/></svg></button>`;
+ return `<div class="scr">${hdr('Let\'s start')}
+ <div class="h1" style="margin-bottom:8px">What do you<br>want to do?</div><p class="sm" style="margin-bottom:20px">Start with your goal. We'll build everything around it.</p>
+ ${opt('5k','flag','Run my first 5K','From zero. Walk breaks welcome.')}
+ ${opt('move','flame','Just get moving','Build a running habit, no race needed')}
+ ${opt('race','trophy','Train for a race','Running or triathlon, any distance')}
+ ${opt('faster','star','Get faster','Sharpen up with smart targets')}
+ <div class="foot"><button class="btn p ${o.intent?'':'dis'}" onclick="S.ob.beg=['5k','move'].includes(S.ob.intent);go(S.ob.beg?'bstart':'sport')">Continue</button></div></div>`};
+
+SCREENS.bstart=()=>{const o=S.ob;
+ return `<div class="scr">${hdr('Step 2 of 3')}<div class="stepdots"><i class="d"></i><i class="d"></i><i></i></div>
+ <div class="h1" style="margin-bottom:8px">Where are you<br>starting?</div><p class="sm" style="margin-bottom:18px">Be honest. There's no wrong answer, and your first week is built from this.</p>
+ <div class="lbl" style="margin-bottom:10px">Right now, how long can you run without stopping?</div>
+ ${Object.entries(BLV).map(([k,v])=>`<button class="opt ${o.lv===k?'sel':''}" style="grid-template-columns:1fr 18px;padding:14px" onclick="S.ob.lv='${k}';render('fade')"><div style="font-size:14px;font-weight:600">${v.opt}</div><svg class="ck"><use href="#check"/></svg></button>`).join('')}
+ <div class="lbl" style="margin:16px 0 10px">How many days a week can you run?</div>
+ <div class="chips">${[2,3,4].map(d=>`<button class="${(o.bdays||3)===d?'on':''}" style="min-width:56px;text-align:center" onclick="S.ob.bdays=${d};render('fade')">${d} days</button>`).join('')}</div>
+ <p class="xs" style="margin-top:10px">Three is a great start. Rest days count toward your streak.</p>
+ <div class="foot"><button class="btn p ${o.lv?'':'dis'}" onclick="go('building')">Build my plan</button><p class="xs" style="text-align:center;margin-top:8px">Every workout in week 1 is one you can finish.</p></div></div>`};
+
+const _bld=SCREENS.building,_bldA=AFTER.building;
+SCREENS.building=()=>{if(!S.ob.beg)return _bld();const g=S.ob.intent==='move'?'Run 30 minutes':'Your first 5K';
+ return `<div class="scr" style="display:flex;flex-direction:column;justify-content:center;padding-bottom:80px">
+ <div class="spin"><svg class="e"><use href="#emblem"/></svg></div>
+ <div class="h2" style="text-align:center;margin-bottom:6px">Building your plan</div><p class="xs" style="text-align:center;margin-bottom:22px">FitLogic is putting it together</p>
+ <ul class="building" id="bl">${['Your goal: '+g,'Where you\'re starting','Your running days','Local heat and humidity','A first week you can finish'].map(x=>`<li>${ic('check')}<span>${x}</span></li>`).join('')}</ul></div>`};
+AFTER.building=()=>{if(!S.ob.beg)return _bldA();const li=[...document.querySelectorAll('#bl li')];li.forEach((l,i)=>setTimeout(()=>l.classList.add('d'),450*(i+1)));
+ setTimeout(()=>{if(cur.id==='building'){setupBeg();go('bready','fade')}},450*li.length+700)};
+
+SCREENS.bready=()=>{const b=S.b,L=BLV[b.lv],s1=b.week.find(Boolean);const dn=b.week.map((s,j)=>s?DAYN[j]:null).filter(Boolean).join(', ');
+ return `<div class="scr np"><div class="photo gh grain" style="height:300px;background-image:linear-gradient(180deg,rgba(16,17,16,0) 40%,#101110),url(${IMG}running-m.jpg);background-position:center 30%"><div style="position:absolute;left:20px;right:20px;bottom:10px"><div class="lbl gold">Your plan is ready</div><div class="h1" style="margin-top:8px;font-size:30px">${bGoal()}<br>in ${bWeeks()} weeks</div></div></div>
+ <div style="padding:6px 20px 24px"><div class="lbl" style="margin:12px 0 4px">Built from</div>
+ <div class="chk">${ic('check')}<div><b>Your goal:</b> ${b.intent==='move'?'run 30 minutes without stopping':'finish your first 5K'}</div></div>
+ <div class="chk">${ic('check')}<div><b>Your starting point:</b> ${L.txt}, so ${L.cont?'you start with easy, steady runs':'week 1 starts with run-walk'}</div></div>
+ <div class="chk">${ic('check')}<div><b>Your week:</b> ${b.days} runs, on ${dn}</div></div>
+ <div class="chk">${ic('check')}<div><b>Day 1:</b> ${s1.min} minutes, with ${s1.runMin} minutes of running</div></div>
+ <div class="card" style="margin-top:16px;border-color:rgba(201,161,92,.45)"><div class="lbl gold" style="margin-bottom:6px">Our promise</div><div class="sm" style="color:var(--iv)">Every workout is one you can finish. If one feels too hard, tell us and the next one eases off.</div></div>
+ <div style="margin-top:20px;display:grid;gap:10px"><button class="btn p" onclick="go('today','tab')">See day 1</button><button class="btn s" onclick="back()">Adjust my plan</button></div>
+ <p class="xs" style="margin-top:12px;text-align:center">Plan length and steps are sample data.</p></div></div>`};
+
+/* run-walk bars */
+function rwBars(s){return `<div style="display:flex;gap:2px;align-items:flex-end;height:44px;margin:14px 0 6px">${s.steps.map(x=>`<i style="display:block;flex:${x.d};height:${x.kind==='run'?100:34}%;background:${x.kind==='run'?'var(--gd)':'#3a3b39'}"></i>`).join('')}</div><div class="row xs"><span style="display:flex;gap:12px"><span><i style="display:inline-block;width:8px;height:8px;background:var(--gd);margin-right:5px"></i>Run</span><span><i style="display:inline-block;width:8px;height:8px;background:#3a3b39;margin-right:5px"></i>Walk</span></span><span>${s.min} min</span></div>`}
+function pathBar(cw=0){const n=bWeeks();return `<div style="display:grid;grid-template-columns:repeat(${n},1fr);gap:3px;margin:10px 0 6px">${Array.from({length:n},(_,k)=>`<i style="display:block;height:5px;background:${k<cw?'#6f6650':k===cw?'var(--gd)':'#333431'}"></i>`).join('')}</div>`}
+function coachNote(){const b=S.b;return b.eased?'We eased your next run. Easing off now is how you keep going, and you\'re still on track.':b.done===0?'The hardest part is starting. Opening this app today counts.':b.done===1?'One run in. That\'s one more than last week.':'You\'re stacking runs. This is how a 5K gets built.'}
+function dotLockSheet(){openSheet(`<div style="text-align:center"><div class="bdg lock" style="margin-bottom:10px"><div class="rg" style="width:80px;height:80px">${ic('lock','width:30px;height:30px')}</div></div><div class="lbl gold" style="margin-bottom:6px">Unlocks in week 3</div><div class="h2" style="margin-bottom:10px">Your Dot Score</div></div><p class="sm" style="margin-bottom:12px">Once you can run 10 minutes without stopping, a short check-in sets your Dot Score and training zones. Then Data mode and the full numbers open up.</p><p class="xs" style="border-left:2px solid var(--gd);padding-left:10px">Numbers mean more once they measure real running. When a Dot Score becomes meaningful for a new runner needs product confirmation.</p><button class="btn p" style="margin-top:16px" onclick="closeSheet()">Got it</button>`)}
+
+/* Today · beginner */
+function bToday(){const b=S.b,i=b.dayIdx,s=b.week[i];const runs=b.week.filter(Boolean),dn=runs.filter(x=>x.done).length;
+ const wk=b.week.map((x,j)=>`<button class="${j===i?'on':''}" onclick="S.b.dayIdx=${j};render('fade')">${WEEKDAYS[j]}<b>${DATES[j]}</b><div class="dots">${x?`<s class="${x.done?'d':'o'}"></s>`:'<s style="background:#333"></s>'}</div></button>`).join('');
+ let hero;
+ if(!s)hero=`<div class="card" style="padding:18px"><span class="disc" style="color:var(--mute)">${ic('rest')}Rest day</span><div class="h1" style="font-size:24px;margin:10px 0 8px">Rest is<br>training too</div><p class="sm">Your legs get stronger on days like this. It counts toward your streak.</p></div>`;
+ else hero=`<div class="card" style="padding:16px">
+  <div class="row"><span class="disc">${ic('run')}${BLV[b.lv].cont?'Easy run':'Run-walk'} · Easy</span><span class="xs">Week 1 of ${bWeeks()}</span></div>
+  <div class="h1" style="font-size:28px;margin:12px 0 10px">${s.name}</div>
+  <div style="display:flex;gap:16px;font-size:13px;color:var(--mute)"><span><b style="color:var(--iv)">${s.min}</b> min</span><span><b style="color:var(--iv)">${s.runMin}</b> min of running</span></div>
+  ${rwBars(s)}
+  <div class="sm" style="margin-top:10px;color:var(--iv)">${s.desc}${s.eased?' <span class="gold">· eased</span>':''}</div>
+  <div class="why"><div class="lbl">Why ${i===1?'today':DAYN[i]}</div><div class="sm" style="color:var(--iv)">${s.why}</div></div>
+  <div class="pill" style="margin-bottom:14px;white-space:normal">${ic('mic','width:13px;height:13px;color:var(--gd)')}Easy pace: you can talk in full sentences</div>
+  ${s.done?`<div class="row" style="border:1px solid rgba(201,161,92,.5);padding:12px 14px"><span style="display:flex;gap:8px;align-items:center;font-size:13px">${ic('check','width:16px;height:16px;color:var(--gd)')}Done · nice work</span><span class="xs gold">+40 XP</span></div>`
+  :`<div class="g2"><button class="btn p" onclick="startBeg(${i})">${ic('play')}Start</button><button class="btn s" onclick="toast('Sent to your watch')">${ic('watch')}To watch</button></div>`}</div>`;
+ return `<div class="scr"><div class="hd"><div><div class="xs">${DAYF[i]}, Oct ${DATES[i]}</div><div class="h2" style="font-size:20px;margin-top:3px">${b.done?'Nice work, ':'Let\'s go, '}${S.name}</div></div><button class="pill" onclick="go('progress','tab')" style="color:var(--gd);border-color:rgba(201,161,92,.4)">${ic('flame','width:13px;height:13px')}${dn?dn+' run'+(dn>1?'s':''):'Day 1'}</button></div>
+ ${hero}
+ <div class="card" style="margin-top:10px;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start"><svg style="width:28px;height:19px;color:var(--gd);margin-top:2px"><use href="#emblem"/></svg><div><div class="lbl gold" style="margin-bottom:4px">Coach note</div><div class="sm" style="color:var(--iv)">${coachNote()}</div></div></div>
+ <div class="lbl" style="margin:20px 0 10px">Your wins</div>
+ <div class="g3">
+  <button class="card" style="padding:12px;text-align:left" onclick="go('plan','tab')"><div class="num">${dn}<span style="font-size:13px">/${runs.length}</span></div><div class="xs" style="margin-top:6px">Runs this week</div></button>
+  <button class="card" style="padding:12px;text-align:left" onclick="go('progress','tab')"><div class="num">${b.mins}</div><div class="xs" style="margin-top:6px">Minutes running</div></button>
+  <button class="card" style="padding:12px;text-align:left;border-style:dashed" onclick="dotLockSheet()">${ic('lock','width:22px;height:22px;color:var(--dim)')}<div class="xs" style="margin-top:6px">Dot Score · unlocks week 3</div></button></div>
+ <div class="lbl" style="margin:20px 0 10px">This week</div><div class="wk">${wk}</div>
+ <button class="card" style="margin-top:14px;width:100%;text-align:left" onclick="go('plan','tab')"><div class="row"><span class="lbl gold">Your road to ${b.intent==='move'?'30 minutes':'5K'}</span><span class="xs">Week 1 of ${bWeeks()} ›</span></div>${pathBar(0)}<div class="xs">Finish line: ${bPath()[bWeeks()-1]}</div></button>
+ </div>`}
+
+/* Live · beginner */
+function startBeg(i){const s=S.b.week[i];live={i,s,step:0,t:0,el:0,dist:0,paused:false,voice:live&&live.voice||false,hr:110,cue:'',timer:null,speed:20};go('live','up')}
+function bCue(st){if(st.kind==='run'){if(st.of===1)return 'Time to run. Nice and easy. Slow is the right speed today.';if(st.rep===1)return 'First run. Nice and easy, you should be able to talk.';if(st.rep===st.of)return "Last run. You've got this.";if(st.rep===Math.ceil(st.of/2))return `Run ${st.rep} of ${st.of}. Halfway there. Shoulders relaxed.`;return `Run ${st.rep} of ${st.of}. Easy does it.`}
+ if(st.n==='Warm-up walk')return "Let's go. Start with a brisk five-minute walk.";if(st.n==='Cool-down walk')return 'That\'s every run done. Walk it out. You did it.';return 'Walk it out. Breathe. You earned this one.'}
+const _cue=cueFor;cueFor=function(st,s){return s.beg?bCue(st):_cue(st,s)};
+const _draw=drawLive;drawLive=function(){if(live&&live.s.beg)return drawBeg();return _draw()};
+function drawBeg(){const L=live,el=$('#livescr');if(!el)return;const st=L.s.steps[L.step],nx=L.s.steps[L.step+1],run=st.kind==='run',left=st.d-L.t;
+ const runDone=L.s.steps.slice(0,L.step).filter(x=>x.kind==='run').reduce((a,b)=>a+b.d,0)+(run?L.t:0);
+ el.innerHTML=`<div class="row" style="margin:6px 0 12px"><span class="disc">${ic('run')}${L.s.name}</span><span class="xs">${fmtT(L.el)} elapsed</span></div>
+ <div style="display:flex;gap:2px;height:6px">${L.s.steps.map((x,k)=>`<i style="display:block;flex:${x.d};background:${k<L.step?'#6f6650':k===L.step?'var(--gd)':x.kind==='run'?'#4a4639':'#2a2b29'}"></i>`).join('')}</div>
+ <div style="margin:30px 0 4px"><div class="wide" style="font-size:78px;line-height:.9;color:${run?'var(--gd)':'var(--iv)'}">${run?'Run':'Walk'}</div>
+ <div class="sm" style="margin-top:8px">${run?(st.of>1?`Run ${st.rep} of ${st.of} · easy pace`:'Easy pace'):st.n==='Walk'?'Breathe and recover':st.n}</div></div>
+ <div class="live-big" style="font-size:84px;margin-top:14px">${fmtT(left)}</div>
+ <div class="g2" style="margin-top:22px"><div class="card"><div class="xs">Running so far</div><div class="num" style="margin-top:8px;font-size:22px">${fmtT(runDone)}</div><div class="xs" style="margin-top:2px">of ${dur(L.s.runMin*60)}</div></div>
+  <div class="card"><div class="xs">Distance</div><div class="num" style="margin-top:8px;font-size:22px">${L.dist.toFixed(2)}</div><div class="xs" style="margin-top:2px">mi</div></div></div>
+ <div class="why" style="margin-top:18px"><div class="lbl" style="display:flex;gap:8px;align-items:center">Voice coach ${L.voice?'<span class="speak"><i></i><i></i><i></i></span>':''}</div><div class="sm" style="color:var(--iv)">${L.cue}</div></div>
+ <div class="xs" style="margin-bottom:14px">${nx?`Up next · <span style="color:var(--mute)">${nx.kind==='run'?'Run':nx.n} · ${dur(nx.d)}</span>`:'Last step'}</div>
+ <div class="g3"><button class="btn s" onclick="live.paused=!live.paused;drawLive()">${L.paused?ic('play')+'Resume':ic('pause')+'Pause'}</button><button class="btn s" onclick="nextStep()">${ic('skip')}Skip</button><button class="btn s" onclick="endLive()">End</button></div>
+ <div class="row" style="margin-top:14px"><button class="pill" onclick="live.voice=!live.voice;if(live.voice)say(live.cue);else speechSynthesis&&speechSynthesis.cancel();drawLive()" style="${L.voice?'color:var(--gd);border-color:rgba(201,161,92,.5)':''}">${ic('mic','width:13px;height:13px')}Voice ${L.voice?'on':'off'}</button><button class="pill" onclick="live.speed=live.speed===20?60:20;drawLive()">Demo speed ${L.speed}×</button></div>
+ ${L.paused?'<div style="position:absolute;inset:0;background:rgba(16,17,16,.6);display:grid;place-items:center;pointer-events:none"><div class="wide" style="font-size:30px">Paused</div></div>':''}`}
+const _fin=finishLive;finishLive=function(){if(live&&live.s.beg){const s=live.s;stopLive();s.done=true;S.b.done++;S.b.mins=Math.round((S.b.mins+s.runMin)*10)/10;S.xp+=40;S.b.last=s;S.b.feel=null;go('bdone','up');return}_fin()};
+
+/* Finish · beginner */
+SCREENS.bdone=()=>{const b=S.b,s=b.last,first=b.done===1,runs=b.week.filter(Boolean);
+ return `<div class="scr np"><div style="position:absolute;left:0;right:0;top:0;height:420px" class="photo gh grain"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,17,16,.15),rgba(16,17,16,.5) 45%,#101110),url(${AIMG}finish-bg.jpg) center 30%/cover"></div></div>
+ <div style="position:relative;padding:80px 20px 30px;text-align:center">
+  <div class="lbl gold">${first?'First run · Done':'Run complete'}</div><div class="h1" style="font-size:30px;margin:10px 0 18px">${first?'You showed up.<br>That\'s the hard part.':'Another one<br>in the bank.'}</div>
+  <div class="ringwrap"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="rgba(243,238,223,.15)" stroke-width="8"/><circle id="rg" cx="75" cy="75" r="64" fill="none" stroke="#C9A15C" stroke-width="8" stroke-dasharray="402" stroke-dashoffset="402" style="transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)"/></svg><div class="c"><div><div class="num" style="font-size:46px">${s.runMin}</div><div class="lbl" style="margin-top:4px">min running</div></div></div></div>
+  <p class="sm" style="color:var(--iv);margin:18px 10px 18px">${s.runMin} of 30 minutes. Every run gets you closer to ${b.intent==='move'?'30 nonstop':'your 5K'}.</p>
+  <div class="g3" style="text-align:left"><div class="card" style="padding:12px"><div class="num gold" id="xpn">+0</div><div class="xs" style="margin-top:4px">XP earned</div></div><div class="card" style="padding:12px"><div class="num">${runs.filter(x=>x.done).length}/${runs.length}</div><div class="xs" style="margin-top:4px">runs this week</div></div><div class="card" style="padding:12px"><div class="num">${s.min}</div><div class="xs" style="margin-top:4px">minutes moving</div></div></div>
+  <div id="bslot" style="min-height:${first&&!b.badge?96:0}px"></div>
+  <div class="lbl" style="margin:16px 0 10px;text-align:left">How did that feel?</div><div id="feel">${feelHTML()}</div>
+  <div class="g2" style="margin-top:16px"><button class="btn s" onclick="go('bshare')">${ic('share')}Share</button><button class="btn p" onclick="go('today','tab')">Done</button></div></div></div>`};
+AFTER.bdone=()=>{const s=S.b.last;setTimeout(()=>{const r=$('#rg');if(r)r.style.strokeDashoffset=402*(1-Math.min(1,s.runMin/30))},80);countUp('#xpn',40,'+',1100);
+ if(S.b.done===1&&!S.b.badge){setTimeout(()=>{const b=$('#bslot');if(!b)return;b.innerHTML=`<div class="card badge-pop" style="display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;text-align:left;margin-top:12px;border-color:rgba(201,161,92,.5)"><div class="bdg" style="padding:0"><div class="rg" style="width:56px;height:56px">${ic('flag')}</div></div><div><div class="lbl gold">Badge unlocked</div><div class="h2" style="font-size:15px;margin:4px 0 3px">First step</div><div class="xs">You finished your first run.</div></div></div>`;S.b.badge=true},1400)}};
+function feelHTML(){const f=S.b.feel;const R={easy:'Noted. If the next one feels easy too, we\'ll add a little more running.',right:'Perfect. That\'s exactly where we want you.',hard:'Thanks for telling us. We\'ve eased your next run'+(BLV[S.b.lv].cont?' to 15 minutes.':` to ${dur(BLV[S.b.lv].er)} run intervals.`)+' You\'re still on track.'};
+ return `<div class="g3">${[['easy','Too easy'],['right','Just right'],['hard','Too hard']].map(x=>`<button class="btn s" style="height:44px;letter-spacing:.06em;${f===x[0]?'border-color:var(--gd);color:var(--gd)':''}" onclick="bFeel('${x[0]}')">${x[1]}</button>`).join('')}</div>${f?`<p class="sm" style="color:var(--iv);text-align:left;margin-top:12px;border-left:2px solid var(--gd);padding-left:10px;animation:fade .3s">${R[f]}</p>`:''}`}
+function bFeel(k){const b=S.b;b.feel=k;if(k==='hard'&&!b.eased){b.eased=true;b.week=b.week.map(s=>s&&!s.done?bSess(s.n,b.lv,true):s)}const f=$('#feel');if(f)f.innerHTML=feelHTML()}
+
+/* Share · beginner */
+SCREENS.bshare=()=>{const b=S.b,s=b.last||b.week.find(Boolean);
+ const story=`<div class="story"><div class="bg gh" style="background-image:url(${AIMG}share-road.jpg)"></div><div class="sh"></div>
+ <div style="position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px"><svg style="width:26px;height:17px;color:var(--iv)"><use href="#emblem"/></svg><span style="font-family:Archivo,'Arial Black',sans-serif;font-stretch:125%;font-weight:900;font-size:13px;letter-spacing:.04em">XDOT</span></div>
+ <div style="position:absolute;left:16px;right:16px;bottom:16px"><div class="lbl gold" style="margin-bottom:6px">Road to ${b.intent==='move'?'30 minutes':'my first 5K'} · Week 1 of ${bWeeks()}</div>
+ <div class="h1" style="font-size:30px;margin-bottom:10px">${b.done<=1?'First run.<br>Done.':'Run '+b.done+'.<br>Done.'}</div>
+ ${pathBar(0)}
+ <div style="display:flex;gap:18px;margin-top:10px"><div><div class="num" style="font-size:22px">${s.min}:00</div><div class="xs" style="color:var(--mute)">time</div></div><div><div class="num" style="font-size:22px">${s.runMin}</div><div class="xs" style="color:var(--mute)">min running</div></div></div>
+ ${b.done<=1?`<div style="margin-top:12px"><span class="pill" style="color:var(--gd);border-color:rgba(201,161,92,.6);background:rgba(16,17,16,.5)">${ic('flag','width:12px;height:12px')}First step badge</span></div>`:''}</div></div>`;
+ return `<div class="scr"><div class="hd"><button class="xs" style="letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--mute)" onclick="back()">Cancel</button><span class="t">Share</span><span style="width:50px"></span></div>
+ <div style="width:220px;height:391px;margin:0 auto 18px;box-shadow:0 20px 40px rgba(0,0,0,.5);overflow:hidden"><div style="width:306px;transform:scale(.719);transform-origin:0 0">${story}</div></div>
+ <p class="sm" style="text-align:center;margin-bottom:6px">Your journey, not your pace. Friends can cheer you on.</p>
+ <div class="dest"><button onclick="toast('Opens your story app with the graphic ready')"><span>${ic('story')}</span>Story</button><button onclick="toast('Posted to the Club. Cheers incoming.')"><span>${ic('club')}</span>Club</button><button onclick="toast('Saved to your photos')"><span>${ic('down')}</span>Save</button><button onclick="toast('Opens the share sheet')"><span>${ic('dotsh')}</span>More</button></div></div>`};
+
+/* Plan · beginner */
+function bPlan(){const b=S.b,p=bPath();
+ const rows=b.week.map((s,j)=>s?`<button class="sess ${j===1?'today':''}" onclick="S.b.dayIdx=${j};go('today','tab')"><div class="ico">${ic('run')}</div><div style="text-align:left"><span class="xs">${DAYN[j]}${j===1?' · Today':''}</span><b>${s.name} · ${s.min}m</b><span class="xs">${s.desc}${s.eased?' · eased':''}</span></div><span class="str ${s.done?'done':''}">${s.done?'✓ Done':'Easy'}</span></button>`
+  :`<div class="sess"><div class="ico">${ic('rest')}</div><div><span class="xs">${DAYN[j]} · Rest</span><b style="color:var(--mute)">Counts toward your streak</b></div><span class="str">Rest</span></div>`).join('');
+ return `<div class="scr"><div class="hd"><div class="h2" style="font-size:22px">Your plan</div><span></span></div>
+ <div class="card"><div class="row"><span class="disc">${ic('flag')}${bGoal()}</span><span class="xs">Week 1 of ${p.length}</span></div><div class="xs" style="margin-top:6px">${b.days} runs a week · every one is a workout you can finish</div>${pathBar(0)}</div>
+ <div class="row" style="margin:20px 0 4px"><div class="h2" style="font-size:14px">This week · Oct 12 – 18</div><span class="xs">${b.week.filter(Boolean).reduce((a,s)=>a+s.min,0)} min</span></div>
+ ${rows}
+ <button class="btn s" style="margin-top:16px" onclick="missSheet()">Missed a run? See what happens</button>
+ <div class="lbl" style="margin:24px 0 6px">The road ahead</div>
+ ${p.map((t,k)=>`<div class="step"><i class="z" style="background:${k===0?'var(--gd)':k===p.length-1?'var(--z5)':'#333431'}"></i><div><b style="${k===0?'color:var(--gd)':''}">Week ${k+1}${k===0?' · now':k===p.length-1?' · finish line':''}</b><span class="xs">${t}</span></div>${k===p.length-1?ic('flag','width:16px;height:16px;color:var(--gd)'):'<span></span>'}</div>`).join('')}
+ <p class="xs" style="margin-top:12px">Sample plan. FitLogic sets the real steps and can repeat a week when needed.</p></div>`}
+function missSheet(){openSheet(`<div class="lbl gold" style="margin-bottom:6px">Life happens</div><div class="h2" style="margin-bottom:12px">Missed a run?</div>
+ <div class="chk">${ic('check')}<div><b>It slides, it doesn't pile up.</b> You pick up where you left off. No double days.</div></div>
+ <div class="chk">${ic('check')}<div><b>Miss a few?</b> We ease the next week and tell you why: "We've eased this week. You're still on track."</div></div>
+ <div class="chk">${ic('check')}<div><b>Sick or traveling?</b> Pause your plan and your streak waits for you.</div></div>
+ <button class="btn p" style="margin-top:16px" onclick="closeSheet()">Good to know</button>`)}
+
+/* Progress · beginner */
+function bProg(){const b=S.b,runs=b.week.filter(Boolean),dn=runs.filter(x=>x.done).length;
+ const M=[['flag','First step','Finish your first run',b.done>=1],['flame','First full week','Every run in week 1',dn===runs.length],['run','10 minutes','Run 10 min nonstop',b.lv==='ten'||b.lv==='twenty'],['star','20 minutes','Run 20 min nonstop',b.lv==='twenty'],['trophy','5K finisher','Run your first 5K',false],['emblem','Halfway','Reach the middle week',false]];
+ return `<div class="scr"><div class="hd"><div><div class="h2" style="font-size:22px">Progress</div><div class="xs" style="margin-top:2px">${bGoal()}</div></div><span></span></div>
+ <div class="card"><div class="row"><div><div class="xs">Minutes running</div><div class="num" style="font-size:40px;margin-top:6px">${b.mins}</div></div><div style="text-align:right"><div class="gold" style="font-size:13px;font-weight:600">${dn} of ${runs.length} runs</div><div class="xs">this week</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(${bWeeks()},1fr);gap:4px;align-items:end;height:70px;margin-top:12px">${Array.from({length:bWeeks()},(_,k)=>`<i style="display:block;height:${k===0?Math.max(6,Math.min(100,b.mins/30*100)):6}%;background:${k===0?'var(--gd)':'#2e2f2d'}"></i>`).join('')}</div>
+  <div class="row xs" style="margin-top:6px"><span>Week 1</span><span>Week ${bWeeks()}</span></div></div>
+ <button class="card" style="margin-top:10px;width:100%;text-align:left;border-style:dashed;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:center" onclick="dotLockSheet()">${ic('lock','width:24px;height:24px;color:var(--dim)')}<div><div class="h2" style="font-size:14px">Dot Score unlocks in week 3</div><div class="xs" style="margin-top:3px">A short check-in sets it, then Data mode opens up.</div></div></button>
+ <div class="lbl" style="margin:22px 0 12px">Milestones</div>
+ <div class="g3" style="row-gap:18px">${M.map(m=>`<div class="bdg ${m[3]?'':'lock'}"><div class="rg">${m[0]==='emblem'?'<svg style="width:28px;height:19px"><use href="#emblem"/></svg>':ic(m[0])}</div><b>${m[1]}</b><span>${m[2]}</span></div>`).join('')}</div></div>`}
+
+/* route beginner mode */
+const _today=SCREENS.today,_plan=SCREENS.plan,_prog=SCREENS.progress,_you=SCREENS.you,_wel=SCREENS.welcome;
+SCREENS.today=a=>S.mode==='b5k'?bToday():_today(a);
+SCREENS.plan=a=>S.mode==='b5k'?bPlan():_plan(a);
+SCREENS.progress=a=>S.mode==='b5k'?bProg():_prog(a);
+SCREENS.you=a=>{const h=_you(a);return S.mode==='b5k'?h.replace('Running · Member since 2021','Running · New member · '+bGoal()):h};
+SCREENS.welcome=a=>_wel(a).replace("go('sport','push')","go('bgoal','push')");
+const _sd=setData;setData=function(on){if(S.mode==='b5k'&&on){closeSheet();toast('Data mode unlocks with your Dot Score in week 3');return}_sd(on)};
+const _rend=render;render=function(m){_rend(m);if(['bready','bdone'].includes(cur.id))$('#sb').classList.add('over')};
+const _rn=renderNotes;renderNotes=function(id){if(S.mode==='b5k'&&NOTES['b_'+id])id='b_'+id;_rn(id)};
+const _jump=jump;jump=function(id){if(id==='bgoal'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh();stack=[{id:'welcome'}];cur={id:'bgoal'};render('push');return}
+ if(S.mode==='b5k')S=fresh();_jump(id)};
+Object.assign(NOTES,{
+ bgoal:['new','Start with the goal','<b>Today:</b> setup starts with sport and settings. A beginner asked, "Where do I put in that I want to do a 5K?"','<b>Change:</b> the first question is what you want to do. First 5K and Just get moving lead to the beginner path. Train for a race and Get faster lead to the full setup.'],
+ bstart:['new','Honest starting point','<b>Today:</b> a beginner described her fitness honestly and still got a 50-minute run she couldn\'t finish.','<b>Change:</b> plain questions set week 1. If you can\'t run 10 minutes yet, you start with run-walk. <b>Requirement:</b> the first workout must be one the athlete can finish.'],
+ bready:['new','Beginner plan recap','<b>Change:</b> the recap promises a doable start and says the plan eases off if a run feels too hard.','<b>Engineering question:</b> can FitLogic produce run-walk sessions and a beginner ramp today? Plan lengths here are sample.'],
+ b_today:['new','Today · beginner mode','<b>Change:</b> one doable session in plain language ("easy pace: you can talk in full sentences"), a coach note and simple wins.','<b>Dot Score is locked</b> until the week 3 check-in, and Data mode stays off, so a new runner isn\'t handed numbers that don\'t mean anything yet.'],
+ b_live:['new','Run-walk coach','<b>Change:</b> a huge RUN or WALK cue, a countdown and encouraging voice lines. No pace targets for beginners.','Turn on Voice to hear it. Demo runs at 20× speed.'],
+ bdone:['new','First run celebration','<b>Change:</b> celebrate showing up, show progress toward 30 minutes of running, and award a First step badge.','<b>Calibration:</b> "How did that feel?" Too hard eases the next run right away. Try it, then check the plan.'],
+ bshare:['new','Share a first run','<b>Change:</b> beginners get a share graphic too, framed around the journey ("Road to my first 5K") instead of pace.','Cheers from friends are a big part of what keeps beginners going.'],
+ b_plan:['new','Beginner plan','<b>Change:</b> the whole road to 5K is visible week by week, so progress feels real.','<b>Missed runs</b> slide instead of piling up. Tap "Missed a run?" to see the message.'],
+ b_progress:['new','Beginner progress','<b>Change:</b> minutes running and beginner milestones instead of scores.','<b>Dot Score unlocks</b> at the week 3 check-in, then Data mode opens. Product needs to confirm when a Dot Score becomes meaningful for a new runner.']});
+NOTES.welcome[3]+=' <b>Get started</b> now asks for your goal first.';
+FLOWS.splice(1,0,['02','First 5K · beginner path','bgoal']);FLOWS.forEach((f,k)=>f[0]=String(k+1).padStart(2,'0'));
+$('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
+
 /* ---------- scale device to fit ---------- */
 function fit(){const w=$('#devwrap');if(innerWidth<=820)return;const sc=Math.min((w.clientHeight-40)/844,(w.clientWidth-40)/390,1);$('#device').style.transform=`scale(${sc})`}
 addEventListener('resize',fit);fit();
