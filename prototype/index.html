@@ -1204,6 +1204,7 @@ SCREENS.today=a=>{let h=_today5(a);
  if(S.mode==='b5k'){h=h.replace(/(<div class="lbl" style="margin:20px 0 10px">Your wins)/,askBar('Ask anything: easy pace, soreness, shoes…')+'$1');
   return h.replace(/(<\/div><button class="pill" onclick="go\('progress','tab'\)")/,'</div><div style="display:flex;gap:8px;align-items:center"><button class="pill" onclick="go(\'progress\',\'tab\')"').replace(/(Day 1|\d+ runs?)<\/button><\/div>/,'$1</button>'+AVB()+'</div></div>')}
  const s=S.week[S.dayIdx];
+ if(s&&s.d!=='run'&&!s.done)h=h.replace(new RegExp('<button class="btn p" onclick="startLive\\('+S.dayIdx+'\\)">[\\s\\S]*?</button><button class="btn s" onclick="toast\\(\'Sent to your watch\'\\)">'),`<button class="btn p" onclick="go('workout',0,${S.dayIdx})">${ic('arr')}See ${s.d==='swim'?'sets':'targets'}</button><button class="btn s" onclick="toast('Sent to your ${s.d==='swim'?'watch':'watch or bike computer'}')">`);
  const extra=s&&s.extra==='str'?strCard():'';
  h=h.replace('<div class="lbl" style="margin:20px 0 10px">Your numbers</div>',extra+askBar()+'<div class="lbl" style="margin:20px 0 10px">Your numbers</div>');
  h=h.replace(/(<div class="lbl" style="margin:20px 0 10px">This week<\/div>)/,insight()+'$1');
