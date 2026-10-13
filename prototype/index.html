@@ -103,6 +103,8 @@ input{font:inherit;color:inherit}
 .dots s{width:5px;height:5px;border-radius:50%;background:var(--dim);text-decoration:none}
 .dots s.d{background:var(--gd)}.dots s.o{background:transparent;border:1px solid var(--dim)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.scs .sc{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:12px 10px;text-align:left}
+.sc-l{font-size:11.5px;color:var(--iv);font-weight:600;margin-top:2px;line-height:1.3}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .num{font-size:24px;line-height:1;font-stretch:115%}
 .step{display:grid;grid-template-columns:4px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--ln);align-items:center}
@@ -425,7 +427,7 @@ const BADGES=[
 let S;
 function fresh(sport='tri'){return {sport,name:'Alex',week:SPORT[sport].week(),dayIdx:3,moved:false,races:JSON.parse(JSON.stringify(SPORT[sport].races)),
  xp:3240,level:7,streak:7,clubPosts:[],cheers:{},chat:[],shareStyle:'photo',showPace:true,showRoute:false,hideEnds:true,lastDone:null,disc:sport==='tri'?'run':'run',
- ob:{sport:null,goal:null,days:['mon','tue','thu','sat'],long:'sat',watch:false},raceDraft:null,clubTab:'activity',badgeNew:false}}
+ ob:{sport:null,goal:null,days:['mon','tue','thu','sat'],long:'sat',watch:false},raceDraft:null,clubTab:'activity',badgeNew:false,dataMode:false}}
 S=fresh();
 let stack=[],cur=null,live=null;
 
@@ -437,7 +439,7 @@ const NOTES={
  days:['ref','Your week','<b>Today:</b> plans already ask for training days and long-day preference.','<b>Change:</b> simpler chips, one screen.'],
  building:['new','Building your plan','<b>Today:</b> FitLogic builds the plan behind the scenes.','<b>Change:</b> show the inputs being used, so the plan feels personal before it appears.'],
  ready:['new','Your plan is ready','<b>Today:</b> no recap screen.','<b>Change:</b> a recap of what the plan was built from. Runna does this and it builds trust.'],
- today:['ref','Today','<b>Today:</b> weather, TrainX, XP, stress, Dot Scores and the Assistant all sit on home at equal weight.','<b>Change:</b> one hero session, a one-line why, EnviroNorm in plain words, and one strip for race, Dot Score and TrainX. Tap other days in the week strip.'],
+ today:['ref','Today','<b>Today:</b> weather, TrainX, XP, stress, Dot Scores and the Assistant all sit on home at equal weight.','<b>Change:</b> today\'s session leads. Right under it, a three-tile scoreboard: Dot Score, this week\'s TrainX and Readiness. Tap a tile for detail. Turn on <b>Data mode</b> (link under the tiles, or You → Settings) for the full dashboard.'],
  workout:['ref','Workout','<b>Today:</b> intensity chart, zone targets, text description and drill links exist.','<b>Change:</b> clear steps with a target beside each, drills as cards.'],
  live:['exist','Live session','<b>Today:</b> RunDot runs from the phone with GPS and voice coaching.','<b>Change:</b> one big number, target vs current, next step always visible. This demo runs at 20× speed. Turn on Voice to hear cues.'],
  complete:['new','Session complete','<b>Today:</b> XP and TrainX exist, but no finish moment.','<b>Change:</b> a celebration with TrainX, XP, streak and badge, plus a link to full analysis.'],
@@ -564,6 +566,31 @@ SCREENS.ready=()=>{const o=S.ob,t=o.sport==='tri';let g=sp().goal,w='in 18 weeks
  <div style="margin-top:20px;display:grid;gap:10px"><button class="btn p" onclick="go('today','tab');setTimeout(()=>toast('Showing a sample athlete in week 9 of the plan'),400)">See today's workout</button><button class="btn s" onclick="back()">Adjust my plan</button></div>
  <p class="xs" style="margin-top:12px;text-align:center">Next, the prototype jumps ahead to a sample athlete mid-plan.</p></div></div>`};
 
+
+function arc(v,max){const c=2*Math.PI*19,f=Math.max(0,Math.min(1,v/max));return `<svg viewBox="0 0 46 46" style="width:46px;height:46px;flex:none"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(243,238,223,.13)" stroke-width="4"/><circle cx="23" cy="23" r="19" fill="none" stroke="#C9A15C" stroke-width="4" stroke-dasharray="${(c*f).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 23 23)"/><text x="23" y="27.5" text-anchor="middle" fill="#F3EEDF" style="font:800 13px Archivo,Arial,sans-serif">${v}</text></svg>`}
+const TXLBL=v=>v>=85?'Very good':v>=70?'Good':v>=50?'Building':'Getting started';
+function wkDone(){const w=S.week.filter(Boolean);return [w.filter(x=>x.done).length,w.length]}
+function lastDone(){let j=-1;S.week.forEach((x,k)=>{if(x&&x.done)j=k});return j}
+function scoreTile(k){const [dn,pl]=wkDone();const run=SCORES.run;const T={
+ dot:[arc(run.v,100),'Run Dot',LADDER[run.lvl],"dotSheet()"],
+ tx:[arc(86,100),'TrainX wk',dn+' of '+pl+' done',"txSheet()"],
+ rd:[arc(78,100),'Readiness','Good to train',"rdSheet()"]}[k];
+ return `<button class="card sc" onclick="${T[3]}">${T[0]}<div style="min-width:0"><div class="xs">${T[1]}</div><div class="sc-l">${T[2]}</div></div></button>`}
+function dotSheet(){const t=S.sport==='tri';openSheet(`<div class="lbl gold" style="margin-bottom:6px">Dot Score · Ability</div><div class="h2" style="margin-bottom:10px">${t?'Swim 68 · Bike 51 · Run 82':'Run 82 · Competitive'}</div><p class="sm" style="margin-bottom:12px">Your Dot Score measures ability, normalized for heat, humidity and elevation. Assessments update it, and it sets your training zones.</p><div class="row card" style="padding:12px"><span class="xs">Threshold pace</span><b style="font-size:14px">7:43 /mi</b></div><button class="btn p" style="margin-top:14px" onclick="closeSheet();go('progress','tab')">See progress</button>`)}
+function txSheet(){openSheet(`<div class="lbl gold" style="margin-bottom:6px">TrainX · This week</div><div class="h2" style="margin-bottom:10px">86 · Very good</div><p class="sm" style="margin-bottom:12px">How well you did the right workouts, the right way, this week. Hitting targets and respecting easy days count. Doing extra does not raise it.</p><div class="row card" style="padding:12px"><span class="xs">Sessions done this week</span><b style="font-size:14px">${wkDone()[0]} of ${wkDone()[1]}</b></div><p class="xs" style="margin-top:12px;border-left:2px solid var(--gd);padding-left:10px">Labels stay encouraging: a low week reads "Building," never "Poor." Each workout's own TrainX lives on its finish screen.</p>`)}
+function rdSheet(){openSheet(`<div class="lbl gold" style="margin-bottom:6px">Readiness</div><div class="h2" style="margin-bottom:10px">78 · Good to train</div><p class="sm" style="margin-bottom:12px">A quick read on whether today's session fits how recovered you are. You're on track for the threshold session as written.</p><p class="xs" style="border-left:2px solid var(--gd);padding-left:10px">Readiness is on the current home screen. What feeds it, and whether it should ever adjust a session, needs product confirmation.</p>`)}
+function setData(on){S.dataMode=on;closeSheet();render('fade');toast(on?'Data mode on: full dashboard on Today':'Data mode off: clean Today screen')}
+function settingsSheet(){openSheet(`<div class="h2" style="margin-bottom:14px">Settings</div><button class="tog" onclick="setData(!S.dataMode)"><span><b style="font-size:14px">Data mode</b><br><span class="xs">Show the full dashboard on Today: every Dot Score, training load, stress and readiness.</span></span><span class="sw ${S.dataMode?'on':''}"></span></button><p class="xs" style="margin-top:14px">Other settings (units, zones, notifications, privacy) live here in the full app.</p>`)}
+function dataPanel(){const t=S.sport==='tri';const ds=t?['swim','bike','run']:['run'];
+ const dots=ds.map(d=>`<button class="card" style="padding:12px" onclick="S.disc='${d}';go('progress','tab')"><div class="xs" style="text-transform:capitalize">${d} Dot</div><div class="num" style="margin-top:6px">${SCORES[d].v}</div><div class="xs" style="margin-top:4px">${SCORES[d].t}</div></button>`).join('');
+ return `<div class="row" style="margin:20px 0 10px"><span class="lbl">Full data</span><button class="xs gold" style="letter-spacing:.1em;text-transform:uppercase;font-weight:600" onclick="setData(false)">Hide</button></div>
+ ${t?`<div class="g3">${dots}</div>`:''}
+ <div class="g3" style="margin-top:8px">
+  <div class="card" style="padding:12px"><div class="xs">Load · wk</div><div class="num" style="margin-top:6px">248</div><div class="xs" style="margin-top:4px">of 410 NTS</div></div>
+  <div class="card" style="padding:12px"><div class="xs">Stress</div><div class="num" style="margin-top:6px">103<span style="font-size:12px"> /97</span></div><div class="xs" style="margin-top:4px">Low</div></div>
+  ${(()=>{const j=lastDone();return j<0?'':`<button class="card" style="padding:12px" onclick="go('analysis',0,${j})"><div class="xs">Last session</div><div class="num" style="margin-top:6px">${S.week[j].trainx}</div><div class="xs" style="margin-top:4px">TrainX · ${DAYN[j].slice(0,3)}</div></button>`})()}</div>
+ <p class="xs" style="margin-top:8px">Sample data. Load, stress and readiness formulas come from the current apps.</p>`}
+
 /* Today */
 SCREENS.today=()=>{const i=S.dayIdx,s=S.week[i],isT=i===3;
  const wk=S.week.map((x,j)=>`<button class="${j===i?'on':''}" onclick="S.dayIdx=${j};render('fade')">${WEEKDAYS[j]}<b>${DATES[j]}</b><div class="dots">${x?`<s class="${x.done?'d':'o'}"></s>`:'<s style="background:#333"></s>'}</div></button>`).join('');
@@ -582,11 +609,11 @@ SCREENS.today=()=>{const i=S.dayIdx,s=S.week[i],isT=i===3;
  const rx=S.races.find(r=>r.p==='A');
  return `<div class="scr"><div class="hd"><div><div class="xs">${DAYF[i]}, Oct ${DATES[i]}</div><div class="h2" style="font-size:20px;margin-top:3px">Morning, ${S.name}</div></div><div style="display:flex;gap:8px;align-items:center"><button class="pill" onclick="go('badges')" style="color:var(--gd);border-color:rgba(201,161,92,.4)">${ic('flame','width:13px;height:13px')}${S.streak} wks</button>${xb()}</div></div>
  ${hero}
+ <div class="lbl" style="margin:20px 0 10px">Your numbers</div>
+ <div class="g3 scs">${scoreTile('dot')}${scoreTile('tx')}${scoreTile('rd')}</div>
+ ${S.dataMode?dataPanel():`<button class="xs" style="margin-top:10px;display:flex;gap:6px;align-items:center;color:var(--mute)" onclick="setData(true)">${ic('arr','width:12px;height:12px')}Show full data</button>`}
  <div class="lbl" style="margin:20px 0 10px">This week</div><div class="wk">${wk}</div>
- <div class="g3" style="margin-top:16px">
-  <button class="card" style="padding:12px" onclick="go('races')"><div class="xs">${rx?rx.name.replace('Triathlon','Tri').replace('Marathon',''):'No A race'}</div><div class="num" style="margin-top:6px">66<span style="font-size:12px"> d</span></div><div class="xs" style="margin-top:4px">to go</div></button>
-  <button class="card" style="padding:12px" onclick="go('progress','tab')"><div class="xs">Run Dot</div><div class="num" style="margin-top:6px">82</div><div class="xs gold" style="margin-top:4px">Competitive</div></button>
-  <button class="card" style="padding:12px" onclick="go('progress','tab')"><div class="xs">TrainX wk</div><div class="num" style="margin-top:6px">86</div><div class="xs" style="margin-top:4px">Very good</div></button></div>
+ <button class="list-row" style="margin-top:14px" onclick="go('races')"><span><span class="xs">A race · ${rx?rx.mo+' '+rx.dd:''}</span><br>${rx?rx.name:'Add a goal race'}</span><span class="r"><b class="num" style="font-size:16px;color:var(--iv)">66</b>&nbsp;days ${ic('arr')}</span></button>
  </div>`};
 
 SCREENS.workout=i=>{const s=S.week[i];return `<div class="scr">${hdr(`${DAYN[i]}, Oct ${DATES[i]}`)}
@@ -754,7 +781,7 @@ SCREENS.club=()=>{const tab=S.clubTab;
  <div class="seg" style="margin-top:14px">${['activity','milestones','badges','friends'].map(t=>`<button class="${tab===t?'on':''}" onclick="S.clubTab='${t}';render('fade')">${t}</button>`).join('')}</div>${body}</div>`};
 
 /* You */
-SCREENS.you=()=>`<div class="scr"><div class="hd"><div class="h2" style="font-size:22px">You</div><button class="pill" onclick="toast('Settings')">Settings</button></div>
+SCREENS.you=()=>`<div class="scr"><div class="hd"><div class="h2" style="font-size:22px">You</div><button class="pill" onclick="settingsSheet()">Settings</button></div>
  <div class="row" style="margin-bottom:18px"><div style="display:flex;gap:14px;align-items:center"><div class="av" style="width:58px;height:58px;font-size:18px;background:var(--gd);color:#101110">AK</div><div><div class="h2">${S.name} K.</div><div class="xs" style="margin-top:3px">${sp().label} · Member since 2021</div></div></div></div>
  <button class="card" style="width:100%;text-align:left" onclick="go('badges')"><div class="row"><span class="h2" style="font-size:15px">Level ${S.level} · Builder</span><span class="xs gold">${S.xp.toLocaleString()} XP</span></div><div class="prog" style="margin:12px 0 6px"><i style="width:${(S.xp-3000)/1000*100}%"></i></div><div class="xs">${4000-S.xp} XP to Level 8</div></button>
  <div style="margin-top:10px">
