@@ -265,6 +265,34 @@ input{font:inherit;color:inherit}
  .tabs{height:calc(64px + env(safe-area-inset-bottom))}
  .guide .close{display:block!important}
 }
+
+.tabs button.aitab{position:relative}
+.tabs .orb{width:48px;height:48px;margin-top:-22px;background:var(--gd);color:#101110;display:grid;place-items:center;border:4px solid var(--bk);box-shadow:0 0 0 1px rgba(201,161,92,.45)}
+.tabs .orb svg{width:22px;height:22px;color:#101110!important}
+.tabs button.aitab.on{color:var(--gd)}
+.youbtn{width:34px;height:34px;border-radius:50%;background:var(--gd);color:#101110;font-size:11.5px;font-weight:700;display:grid;place-items:center;flex:none}
+.aitag{font-size:9px;font-weight:700;letter-spacing:.12em;padding:2px 5px;border:1px solid rgba(201,161,92,.6);color:var(--gd);line-height:1.2}
+.aio{width:28px;height:28px;background:var(--gd);color:#101110;display:grid;place-items:center;flex:none}
+.aio svg{width:15px;height:15px}
+.askbar{display:flex;gap:10px;align-items:center;width:100%;margin-top:10px;padding:8px 12px 8px 8px;border:1px solid rgba(201,161,92,.45);background:linear-gradient(90deg,rgba(201,161,92,.10),rgba(201,161,92,0) 70%),var(--ch);text-align:left}
+.askbar .ph{flex:1;font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aicard{margin-top:16px;padding:14px;border:1px solid rgba(201,161,92,.35);background:var(--ch)}
+.aichip{display:flex;gap:10px;align-items:center;width:100%;margin-top:12px;padding:8px 12px 8px 8px;border:1px solid var(--ln);background:var(--ch);font-size:13px;color:var(--iv);text-align:left}
+.aiorb{width:64px;height:64px;margin:0 auto;background:var(--gd);color:#101110;display:grid;place-items:center;box-shadow:0 0 0 8px rgba(201,161,92,.12)}
+.aiorb svg{width:30px;height:30px}
+.aicats{gap:8px;margin-bottom:14px}
+.aicats button{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:12px;border:1px solid var(--ln);background:var(--ch);font-size:12.5px;color:var(--iv);text-align:left}
+.aicats svg{width:18px;height:18px;color:var(--gd)}
+.synced{display:inline-flex;gap:4px;align-items:center;color:var(--gd);font-size:inherit}
+.migr{border-top:1px solid var(--ln)}
+.mrow{display:grid;grid-template-columns:30px 1fr 20px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln);opacity:0;animation:mrow .4s ease forwards}
+.mrow b{font-size:13.5px}
+.mrow .mi svg{width:18px;height:18px;color:var(--mute)}
+.mrow .mc svg{width:16px;height:16px;color:var(--gd)}
+@keyframes mrow{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.devic{width:36px;height:36px;border:1px solid var(--ln);display:grid;place-items:center;color:var(--gd)}
+.devic svg{width:18px;height:18px}
+.btn svg{flex:none}
 </style>
 </head>
 <body>
@@ -291,7 +319,10 @@ input{font:inherit;color:inherit}
  <symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4h10l-1 3h5v8h-9l1-3H5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
  <symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
  <symbol id="search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></g></symbol>
- <symbol id="drag" viewBox="0 0 16 16"><g fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></g></symbol>
+ <symbol id="drag" viewBox="0 0 16 16"><g fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></g></symbol><symbol id="spark" viewBox="0 0 24 24"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z" fill="currentColor"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" fill="currentColor"/></symbol>
+<symbol id="dumbbell" viewBox="0 0 24 24"><path d="M3 9v6M6 6.5v11M18 6.5v11M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+<symbol id="sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-14.3 4.9M4 12A8 8 0 0118.3 7.1M18.5 3v4.3h-4.3M5.5 21v-4.3h4.3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+
 <symbol id="send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></g></symbol>
 <symbol id="pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></g></symbol>
 <symbol id="skip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l10 7-10 7zM19 5v14"/></g></symbol>
@@ -327,9 +358,9 @@ input{font:inherit;color:inherit}
     <nav class="tabs" id="tabs">
      <button data-tab="today"><svg><use href="#home"/></svg>Today</button>
      <button data-tab="plan"><svg><use href="#cal"/></svg>Plan</button>
+     <button data-tab="assistant" class="aitab"><span class="orb"><svg><use href="#spark"/></svg></span>Ask AI</button>
      <button data-tab="progress"><svg><use href="#prog"/></svg>Progress</button>
      <button data-tab="club"><svg><use href="#club"/></svg>Club</button>
-     <button data-tab="you"><svg><use href="#me"/></svg>You</button>
     </nav>
     <div class="scrim" id="scrim" onclick="closeSheet()"></div>
     <div class="sheet" id="sheet"></div>
@@ -492,7 +523,7 @@ let tt;function toast(m){const t=$('#toast');t.querySelector('span').textContent
 function toggleGuide(o){$('#guide').classList.toggle('open',o)}
 function resetAll(){if(live)stopLive();S=fresh();stack=[];closeSheet();cur={id:'welcome'};render('fade');toggleGuide(false);toast('Prototype reset')}
 const hdr=(title,right='')=>`<div class="hd"><button class="back" onclick="back()">‹</button><span class="t">${title}</span>${right||'<span style="width:34px"></span>'}</div>`;
-const xb=()=>`<button class="xbtn" onclick="go('assistant')" aria-label="Assistant">${ic('emblem')}</button>`;
+let xb=()=>`<button class="xbtn" onclick="go('assistant')" aria-label="Assistant">${ic('emblem')}</button>`;
 const sp=()=>SPORT[S.sport];
 const todaySess=()=>S.week[3];
 function fmtPace(s){s=Math.round(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
@@ -1056,6 +1087,189 @@ Object.assign(NOTES,{
 NOTES.welcome[3]+=' <b>Get started</b> now asks for your goal first.';
 FLOWS.splice(1,0,['02','First 5K · beginner path','bgoal']);FLOWS.forEach((f,k)=>f[0]=String(k+1).padStart(2,'0'));
 $('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
+
+/* ---------- v5 additions: AI front and center, switch welcome, swim/bike/strength, devices, race prediction ---------- */
+const AVB=()=>`<button class="youbtn" onclick="go('you')" aria-label="You">AK</button>`;
+xb=AVB;
+TABBED.assistant='assistant';TABBED.devices='you';TABBED.strength='today';
+
+/* founder badge resets with the prototype */
+const _fresh5=fresh;fresh=function(sp){BADGES[8].e=false;const s=_fresh5(sp);s.synced='2 min ago';s.devs={garmin:true,apple:false,coros:false,fitbit:false,strava:true};s.autoSend=true;s.bikeMode='out';s.strDone=false;return s};
+S=fresh();
+
+/* ---------- detailed swim, bike and strength sessions ---------- */
+function swimW(id,name,type,min,stress,yd,rows,why,extra={}){
+ const steps=rows.map(r=>({n:r[0],s:r[1],d:r[4]*60,z:r[3],t:r[2]}));
+ return Object.assign({id,d:'swim',name,type,min,stress,nts:stress==='Low'?30:52,dist:yd,why,steps,
+  display:rows.map(r=>({n:r[0],s:r[1],t:r[2],u:r[2]==='By feel'?'':'/100y',z:r[3]})),unit:'/100y',trainx:88,xp:Math.round(min*0.6),pool:'25 yd pool'},extra)}
+function bikeW(id,name,type,min,stress,rows,why,extra={}){
+ const steps=rows.map(r=>({n:r[0],s:r[1],d:r[4]*60,z:r[3],t:r[2]}));
+ return Object.assign({id,d:'bike',name,type,min,stress,nts:stress==='Low'?30:stress==='Moderate'?58:72,why,steps,
+  display:rows.map(r=>({n:r[0],s:r[1],t:r[2],u:'W',z:r[3]})),unit:'W',trainx:88,xp:Math.round(min*0.6)},extra)}
+const STRENGTH={name:"Runner's Strength A",min:20,
+ why:'Short, bodyweight strength that supports your hips, calves and core. It sits on an easy day so it never steals from key sessions.',
+ ex:[['Glute bridge','2 × 12','step-work-m'],['Split squat','2 × 10 each leg','running-m'],['Single-leg calf raise','2 × 12 each leg','detail-lace-m'],['Side plank','2 × 30 sec each side','recovery-m'],['Dead bug','2 × 10 each side','step-goal-m']]};
+const _triWeek=SPORT.tri.week;
+SPORT.tri.week=()=>{const w=_triWeek();
+ w[0]=swimW('mon','Broken Ladders','Ladders',60,'Moderate','2,600 yd',[
+  ['Warm up','300 easy, 4 × 50 drill','2:05',2,8],['Ladder','100 · 200 · 300 · 200 · 100, 20 sec rest','1:50–1:54',3,18],
+  ['Ladder, faster','100 · 200 · 300 · 200 · 100, 20 sec rest','1:47–1:50',4,18],['Cool down','200 easy','By feel',1,6]],
+  'Ladders build the rhythm to hold pace as the distance changes. The second round is quicker, so you finish strong.',{done:true,trainx:88});
+ w[1]=bikeW('tue','Threshold & Holds','Threshold',60,'Moderate',[
+  ['Warm up','15 min building, 3 × 30 sec high cadence','120–145',2,15],['Threshold','3 × 10 min, 3 min easy between','172–181',4,39],['Cool down','6 min easy','110–125',1,6]],
+  'Threshold holds raise the power you can sustain, the base of a strong bike split.',{done:true,trainx:90});
+ w[4]=swimW('fri','Technique','Technique',45,'Low','2,000 yd',[
+  ['Warm up','300 easy','2:05',2,7],['Drill set','6 × 50 catch-up and fist drill, 15 sec rest','By feel',2,8],
+  ['Main set','8 × 100 steady, 15 sec rest','1:52–1:56',3,18],['Pull','4 × 100 with buoy, 15 sec rest','2:00–2:05',2,8],['Cool down','200 easy','By feel',1,4]],
+  'Technique and rhythm work so your swim gets faster without getting harder.');
+ w[5]=bikeW('sat','Long Ride','Aerobic endurance',150,'Moderate',[
+  ['Warm up','15 min easy','110–125',2,15],['Aerobic','60 min steady','125–140',2,60],['Race effort','3 × 8 min, 4 min easy between','140–148',3,36],
+  ['Aerobic','29 min steady','125–140',2,29],['Cool down','10 min easy','110–120',1,10]],
+  'Long aerobic time builds your engine. The race-effort blocks rehearse your half-distance power, about 77 to 82% of threshold.',{long:true});
+ w[4].extra='str';return w};
+const _runWeek=SPORT.run.week;SPORT.run.week=()=>{const w=_runWeek();w[4].extra='str';return w};
+S=fresh();
+
+/* swim and bike workout screens */
+const _wk5=SCREENS.workout;
+SCREENS.workout=i=>{const s=S.week[i];if(!s||s.d==='run')return _wk5(i);
+ const sw=s.d==='swim',out=S.bikeMode==='out';
+ const total=sw?`<div class="g3" style="margin-top:14px"><div class="card" style="padding:12px"><div class="num">${s.dist.replace(' yd','')}</div><div class="xs" style="margin-top:4px">yards</div></div><div class="card" style="padding:12px"><div class="num">~${s.min}</div><div class="xs" style="margin-top:4px">minutes</div></div><div class="card" style="padding:12px"><div class="num">1:45</div><div class="xs" style="margin-top:4px">your threshold /100y</div></div></div>`
+  :`<div class="seg" style="margin-top:14px"><button class="${out?'on':''}" onclick="S.bikeMode='out';render('fade')">Outdoor</button><button class="${out?'':'on'}" onclick="S.bikeMode='in';render('fade')">Indoor</button></div>
+   <div class="pill" style="white-space:normal">${out?`${ic('sun','width:14px;height:14px;color:var(--gd)')}88°F, humid · targets adjusted by EnviroNorm®`:`${ic('bike','width:14px;height:14px;color:var(--gd)')}Indoor trainer · same watts, no weather adjustment`}</div>`;
+ return `<div class="scr">${hdr(`${DAYN[i]}, Oct ${DATES[i]}`)}
+ <span class="disc">${ic(DISC_IC[s.d])}${sw?'Swim':'Bike'} · ${s.type}</span>
+ <div class="h1" style="margin:10px 0 6px">${s.name}</div><div class="sm">${sw?`${s.dist} · ${s.pool} · targets in pace per 100 yd`:`${minTxt(s.min)} · targets in watts · threshold 181 W`}</div>
+ ${total}
+ ${zoneBars(s.steps)}
+ <div style="margin-top:10px">${s.display.map(x=>`<div class="step"><i class="z" style="background:${ZC[x.z]}"></i><div><b>${x.n}</b><span class="xs">${x.s}</span></div><div class="t">${x.t}<br><span class="xs">${x.u}</span></div></div>`).join('')}</div>
+ <div class="why"><div class="lbl">Why this session</div><div class="sm" style="color:var(--iv)">${s.why}</div></div>
+ ${aiChip(sw?'swimq':'bikeq',sw?'Ask: how do I do catch-up drill?':'Ask: what should I eat on this ride?')}
+ <div class="foot">${s.done?`<button class="btn s" onclick="go('analysis',0,${i})">See analysis</button>`:`<div class="g2"><button class="btn p" onclick="toast('Sent to your ${sw?'watch':'watch or bike computer'}')">${ic('watch')}Send to ${sw?'watch':'device'}</button><button class="btn s" onclick="logSheet(${i})">${ic('check')}Log it</button></div>`}</div></div>`};
+function logSheet(i){const s=S.week[i];openSheet(`<div class="h2" style="margin-bottom:8px">Log ${s.name}</div><p class="sm" style="margin-bottom:16px">${s.d==='swim'?'Swims usually record on your watch and sync back on their own.':'Rides usually record on your watch or bike computer and sync back on their own.'} You can also log it by hand.</p><button class="btn p" onclick="closeSheet();const s=S.week[${i}];s.done=true;S.xp+=s.xp;go('complete','up',${i})">Mark as done</button><p class="xs" style="margin-top:12px;text-align:center">Prototype · sample result</p>`)}
+
+/* strength */
+SCREENS.strength=()=>`<div class="scr">${hdr(`${DAYN[4]}, Oct ${DATES[4]}`)}
+ <span class="disc">${ic('dumbbell')}Strength · Bodyweight</span>
+ <div class="h1" style="margin:10px 0 6px">${STRENGTH.name}</div><div class="sm">${STRENGTH.min} min · no equipment · after your easy session</div>
+ <div style="margin-top:16px">${STRENGTH.ex.map((e,k)=>`<button class="step" style="width:100%;text-align:left;grid-template-columns:64px 1fr auto" onclick="openSheet('<div class=&quot;h2&quot;>${e[0]}</div><p class=&quot;sm&quot; style=&quot;margin:8px 0 14px&quot;>${e[1]}. Exercise video plays here, with form cues.</p><div class=&quot;photo gh&quot; style=&quot;height:180px;background-image:url(${IMG}${e[2]}.jpg)&quot;></div>')"><div class="photo gh" style="width:64px;height:48px;background-image:url(${IMG}${e[2]}.jpg);display:grid;place-items:center">${ic('play','width:16px;height:16px;color:var(--iv)')}</div><div><b>${e[0]}</b><span class="xs">${e[1]}</span></div><span class="xs">${k+1}/${STRENGTH.ex.length}</span></button>`).join('')}</div>
+ <div class="why"><div class="lbl">Why strength</div><div class="sm" style="color:var(--iv)">${STRENGTH.why}</div></div>
+ <div class="foot">${S.strDone?`<div class="row" style="border:1px solid rgba(201,161,92,.5);padding:12px 14px"><span style="display:flex;gap:8px;align-items:center;font-size:13px">${ic('check','width:16px;height:16px;color:var(--gd)')}Done · counts toward your streak</span><span class="xs gold">+12 XP</span></div>`:`<button class="btn p" onclick="S.strDone=true;S.xp+=12;render('fade');toast('Strength done. +12 XP')">${ic('check')}Mark as done</button>`}</div></div>`;
+const strCard=()=>`<button class="card" style="width:100%;text-align:left;margin-top:10px;display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center" onclick="go('strength')"><div class="ico" style="width:38px;height:38px;border:1px solid var(--ln);display:grid;place-items:center;color:var(--gd)">${ic('dumbbell','width:20px;height:20px')}</div><div><div class="xs">Also today · Strength</div><b style="font-size:14px">${STRENGTH.name} · ${STRENGTH.min} min</b></div>${S.strDone?ic('check','width:16px;height:16px;color:var(--gd)'):ic('arr','width:14px;height:14px')}</button>`;
+
+/* ---------- AI everywhere ---------- */
+const aiChip=(k,q)=>`<button class="aichip" onclick="askFrom('${k}')"><span class="aio">${ic('spark')}</span>${q}</button>`;
+function askFrom(k){go('assistant','push');setTimeout(()=>ask(k),350)}
+const insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if(!lr||lr.done)return '';
+ return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
+ <div class="sm" style="color:var(--iv)">${t?"Saturday's long ride is 2.5 hours in the heat. Want a fueling plan for it?":"Saturday's long run is 95 minutes. Want a fueling plan for it?"}</div>
+ <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('fuel')">Yes, plan it</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Ask something else</button></div></div>`};
+const askBar=(ph)=>`<button class="askbar" onclick="go('assistant')"><span class="aio">${ic('spark')}</span><span class="ph">${ph||'Ask anything: plan, recovery, fueling, sleep…'}</span><span class="aitag">AI</span></button>`;
+
+const QA_EXTRA={
+ tired:{q:'My legs feel heavy. Should I still train today?',a:"Your last two sessions were on target and this week's training stress is normal, so it's most likely everyday fatigue. Do the warm-up, then decide. If the first rep feels much harder than usual, swap today for 30 easy minutes and I'll rebalance the week.<div class=\"xs\" style=\"margin-top:8px\">If you have pain or feel unwell, rest and check with a doctor.</div>"},
+ sleep:{q:'I only slept 5 hours. Should I change today?',a:"One short night won't undo your fitness. Keep today's session, but stop at 3 reps if your heart rate runs high early. If it's two or more short nights in a row, tell me and I'll ease the week."},
+ race:{q:'How should I pace race day?',a:null},
+ swimq:{q:'How do I do catch-up drill?',a:"Swim freestyle, but leave one hand out front until the other hand arrives to \"catch up\" with it. It slows your stroke down so you can feel a long reach and a full pull. Keep it easy, and focus on reaching forward rather than going fast.<div class=\"xs\" style=\"margin-top:8px\">The full app would link the drill video here.</div>"},
+ bikeq:{q:'What should I eat on this ride?',a:null},
+ bpace:{q:'How slow is easy pace?',a:"Slow enough to talk in full sentences. If you can't, walk until you can. Slow is the point right now. It's how you build up without getting hurt."},
+ bsore:{q:'My shins are sore. What should I do?',a:"Mild soreness is common in the first few weeks. Keep the walk breaks, stay at easy pace, and tap <b>Too hard</b> after a run so I can ease the plan.<div class=\"xs\" style=\"margin-top:8px\">Sharp pain, or pain that gets worse while running, is a reason to stop and see a doctor.</div>"},
+ bmiss:{q:'I missed my run yesterday. Now what?',a:"No problem. Just do today's run. Your plan slides back instead of stacking runs up, so you're still on track."}};
+QA.fuel={q:"What should I eat for Saturday's long session?",a:null};
+Object.assign(QA,QA_EXTRA);
+const FUEL=()=>{const t=S.sport==='tri';return `For your ${t?'2.5-hour ride':'95-minute run'}:<br><br><b>Before:</b> a carb-focused meal 2 to 3 hours out, and a drink with it.<br><b>During:</b> ${t?'start fueling in the first 30 minutes, then take in carbs regularly, every 20 to 30 minutes':'take a gel or chews around 40 minutes and again around 70'}. It's 88°F, so drink more than usual and add electrolytes.<br><b>After:</b> carbs and protein within an hour.<br><br>Use this ${t?'ride':'run'} to practice what you'll use on race day.`};
+const RACEA=()=>S.sport==='tri'?`Your RaceX plan predicts <b>5:41:20</b>.<br><br><b>Swim:</b> steady, not hard. Settle in by the first buoy.<br><b>Bike:</b> 139 to 148 W, about 77 to 82% of threshold, so you can still run.<br><b>Run:</b> the first 2 miles a little slower than goal pace, then settle in.<br><br>Want me to open the full race plan?<div style="margin-top:10px"><button class="btn s" style="height:36px;font-size:12px" onclick="go('racex')">Open race plan</button></div>`
+ :`Your prediction is <b>1:44:30</b>, about 7:58 per mile.<br><br>Run the first 2 miles 5 to 10 seconds slower than that, settle in through the middle, and save anything extra for the last 5K.`;
+const _ask5=ask;ask=function(k){if(k==='fuel'||k==='bikeq'){pushChat(k,QA[k].q,FUEL());return}if(k==='race'){pushChat(k,QA.race.q,RACEA());return}_ask5(k)};
+askFree=function(){const q=$('#q');if(!q||!q.value.trim())return;pushChat('free'+Date.now(),q.value.trim(),"In the full app I can answer anything about your training, recovery, fueling and health, using your plan, workouts and Dot Scores. In this prototype, try one of the suggested questions.")};
+
+const CATS=()=>S.mode==='b5k'?[['run','Easy pace','bpace'],['flame','Soreness','bsore'],['cal','Missed a run','bmiss']]
+ :[['cal','My plan','move'],['run','Workouts','why'],['flame','Recovery','tired'],['sun','Fueling','fuel'],['rest','Sleep','sleep'],['flag','Race day','race']];
+const CHIPKEYS=()=>S.mode==='b5k'?['bpace','bsore','bmiss']:['move','why','cmp','best','tired','fuel','sleep','race'];
+SCREENS.assistant=()=>{const used=S.chat.map(c=>c.k);const tabbed=!stack.length;
+ return `<div class="scr" id="chat" style="display:flex;flex-direction:column;padding-bottom:0">
+ <div class="hd">${tabbed?'<span style="width:34px"></span>':'<button class="back" onclick="back()">‹</button>'}<span class="t" style="display:flex;gap:8px;align-items:center">Assistant <span class="aitag">AI</span></span>${AVB()}</div>
+ <div style="flex:1">${S.chat.length?'':`<div style="text-align:center;padding:14px 6px 16px"><div class="aiorb">${ic('spark')}</div><div class="h2" style="margin:14px 0 6px">Ask me anything</div><p class="xs" style="max-width:270px;margin:0 auto">Your plan, workouts, recovery, fueling, sleep and race day. I answer from your plan, your sessions and your Dot Scores.</p></div>
+ <div class="g3 aicats">${CATS().map(c=>`<button onclick="ask('${c[2]}')">${ic(c[0])}<span>${c[1]}</span></button>`).join('')}</div>`}
+ <div id="msgs">${S.chat.map(c=>`<div class="bub me">${c.q}</div><div class="bub ai">${c.a}</div>`).join('')}</div></div>
+ <div style="position:sticky;bottom:0;background:var(--bk);padding:10px 0 12px"><div class="chips" style="margin-bottom:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none">${CHIPKEYS().filter(k=>!used.includes(k)).map(k=>`<button style="white-space:nowrap" onclick="ask('${k}')">${QA[k].q}</button>`).join('')}</div>
+ <div class="inbar"><button onclick="toast('Voice questions work in the full app')" aria-label="Speak" style="color:var(--mute);background:none">${ic('mic')}</button><input id="q" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')askFree()"><button onclick="askFree()">${ic('send')}</button></div>
+ <p class="xs" style="text-align:center;margin-top:8px;font-size:10px">AI answers can be wrong. Not medical advice.</p></div></div>`};
+const _push5=pushChat;pushChat=function(k,q,a){const c=document.querySelector('.aicats');if(c){c.remove();const h=document.querySelector('#chat .aiorb');if(h)h.parentNode.remove()}_push5(k,q,a)};
+
+/* ---------- Today, Plan and others: inject new pieces ---------- */
+const _today5=SCREENS.today;
+SCREENS.today=a=>{let h=_today5(a);
+ if(S.mode==='b5k'){h=h.replace(/(<div class="lbl" style="margin:20px 0 10px">Your wins)/,askBar('Ask anything: easy pace, soreness, shoes…')+'$1');
+  return h.replace(/(<\/div><button class="pill" onclick="go\('progress','tab'\)")/,'</div><div style="display:flex;gap:8px;align-items:center"><button class="pill" onclick="go(\'progress\',\'tab\')"').replace(/(Day 1|\d+ runs?)<\/button><\/div>/,'$1</button>'+AVB()+'</div></div>')}
+ const s=S.week[S.dayIdx];
+ const extra=s&&s.extra==='str'?strCard():'';
+ h=h.replace('<div class="lbl" style="margin:20px 0 10px">Your numbers</div>',extra+askBar()+'<div class="lbl" style="margin:20px 0 10px">Your numbers</div>');
+ h=h.replace(/(<div class="lbl" style="margin:20px 0 10px">This week<\/div>)/,insight()+'$1');
+ h=h.replace(/<div class="xs">(\w+day, Oct \d+)<\/div>/,`<div class="xs">$1 · <button class="synced" onclick="go('devices')">${ic('check','width:10px;height:10px')}Synced ${S.synced}</button></div>`);
+ h=h.replace(/(<span class="xs">A race · [^<]*)<\/span>/,`$1 · Predicted ${sp().pred}</span>`);
+ return h};
+const _plan5=SCREENS.plan;
+SCREENS.plan=a=>{let h=_plan5(a);if(S.mode==='b5k')return h;
+ h=h.replace(/(<button class="sess [^"]*" onclick="[^"]*"><div class="ico">.*?<span class="xs">Fri · .*?<\/button>)/,`$1<button class="sess" onclick="go('strength')"><div class="ico">${ic('dumbbell')}</div><div style="text-align:left"><span class="xs">Fri · Strength · add-on</span><b>${STRENGTH.name} · ${STRENGTH.min}m</b></div><span class="str ${S.strDone?'done':''}">${S.strDone?'✓ Done':'Low'}</span></button>`);
+ return h};
+const _club5=SCREENS.club;SCREENS.club=a=>{const h=_club5(a);return h.includes('youbtn')?h:h.replace(/(<div class="hd">[\s\S]*?)(<\/div>)/,`$1${AVB()}$2`)};
+
+/* race prediction */
+function predSheet(){const t=S.sport==='tri';openSheet(`<div class="lbl gold" style="margin-bottom:6px">Race prediction</div><div class="h2" style="margin-bottom:10px">${sp().pred}</div><p class="sm" style="margin-bottom:12px">Built from your current Dot Scores, your recent training and the race course. It updates after each assessment, so you can watch it move as you get fitter.</p>${t?`<div class="tbl" style="display:grid;grid-template-columns:1fr auto;gap:8px;font-size:13px"><span>Swim</span><b>0:38:50</b><span>Bike</span><b>2:58:30</b><span>Run</span><b>1:56:40</b><span class="xs">Transitions</span><b class="xs">0:07:20</b></div>`:''}<p class="xs" style="margin-top:12px">Sample numbers. In the apps today: race prediction and RaceX® pacing.</p><button class="btn s" style="margin-top:14px" onclick="closeSheet();go('racex')">Open race plan</button>`)}
+const _races5=SCREENS.races;SCREENS.races=a=>_races5(a).replace(/<div class="card" style="padding:12px"><div class="num">([^<]*)<\/div><div class="xs" style="margin-top:4px">predicted<\/div><\/div>/,`<button class="card" style="padding:12px;text-align:left;border-color:rgba(201,161,92,.5)" onclick="predSheet()"><div class="num gold">$1</div><div class="xs" style="margin-top:4px">predicted ›</div></button>`);
+
+/* ---------- devices ---------- */
+const DEVS=[['garmin','Garmin Connect','Watch · workouts sync both ways'],['apple','Apple Watch','Watch · workouts sync both ways'],['coros','COROS','Watch · workouts sync both ways'],['fitbit','Fitbit','Watch · activities sync in'],['strava','Strava','Activities sync in']];
+SCREENS.devices=()=>`<div class="scr">${hdr('Watch and apps')}
+ <div class="card" style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center"><div><div class="xs">Last sync</div><div class="h2" style="font-size:16px;margin-top:4px" id="synct">${S.synced==='now'?'Just now':S.synced}</div></div><button class="btn s" style="height:38px;padding:0 16px;width:auto" onclick="syncNow()">${ic('sync')}Sync now</button></div>
+ <div class="lbl" style="margin:20px 0 6px">Connected</div>
+ ${DEVS.map(d=>`<button class="tog" onclick="S.devs.${d[0]}=!S.devs.${d[0]};render('fade');toast(S.devs.${d[0]}?'${d[1]} connected (sample)':'${d[1]} disconnected')"><span style="display:flex;gap:12px;align-items:center;text-align:left"><span class="devic">${ic(d[0]==='strava'?'run':'watch')}</span><span><b style="font-size:14px">${d[1]}</b><br><span class="xs">${S.devs[d[0]]?d[2]:'Not connected'}</span></span></span><span class="xs ${S.devs[d[0]]?'gold':''}" style="letter-spacing:.1em;text-transform:uppercase;font-weight:600">${S.devs[d[0]]?'Connected':'Connect'}</span></button>`).join('')}
+ <div class="lbl" style="margin:22px 0 6px">Settings</div>
+ <button class="tog" onclick="S.autoSend=!S.autoSend;render('fade')"><span style="text-align:left"><b style="font-size:14px">Send workouts to my watch</b><br><span class="xs">Next 7 days, automatically</span></span><span class="sw ${S.autoSend?'on':''}"><i></i></span></button>
+ <button class="list-row" style="margin-top:6px" onclick="openSheet('<div class=&quot;h2&quot; style=&quot;margin-bottom:8px&quot;>Workout missing?</div><p class=&quot;sm&quot;>1. Open your watch app and make sure the activity finished syncing there.<br>2. Tap Sync now.<br>3. Still missing? Log it by hand from the workout and it still counts.</p>')"><span>Workout missing?</span>${ic('arr')}</button>
+ <p class="xs" style="margin-top:14px">Device list matches what RunDot and TriDot list in the App Store today. Prototype: nothing is really connected.</p></div>`;
+function syncNow(){const t=$('#synct');if(t)t.textContent='Syncing…';setTimeout(()=>{S.synced='now';const t2=$('#synct');if(t2)t2.textContent='Just now';toast('Synced. Everything is up to date.')},1100)}
+const _you5=SCREENS.you;SCREENS.you=a=>_you5(a).replace(/<button class="list-row" onclick="openSheet\('<div class=&quot;h2&quot; style=&quot;margin-bottom:8px&quot;>Watch and apps[\s\S]*?<\/button>/,`<button class="list-row" onclick="go('devices')"><span>Watch and apps</span><span class="r">${Object.values(S.devs).filter(Boolean).length} connected ${ic('arr')}</span></button>`).replace('<button class="list-row" onclick="stack=[]',`<button class="list-row" onclick="go('switch','up')"><span>Replay the XDOT welcome</span><span class="r">${ic('arr')}</span></button><button class="list-row" onclick="stack=[]`);
+
+/* ---------- welcome to XDOT for current athletes ---------- */
+loginSheet=function(){openSheet(`<div class="h2" style="margin-bottom:8px">Welcome back</div><p class="sm" style="margin-bottom:16px">Log in with the same email and password you use for TriDot or RunDot today.</p>
+ <div class="inbar" style="margin-bottom:8px"><input value="alex@example.com" aria-label="Email"></div><div class="inbar" style="margin-bottom:16px"><input type="password" value="password" aria-label="Password"></div>
+ <button class="btn p" onclick="closeSheet();S=fresh('tri');stack=[];go('switch','up')">Log in</button>
+ <p class="xs" style="margin-top:12px;text-align:center">Prototype · any details work</p>`)};
+SCREENS.switch=()=>{const L=[['cal','Your plan','Lakeside Half Triathlon · Week 9 of 18'],['prog','Your training history','Every session since 2021'],['trophy','Your Dot Scores','Swim 68 · Bike 51 · Run 82'],['flag','Your races','3 on your calendar'],['star','XP and badges','Level 7 · 3,240 XP'],['watch','Your watch','Garmin and Strava still connected'],['me','Your login','Same email and password']];
+ return `<div class="scr np"><div style="position:absolute;inset:0 0 auto 0;height:300px" class="photo gh grain"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,17,16,.2),#101110),url(${IMG}hero-m.jpg) center 30%/cover"></div></div>
+ <div style="position:relative;padding:70px 22px 30px">
+ <svg style="width:50px;height:34px;color:var(--iv)"><use href="#emblem"/></svg>
+ <div class="lbl gold" style="margin:16px 0 8px">TriDot is now XDOT</div>
+ <div class="wide" style="font-size:30px;line-height:.98">Welcome to XDOT,<br><span class="gold">${S.name}.</span></div>
+ <p class="sm" style="margin:12px 0 18px;color:var(--iv)">Everything came with you. Nothing to set up again.</p>
+ <div class="migr">${L.map((x,k)=>`<div class="mrow" style="animation-delay:${.25+k*.18}s"><span class="mi">${ic(x[0])}</span><div><b>${x[1]}</b><div class="xs">${x[2]}</div></div><span class="mc">${ic('check')}</span></div>`).join('')}</div>
+ <div class="card badge-pop" style="display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;margin-top:16px;border-color:rgba(201,161,92,.5);animation-delay:1.7s;opacity:0;animation-fill-mode:forwards"><div class="bdg" style="padding:0"><div class="rg" style="width:52px;height:52px"><svg style="width:26px;height:18px"><use href="#emblem"/></svg></div></div><div style="text-align:left"><div class="lbl gold">Badge unlocked</div><b style="font-size:14px">XDOT founder</b><div class="xs">For athletes who made the move.</div></div></div>
+ <div class="lbl" style="margin:22px 0 8px">What's new</div>
+ <div class="xs" style="line-height:1.7;color:var(--mute)">${ic('spark','width:11px;height:11px;color:var(--gd)')} Ask AI from every screen<br>${ic('share','width:11px;height:11px;color:var(--gd)')} Share graphics after every session<br>${ic('flag','width:11px;height:11px;color:var(--gd)')} One race calendar for running and triathlon</div>
+ <button class="btn p" style="margin-top:20px" onclick="BADGES[8].e=true;S.xp+=50;go('today','tab');setTimeout(()=>toast('+50 XP · XDOT founder badge'),400)">Go to today</button></div></div>`};
+
+/* ---------- guide notes and flows ---------- */
+Object.assign(NOTES,{
+ switch:['new','Welcome to XDOT','<b>Today:</b> existing athletes would open a new app with no explanation.','<b>Change:</b> one screen that shows everything came across: plan, history, Dot Scores, races, XP, watch and login. Plus a founder badge. This is the moment most likely to lose loyal users.'],
+ assistant:['ref','AI Assistant','<b>Today:</b> the Assistant reviews workouts, compares intervals and finds best efforts.','<b>Change:</b> its own tab in the center of the bar, an ask bar on Today, a suggestion card, and "Ask" links on workouts. Topics widen to recovery, fueling, sleep and race day. Whether it can change plans, and how health questions are handled safely, need product and legal review.'],
+ devices:['ref','Watch and apps','<b>Today:</b> Garmin, Apple Watch, COROS, Fitbit and Strava are listed in the App Store.','<b>Change:</b> clear sync status, Sync now, and help when a workout is missing. Sync problems are a common complaint in reviews.'],
+ strength:['ref','Strength','<b>Today:</b> reviews mention strength sessions in plans.','<b>Change:</b> a clear add-on card with exercise videos. Product to confirm what strength content exists and how it is scheduled.']});
+NOTES.workout[3]+=' Swim sessions show sets, yards and pace per 100. Bike sessions show watts with an Indoor/Outdoor switch.';
+NOTES.races[3]+=' Tap <b>predicted</b> for the race prediction breakdown.';
+NOTES.today[3]+=' Also new: an <b>Ask AI</b> bar, a suggestion card from the Assistant, a sync status by the date, a strength add-on on Friday, and race prediction on the race row. <b>You</b> is now the avatar top right.';
+FLOWS.splice(1,0,['','Current athlete: welcome to XDOT','switch']);FLOWS.push(['','Ask AI anything','assistant'],['','Swim and bike workouts','swimday'],['','Watch and sync','devices']);
+FLOWS.forEach((f,k)=>f[0]=String(k+1).padStart(2,'0'));
+$('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
+const _jump5=jump;jump=function(id){
+ if(id==='switch'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh('tri');stack=[];cur=null;go('switch','fade');return}
+ if(id==='assistant'){toggleGuide(false);closeSheet();if(live)stopLive();stack=[];go('assistant','tab');return}
+ if(id==='swimday'){toggleGuide(false);closeSheet();if(live)stopLive();if(S.mode==='b5k'||S.sport!=='tri')S=fresh('tri');stack=[];S.dayIdx=4;go('today','tab');return}
+ _jump5(id)};
+/* tab bar: Ask AI tab */
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{closeSheet();if(b.dataset.tab==='assistant'){stack=[];go('assistant','tab');return}go(b.dataset.tab,'tab')});
+const _rend5=render;render=function(m){_rend5(m);const t=$('#tabs');if(cur&&cur.id==='assistant'){t.classList.remove('hide');t.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.tab==='assistant'))}};
 
 /* ---------- scale device to fit ---------- */
 function fit(){const w=$('#devwrap');if(innerWidth<=820)return;const sc=Math.min((w.clientHeight-40)/844,(w.clientWidth-40)/390,1);$('#device').style.transform=`scale(${sc})`}
