@@ -322,7 +322,7 @@ input{font:inherit;color:inherit}
  <symbol id="search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></g></symbol>
  <symbol id="drag" viewBox="0 0 16 16"><g fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></g></symbol><symbol id="spark" viewBox="0 0 24 24"><path d="M11 2.5C11.7 8.3 13.7 10.3 19.5 11 13.7 11.7 11.7 13.7 11 19.5 10.3 13.7 8.3 11.7 2.5 11 8.3 10.3 10.3 8.3 11 2.5Z" fill="currentColor"/><path d="M19 14.5C19.3 16.9 19.9 17.5 22.3 17.8 19.9 18.1 19.3 18.7 19 21.1 18.7 18.7 18.1 18.1 15.7 17.8 18.1 17.5 18.7 16.9 19 14.5Z" fill="currentColor"/><path d="M19.2 1.8C19.4 3.3 19.8 3.7 21.3 3.9 19.8 4.1 19.4 4.5 19.2 6 19 4.5 18.6 4.1 17.1 3.9 18.6 3.7 19 3.3 19.2 1.8Z" fill="currentColor"/></symbol>
 <symbol id="dumbbell" viewBox="0 0 24 24"><path d="M3 9v6M6 6.5v11M18 6.5v11M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
-<symbol id="sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-14.3 4.9M4 12A8 8 0 0118.3 7.1M18.5 3v4.3h-4.3M5.5 21v-4.3h4.3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+<symbol id="mtn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M2 20l7-12 4 6 3-4 6 10z"/><path d="M7.5 10.5l1.5 1.5 1.5-1.5"/></symbol><symbol id="sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-14.3 4.9M4 12A8 8 0 0118.3 7.1M18.5 3v4.3h-4.3M5.5 21v-4.3h4.3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
 
 <symbol id="send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></g></symbol>
 <symbol id="pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></g></symbol>
@@ -1271,6 +1271,71 @@ const _jump5=jump;jump=function(id){
 /* tab bar: Ask AI tab */
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{closeSheet();if(b.dataset.tab==='assistant'){stack=[];go('assistant','tab');return}go(b.dataset.tab,'tab')});
 const _rend5=render;render=function(m){_rend5(m);const t=$('#tabs');if(cur&&cur.id==='assistant'){t.classList.remove('hide');t.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.tab==='assistant'))}};
+
+/* ---------- trail layer (new, unconfirmed concept) ---------- */
+(function(){const st=document.createElement('style');st.textContent=`.nctag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border:1px dashed rgba(201,161,92,.7);color:var(--gd);line-height:1.3;white-space:nowrap;vertical-align:middle}
+.trailcard{border:1px solid var(--ln);border-left:2px solid var(--gd);padding:12px 14px;margin-top:12px;background:rgba(201,161,92,.04)}
+.trailcard b{display:inline-flex;gap:6px;align-items:center}
+.trtag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;background:rgba(201,161,92,.15);color:var(--gd);margin-left:6px;vertical-align:middle}`;document.head.appendChild(st)})();
+const NC='<span class="nctag">New concept · unconfirmed</span>';
+const isTrail=()=>S.sport==='run'&&S.mode!=='b5k'&&S.ob&&['trail','mix'].includes(S.ob.terrain);
+const TERR={road:['Road','Pace targets, as today'],trail:['Trail','Effort and time on easy and long runs'],mix:['Mix','Effort on trail days, pace on road days']};
+
+/* 1. Setup: Where do you run? */
+const _sportT=SCREENS.sport;SCREENS.sport=a=>{let h=_sportT(a);if(S.ob.sport!=='run')return h;const t=S.ob.terrain||'road';
+ const blk=`<div style="margin:18px 0 4px"><div class="row" style="margin-bottom:10px"><span class="lbl" style="margin:0">Where do you run?</span>${NC}</div>
+ <div class="seg">${Object.keys(TERR).map(k=>`<button class="${t===k?'on':''}" onclick="S.ob.terrain='${k}';render('fade')">${TERR[k][0]}</button>`).join('')}</div>
+ <p class="xs" style="margin-top:-6px">${TERR[t][1]}. You can change this any time.</p></div>`;
+ return h.replace('<div class="foot">',blk+'<div class="foot">')};
+
+/* 2. Apply trail targets to the running week */
+function applyTrail(){if(!isTrail())return;S.week.forEach(s=>{if(!s||s.trail||s.d!=='run')return;
+ if(s.id==='thr'||s.type==='Hills'){s.trailNote=s.id==='thr'?'road':'hill';return}
+ s.trail=true;const conv=x=>Object.assign({},x,{t:x.z<=2?'Easy':'Steady',u:`Zone ${x.z} HR`});
+ s.steps=s.steps.map(conv);s.display=s.display.map(conv);
+ if(s.long){s.climb='About 1,200 ft of climbing';s.why='Time on your feet on trail builds durability, climbing strength and your aerobic base. Run it by effort, not pace: keep it conversational and walk the steep climbs.'}
+ else s.why='Easy time on trail builds your aerobic base and the stabilizing muscles that uneven ground asks for. Keep heart rate in Zone 2, even on the climbs.'})}
+const _readyT=SCREENS.ready;SCREENS.ready=a=>{applyTrail();let h=_readyT(a);const t=S.ob.terrain;
+ if(S.ob.sport==='run'&&t&&t!=='road')h=h.replace('<div class="chk">'+ic('check')+'<div><b>Where you train:</b>',`<div class="chk">${ic('check')}<div><b>Where you run:</b> ${t==='trail'?'mostly trail':'road and trail'}. Easy and long runs use effort and time instead of pace. ${NC}</div></div><div class="chk">${ic('check')}<div><b>Where you train:</b>`);
+ return h};
+
+/* 3. Today: trail card */
+function trailCard(s){if(!s)return'';
+ if(s.trail)return `<div class="trailcard"><div class="row" style="margin-bottom:6px"><b style="font-size:13px">${ic('mtn','width:14px;height:14px;color:var(--gd)')}Trail day · run by effort</b>${NC}</div><p class="xs" style="color:var(--iv)">${s.min} min${s.climb?' · '+s.climb.toLowerCase():''}. Keep heart rate in Zone 2 and stay conversational on the climbs. Walking steep sections is part of the plan.</p></div>`;
+ if(s.trailNote)return `<div class="trailcard"><div class="row" style="margin-bottom:6px"><b style="font-size:13px">${s.trailNote==='road'?'Best on smooth ground':'Find a steady hill'}</b>${NC}</div><p class="xs" style="color:var(--iv)">${s.trailNote==='road'?'Threshold reps need steady footing. Use a smooth path, packed fire road or pavement today so footing doesn\'t decide your effort.':'Pick a hill with good footing. Run the reps by effort and walk or jog down.'}</p></div>`;
+ return''}
+const _todayT=SCREENS.today;SCREENS.today=a=>{let h=_todayT(a);if(!isTrail())return h;const s=S.week[S.dayIdx];const c=trailCard(s);if(!c)return h;
+ const k='<div class="lbl" style="margin:20px 0 10px">Your numbers';return h.includes(k)?h.replace(k,c+k):h};
+
+/* 4. Workout detail */
+const _wkT=SCREENS.workout;SCREENS.workout=i=>{let h=_wkT(i);const s=S.week[i];if(!isTrail()||!s||s.d!=='run')return h;
+ if(s.trail)h=h.replace('targets in pace and heart rate','targets by effort and heart rate · trail');
+ const c=trailCard(s);const k='<div class="why">';return c&&h.includes(k)?h.replace(k,c+'<div style="height:6px"></div>'+k):h};
+
+/* 5. Races: trail tag and climbing */
+SEARCH.push({name:'Ridgeline Trail 50K',where:'Sample Mountains',mo:'MAR',dd:'07',img:AIMG+'share-trail.jpg',k:'run',trail:true,climb:'5,400 ft'},
+ {name:'Canyon Trail Half',where:'Sample Canyon',mo:'JAN',dd:'24',img:AIMG+'share-trail.jpg',k:'run',trail:true,climb:'2,100 ft'});
+const _frT=filterRaces;filterRaces=function(){_frT();const l=$('#rlist');if(!l)return;
+ SEARCH.filter(r=>r.trail).forEach(r=>{l.querySelectorAll('.rrow').forEach(b=>{const n=b.querySelector('b');if(n&&n.textContent===r.name&&!b.querySelector('.trtag')){n.insertAdjacentHTML('afterend','<span class="trtag">Trail</span>');const w=b.querySelector('.xs');if(w)w.textContent=r.where+' · '+r.climb+' of climbing'}})});
+ if(!l.querySelector('.ncnote'))l.insertAdjacentHTML('beforeend',`<p class="xs ncnote" style="margin-top:12px">${NC} Trail tags and climbing totals need race data that can tell trail from road.</p>`)};
+const _prT=pickRace;pickRace=function(n){_prT(n);const r=SEARCH.find(x=>x.name===n);if(!r||!r.trail)return;const sh=$('#sheet .h2');if(sh)sh.insertAdjacentHTML('afterend',`<p class="xs" style="margin:-6px 0 12px"><span class="trtag" style="margin:0 6px 0 0">Trail</span>${r.climb} of climbing · ${NC}</p>`)};
+const _arT=addRace;addRace=function(n,p){_arT(n,p);const r=SEARCH.find(x=>x.name===n);if(!r||!r.trail)return;const x=S.races.find(q=>q.name===n);if(x){x.sub='Trail · '+r.climb+' climbing · '+x.sub;render('fade')}};
+
+/* 6. Ask AI: trail question */
+QA.trail={q:'I run mostly trails. How should I adjust?',a:"Your plan works on trail. You just run some of it differently.<br><br><b>Easy and long runs:</b> great on trail. Go by heart rate and effort instead of pace, keep it in Zone 2, and walk steep climbs if you need to.<br><b>Time, not miles:</b> sessions are built on time and intensity, so slower trail miles still give you the right training.<br><b>Threshold and speed work:</b> use smoother ground, like a packed fire road, bike path or pavement, so footing doesn't decide your effort.<br><br>Your training stress still counts either way.<div class=\"xs\" style=\"margin-top:8px\">The current Assistant already answers this. Trail settings in the plan are a new concept.</div>"};
+const _asT=SCREENS.assistant;SCREENS.assistant=a=>{let h=_asT(a);if(S.sport!=='run'||S.mode==='b5k'||S.chat.some(c=>c.k==='trail'))return h;
+ const k='<div class="chips" style="margin-bottom:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none">';
+ return h.replace(k,k+`<button style="white-space:nowrap" onclick="ask('trail')">${QA.trail.q}</button>`)};
+
+/* 7. Guide */
+NOTES.sport[3]+=' <b>New, unconfirmed:</b> runners pick Road, Trail or Mix. Trail runners get effort and time on easy and long runs.';
+NOTES.addrace=NOTES.addrace||['ref','Add a race','<b>Today:</b> Add a Race exists in both apps.','<b>Change:</b> search and set A, B or C priority.'];
+NOTES.addrace[3]+=' <b>New, unconfirmed:</b> trail races carry a Trail tag and total climbing. Try "trail".';
+NOTES.trailq=['new','Trail runners','<b>Today:</b> the Assistant already tells trail runners to go by heart rate and time, not pace. There is no trail setting in the plan.','<b>New, unconfirmed concept:</b> a Road, Trail or Mix choice at setup; effort-based easy and long runs; a "best on smooth ground" note on threshold days; Trail tags and climbing on races. <b>For product:</b> does FitLogic use elevation in training stress today? Can race data tell trail from road? Are climbing targets new?'];
+const _rnT=renderNotes;renderNotes=function(id){if(isTrail()&&['today','workout'].includes(id)){_rnT('trailq');return}_rnT(id)};
+FLOWS.push(['','Trail runner (new concept)','trailrun']);FLOWS.forEach((f,k)=>f[0]=String(k+1).padStart(2,'0'));
+$('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
+const _jumpT=jump;jump=function(id){if(id==='trailrun'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh('run');S.ob.sport='run';S.ob.terrain='trail';applyTrail();S.dayIdx=5;stack=[];go('today','tab');return}_jumpT(id)};
 
 /* ---------- scale device to fit ---------- */
 function fit(){const w=$('#devwrap');if(innerWidth<=820)return;const sc=Math.min((w.clientHeight-40)/844,(w.clientWidth-40)/390,1);$('#device').style.transform=`scale(${sc})`}
