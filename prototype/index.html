@@ -89,6 +89,7 @@ input{font:inherit;color:inherit}
 .btn.s:active{border-color:var(--gd)}
 .btn.dis{opacity:.35;pointer-events:none}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:5px 9px;border:1px solid var(--ln);color:var(--mute);white-space:nowrap}
+.card .pill{white-space:normal;max-width:100%}
 .disc{display:inline-flex;align-items:center;gap:6px;font-weight:600;letter-spacing:.14em;font-size:10.5px;text-transform:uppercase;color:var(--gd)}
 .disc svg{width:15px;height:15px}
 .bars{display:flex;align-items:flex-end;gap:2px;height:48px}
@@ -1184,9 +1185,9 @@ const RACEA=()=>S.sport==='tri'?`Your RaceX plan predicts <b>5:41:20</b>.<br><br
 const _ask5=ask;ask=function(k){if(k==='fuel'||k==='bikeq'){pushChat(k,QA[k].q,FUEL());return}if(k==='race'){pushChat(k,QA.race.q,RACEA());return}_ask5(k)};
 askFree=function(){const q=$('#q');if(!q||!q.value.trim())return;pushChat('free'+Date.now(),q.value.trim(),"In the full app I can answer questions about your training, fitness, recovery, fueling and basic health, using your plan, workouts and Dot Scores. In this prototype, try one of the suggested questions.")};
 
-const CATS=()=>S.mode==='b5k'?[['run','Easy pace','bpace'],['flame','Soreness','bsore'],['cal','Missed a run','bmiss']]
+const CATS=()=>S.ftri?[['swim','First swim','ftswim'],['flame','Recovery','tired'],['sun','Fueling','fuel'],['rest','Sleep','sleep']]:S.mode==='b5k'?[['run','Easy pace','bpace'],['flame','Soreness','bsore'],['cal','Missed a run','bmiss']]
  :[['cal','My plan','move'],['run','Workouts','why'],['flame','Recovery','tired'],['sun','Fueling','fuel'],['rest','Sleep','sleep'],['flag','Race day','race']];
-const CHIPKEYS=()=>S.mode==='b5k'?['bpace','bsore','bmiss']:['move','why','cmp','best','tired','fuel','sleep','race'];
+const CHIPKEYS=()=>S.ftri?['ftswim','tired','fuel','sleep']:S.mode==='b5k'?['bpace','bsore','bmiss']:['move','why','cmp','best','tired','fuel','sleep','race'];
 SCREENS.assistant=()=>{const used=S.chat.map(c=>c.k);const tabbed=!stack.length;
  return `<div class="scr" id="chat" style="display:flex;flex-direction:column;padding-bottom:0">
  <div class="hd">${tabbed?'<span style="width:34px"></span>':'<button class="back" onclick="back()">‹</button>'}<span class="t" style="display:flex;gap:8px;align-items:center"><span class="aio" style="width:24px;height:24px">${ic('spark')}</span>Ask AI <span class="aitag">AI</span></span>${AVB()}</div>
