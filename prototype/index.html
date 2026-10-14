@@ -1301,11 +1301,11 @@ const _readyT=SCREENS.ready;SCREENS.ready=a=>{applyTrail();let h=_readyT(a);cons
 
 /* 3. Today: trail card */
 function trailCard(s){if(!s)return'';
- if(s.trail)return `<div class="trailcard"><div class="row" style="margin-bottom:6px"><b style="font-size:13px">${ic('mtn','width:14px;height:14px;color:var(--gd)')}Trail day · run by effort</b>${NC}</div><p class="xs" style="color:var(--iv)">${s.min} min${s.climb?' · '+s.climb.toLowerCase():''}. Keep heart rate in Zone 2 and stay conversational on the climbs. Walking steep sections is part of the plan.</p></div>`;
+ if(s.trail)return `<div class="trailcard"><div class="row" style="margin-bottom:6px"><b style="font-size:13px">${ic('mtn','width:14px;height:14px;color:var(--gd)')}Trail day · by effort</b>${NC}</div><p class="xs" style="color:var(--iv)">${s.min} min${s.climb?' · '+s.climb.toLowerCase():''}. Keep heart rate in Zone 2 and stay conversational on the climbs. Walking steep sections is part of the plan.</p></div>`;
  if(s.trailNote)return `<div class="trailcard"><div class="row" style="margin-bottom:6px"><b style="font-size:13px">${s.trailNote==='road'?'Best on smooth ground':'Find a steady hill'}</b>${NC}</div><p class="xs" style="color:var(--iv)">${s.trailNote==='road'?'Threshold reps need steady footing. Use a smooth path, packed fire road or pavement today so footing doesn\'t decide your effort.':'Pick a hill with good footing. Run the reps by effort and walk or jog down.'}</p></div>`;
  return''}
 const _todayT=SCREENS.today;SCREENS.today=a=>{let h=_todayT(a);if(!isTrail())return h;const s=S.week[S.dayIdx];const c=trailCard(s);if(!c)return h;
- const k='<div class="lbl" style="margin:20px 0 10px">Your numbers';return h.includes(k)?h.replace(k,c+k):h};
+ if(s&&s.trail)h=h.replace('paces adjusted by EnviroNorm','heart rate effort, adjusted for heat by EnviroNorm');const k1='<button class="askbar"',k='<div class="lbl" style="margin:20px 0 10px">Your numbers';return h.includes(k1)?h.replace(k1,c.replace('trailcard"','trailcard" style="margin:12px 0 0"')+'<div style="height:12px"></div>'+k1):h.includes(k)?h.replace(k,c+k):h};
 
 /* 4. Workout detail */
 const _wkT=SCREENS.workout;SCREENS.workout=i=>{let h=_wkT(i);const s=S.week[i];if(!isTrail()||!s||s.d!=='run')return h;
