@@ -1161,7 +1161,7 @@ const strCard=()=>`<button class="card" style="width:100%;text-align:left;margin
 /* ---------- AI everywhere ---------- */
 const aiChip=(k,q)=>`<button class="aichip" onclick="askFrom('${k}')"><span class="aio">${ic('spark')}</span>${q}</button>`;
 function askFrom(k){go('assistant','push');setTimeout(()=>ask(k),350)}
-const insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if(!lr||lr.done)return '';
+let insight=()=>{const t=S.sport==='tri';const lr=S.week.find(x=>x&&x.long);if(!lr||lr.done)return '';
  return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
  <div class="sm" style="color:var(--iv)">${t?"Saturday's long ride is 2.5 hours in the heat. Want a fueling plan for it?":"Saturday's long run is 95 minutes. Want a fueling plan for it?"}</div>
  <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('fuel')">Yes, plan it</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Something else</button></div></div>`};
