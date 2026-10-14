@@ -1402,6 +1402,15 @@ const _todayF2=SCREENS.today;SCREENS.today=a=>{let h=_todayF2(a);if(!S.ftri)retu
 const _todayF3=SCREENS.today;SCREENS.today=a=>{let h=_todayF3(a);if(!S.ftri)return h;return h.replace(/ · Predicted [0-9:]+/,' · Finish prediction after week 3')};
 const _readyF2=SCREENS.ready;SCREENS.ready=a=>{let h=_readyF2(a);if(!S.ob.firstTri)return h;return h.replace(/<b>Your week:<\/b>[^<]*/,'<b>Your week:</b> 5 short sessions: 2 swims, 2 easy rides and a run-walk')};
 
+const _wkF=SCREENS.workout;SCREENS.workout=i=>{let h=_wkF(i);if(!S.ftri)return h;const s=S.week[i];if(!s)return h;
+ S.week.forEach(x=>{if(x)x.display.forEach(d=>{if(d.t==='By feel')d.u=''})});h=_wkF(i);
+ h=h.replace(' · targets in pace per 100 yd',' · no pace targets this week').replace(/ · targets in watts · threshold \d+ W/,' · by feel, no watts this week')
+  .replace(/<div class="num">1:45<\/div><div class="xs" style="margin-top:4px">your threshold \/100y<\/div>/,'<div class="num">Any</div><div class="xs" style="margin-top:4px">stroke counts</div>')
+  .replace(/<button class="aichip" onclick="askFrom\('swimq'\)">([\s\S]*?<\/span>)Ask: how do I do catch-up drill\?/,'<button class="aichip" onclick="askFrom(\'ftswim\')">$1Ask: what do I need for my first swim?');
+ return h};
+const _compF2=SCREENS.complete;SCREENS.complete=i=>{let h=_compF2(i);if(!S.ftri)return h;const dn=S.week.filter(x=>x&&x.done).length;
+ return h.replace(/<div class="num">\d+<\/div><div class="xs" style="margin-top:4px">week on-plan streak<\/div>/,`<div class="num">${dn} of 5</div><div class="xs" style="margin-top:4px">sessions this week</div>`).replace('See pace and heart rate vs targets','See how it went')};
+
 /* ---------- trail live run: effort first ---------- */
 const _drawLiveT=drawLive;drawLive=function(){_drawLiveT();const L=live;if(!L||!L.s.trail)return;const el=$('#livescr');if(!el)return;
  const st=L.s.steps[L.step],cards=el.querySelectorAll('.g2 .card');if(cards.length<2)return;
