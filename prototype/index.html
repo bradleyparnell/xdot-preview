@@ -1391,6 +1391,14 @@ FLOWS.splice(3,0,['','First triathlon · beginner week','ftri']);FLOWS.forEach((
 $('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}</i><span>${f[1]}</span>${ic('arr')}</button>`).join('');
 const _jumpF=jump;jump=function(id){if(id==='ftri'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh('tri');S.ob.sport='tri';S.ob.firstTri=true;S.ob.goal='Sprint';setupFtri();stack=[];go('today','tab');return}if(S.ftri&&id!=='ftri')S=fresh();_jumpF(id)};
 
+QA.ftswim={q:'What do I need for my first swim?',a:"Not much. A swimsuit, goggles and a towel. A swim cap helps if you have long hair.<br><br><b>At the pool:</b> pick the slowest lane, swim any stroke, and rest at the wall whenever you want. Nobody is timing you.<br><br><b>Tip:</b> breathe out slowly while your face is in the water. Most first-timers feel out of breath because they hold it.<br><br>If anything hurts or you feel unwell, stop and check with a doctor."};
+const _insF=insight;insight=()=>{if(!S.ftri)return _insF();const sw=S.week[1];if(sw&&sw.done)return '';
+ return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
+ <div class="sm" style="color:var(--iv)">First swim on Tuesday. Want a quick list of what to bring and what to expect?</div>
+ <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('ftswim')">Yes, please</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Something else</button></div></div>`};
+const _todayF2=SCREENS.today;SCREENS.today=a=>{let h=_todayF2(a);if(!S.ftri)return h;const [dn,pl]=wkDone();
+ return h.replace(/<button class="card sc" onclick="txSheet\(\)">[\s\S]*?<\/button>/,`<button class="card sc" onclick="txSheet()">${arc(dn,pl)}<div style="min-width:0"><div class="xs">Sessions wk</div><div class="sc-l">${dn?dn+' of '+pl+' done':'Starts today'}</div></div></button>`)};
+
 /* ---------- trail live run: effort first ---------- */
 const _drawLiveT=drawLive;drawLive=function(){_drawLiveT();const L=live;if(!L||!L.s.trail)return;const el=$('#livescr');if(!el)return;
  const st=L.s.steps[L.step],cards=el.querySelectorAll('.g2 .card');if(cards.length<2)return;
