@@ -1342,7 +1342,7 @@ function runW(id,name,type,min,rows,why,extra={}){
  const steps=rows.map(r=>({n:r[0],s:r[1],d:r[4]*60,z:r[3],t:r[2],u:r[5]||''}));
  return Object.assign({id,d:'run',name,type,min,stress:'Low',nts:22,why,steps,
   display:rows.map(r=>({n:r[0],s:r[1],t:r[2],u:r[5]||'',z:r[3]})),unit:'',trainx:90,xp:Math.round(min*0.6)},extra)}
-function setupFtri(){const ob=S.ob;S=fresh('tri');S.ob=ob;S.ftri=true;S.dataMode=false;S.xp=0;S.streak=0;S.level=1;S.dayIdx=1;
+function setupFtri(){const ob=S.ob;S=fresh('tri');S.ob=ob;S.ftri=true;S.dataMode=false;S.xp=0;S.streak=0;S.level=1;S.dayIdx=3;
  S.races=[{id:'spr',name:'Your first sprint triathlon',date:'Sun, Feb 7',mo:'FEB',dd:'07',p:'A',sub:'Sprint · 750 m swim, 20 km bike, 5 km run · sample race',img:AIMG+'race-tri.jpg'}];
  S.week=[null,
   swimW('tue','First Swim','Comfort',20,'Low','300 yd',[
@@ -1362,7 +1362,8 @@ function setupFtri(){const ob=S.ob;S=fresh('tri');S.ob=ob;S.ftri=true;S.dataMode
    'A little more time in the saddle than Wednesday. Still easy. This is your longest session of the week.',{long:true}),
   swimW('sun','Swim Comfort','Comfort',20,'Low','350 yd',[
    ['Easy start','2 × 25, any stroke','By feel',1,5],['Main set','6 × 25 easy, then 2 × 50 with a rest halfway if needed','By feel',2,10],['Cool down','2 × 25 relaxed','By feel',1,5]],
-   'A second, slightly longer swim. Two short swims a week build comfort faster than one long one.')];}
+   'A second, slightly longer swim. Two short swims a week build comfort faster than one long one.')];
+ const w=S.week;S.week=[null,w[2],w[3],w[1],null,w[5],w[6]];}
 const _readyF=SCREENS.ready;SCREENS.ready=a=>{let h=_readyF(a);if(!S.ob.firstTri)return h;
  return h.replace(/onclick="go\('today','tab'\);setTimeout\(\(\)=>toast\('Showing a sample athlete in week 9 of the plan'\),400\)"/,`onclick="setupFtri();go('today','tab')"`).replace("See today's workout",'See week 1').replace('Next, the prototype jumps ahead to a sample athlete mid-plan.','Plan length and sessions are sample data.')
   .replace('<div style="margin-top:20px;display:grid',`<div class="card" style="margin-top:16px;border-color:rgba(201,161,92,.45)"><div class="lbl gold" style="margin-bottom:6px">Our promise</div><div class="sm" style="color:var(--iv)">Every session in week 1 is one you can finish, including your first swim. Rest at the wall and walk breaks are part of the plan.</div></div><div style="margin-top:20px;display:grid`)};
@@ -1392,7 +1393,7 @@ $('#flows').innerHTML=FLOWS.map(f=>`<button onclick="jump('${f[2]}')"><i>${f[0]}
 const _jumpF=jump;jump=function(id){if(id==='ftri'){toggleGuide(false);closeSheet();if(live)stopLive();S=fresh('tri');S.ob.sport='tri';S.ob.firstTri=true;S.ob.goal='Sprint';setupFtri();stack=[];go('today','tab');return}if(S.ftri&&id!=='ftri')S=fresh();_jumpF(id)};
 
 QA.ftswim={q:'What do I need for my first swim?',a:"Not much. A swimsuit, goggles and a towel. A swim cap helps if you have long hair.<br><br><b>At the pool:</b> pick the slowest lane, swim any stroke, and rest at the wall whenever you want. Nobody is timing you.<br><br><b>Tip:</b> breathe out slowly while your face is in the water. Most first-timers feel out of breath because they hold it.<br><br>If anything hurts or you feel unwell, stop and check with a doctor."};
-const _insF=insight;insight=()=>{if(!S.ftri)return _insF();const sw=S.week[1];if(sw&&sw.done)return '';
+const _insF=insight;insight=()=>{if(!S.ftri)return _insF();const sw=S.week[3];if(sw&&sw.done)return '';
  return `<div class="aicard"><div class="row" style="margin-bottom:8px"><span class="lbl gold" style="display:flex;gap:6px;align-items:center">${ic('spark','width:13px;height:13px')}Your AI Assistant</span><span class="aitag">AI</span></div>
  <div class="sm" style="color:var(--iv)">First swim today. Want a quick list of what to bring and what to expect?</div>
  <div style="display:flex;gap:8px;margin-top:12px"><button class="btn p" style="height:36px;font-size:12px" onclick="askFrom('ftswim')">Yes, please</button><button class="btn s" style="height:36px;font-size:12px" onclick="go('assistant')">Something else</button></div></div>`};
